@@ -11,6 +11,7 @@ import { Menu, LogOut, User, Settings } from "lucide-react";
 import { useState } from "react";
 import { AuthUser } from "@/types";
 import { authService } from "@/lib/auth";
+import { useToast } from "@/hooks/use-toast";
 
 interface NavigationProps {
   user: AuthUser | null;
@@ -19,11 +20,17 @@ interface NavigationProps {
 }
 
 export default function Navigation({ user, onShowLogin, onShowRegister }: NavigationProps) {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { toast } = useToast();
 
   const handleLogout = () => {
     authService.logout();
+    navigate("/");
+    toast({
+      title: "Выход выполнен",
+      description: "Вы успешно вышли из аккаунта",
+    });
   };
 
   const getDashboardLink = () => {
