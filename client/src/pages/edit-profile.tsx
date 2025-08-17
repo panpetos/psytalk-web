@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, Save } from "lucide-react";
 import { authService } from "@/lib/auth";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import type { User, Psychologist } from "@shared/schema";
 
 export default function EditProfile() {
   const [, navigate] = useLocation();
@@ -31,12 +32,12 @@ export default function EditProfile() {
   const [formats, setFormats] = useState<string[]>([]);
   const [certifications, setCertifications] = useState("");
 
-  const { data: user } = useQuery({
+  const { data: user } = useQuery<User>({
     queryKey: ['/api/auth/me'],
     enabled: !!currentUser,
   });
 
-  const { data: psychologist } = useQuery({
+  const { data: psychologist } = useQuery<Psychologist>({
     queryKey: ['/api/psychologists/user', currentUser?.id],
     enabled: !!currentUser && currentUser.role === 'psychologist',
   });
@@ -64,10 +65,7 @@ export default function EditProfile() {
 
   const updateUserMutation = useMutation({
     mutationFn: (data: any) => 
-      apiRequest(`/api/users/${currentUser?.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(data),
-      }),
+      apiRequest('PUT', `/api/users/${currentUser?.id}`, data),
     onSuccess: () => {
       toast({
         title: "Успешно",
@@ -86,10 +84,7 @@ export default function EditProfile() {
 
   const updatePsychologistMutation = useMutation({
     mutationFn: (data: any) => 
-      apiRequest(`/api/psychologists/${psychologist?.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(data),
-      }),
+      apiRequest('PUT', `/api/psychologists/${psychologist?.id}`, data),
     onSuccess: () => {
       toast({
         title: "Успешно",
