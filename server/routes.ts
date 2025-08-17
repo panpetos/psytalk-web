@@ -122,6 +122,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ ...psychologist, user });
   });
 
+  app.get("/api/psychologists/user/:userId", async (req, res) => {
+    const psychologist = await storage.getPsychologistByUserId(req.params.userId);
+    if (!psychologist) {
+      return res.status(404).json({ error: "Psychologist profile not found" });
+    }
+    
+    const user = await storage.getUser(psychologist.userId);
+    res.json({ ...psychologist, user });
+  });
+
   app.put("/api/psychologists/:id", async (req, res) => {
     const updates = req.body;
     const psychologist = await storage.updatePsychologist(req.params.id, updates);
