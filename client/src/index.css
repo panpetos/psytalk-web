@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(207 14% 16%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(207 14% 16%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(207 14% 16%);
+  --primary: hsl(208 100% 59%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(115 41% 58%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(212 25% 93%);
+  --muted-foreground: hsl(207 14% 16%);
+  --accent: hsl(278 52% 59%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 40% 95%);
+  --input: hsl(210 40% 95%);
+  --ring: hsl(208 100% 59%);
+  --font-sans: 'Inter', sans-serif;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(207 14% 16%);
+  --foreground: hsl(0 0% 100%);
+  --card: hsl(210 11% 11%);
+  --card-foreground: hsl(0 0% 100%);
+  --popover: hsl(210 11% 11%);
+  --popover-foreground: hsl(0 0% 100%);
+  --primary: hsl(208 100% 59%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(115 41% 58%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(210 11% 15%);
+  --muted-foreground: hsl(210 40% 70%);
+  --accent: hsl(278 52% 59%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 11% 15%);
+  --input: hsl(210 11% 15%);
+  --ring: hsl(208 100% 59%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Custom colors from design */
+  .text-primary-custom {
+    color: #4A90E2;
+  }
+
+  .text-secondary-custom {
+    color: #7FB069;
+  }
+
+  .text-accent-custom {
+    color: #9B59B6;
+  }
+
+  .text-muted-custom {
+    color: #2C3E50;
+  }
+
+  .bg-primary-custom {
+    background-color: #4A90E2;
+  }
+
+  .bg-secondary-custom {
+    background-color: #7FB069;
+  }
+
+  .bg-accent-custom {
+    background-color: #9B59B6;
+  }
+
+  .bg-muted-custom {
+    background-color: #E8EDF3;
+  }
+
+  .border-primary-custom {
+    border-color: #4A90E2;
+  }
+
+  .hover\:bg-primary-custom:hover {
+    background-color: #3A7BD5;
+  }
+
+  .hover\:bg-secondary-custom:hover {
+    background-color: #6FA054;
+  }
+
+  /* Gradient backgrounds from design */
+  .bg-gradient-hero {
+    background: linear-gradient(to right, #f0f8ff, #f0fff0);
+  }
+}
