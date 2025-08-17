@@ -1,8 +1,16 @@
 # Overview
 
-This is a comprehensive online psychology platform called "PsychPlatform" that connects clients with qualified psychologists for remote consultations. The platform is built as a full-stack web application using React for the frontend and Express.js for the backend, with PostgreSQL as the database. The system supports three user roles: clients seeking psychological help, psychologists providing services, and administrators managing the platform.
+This is a comprehensive online psychology platform called "PsychPlatform" that connects clients with qualified psychologists for remote consultations. The platform is built as a full-stack web application using React for the frontend and Express.js for the backend, with in-memory storage for development. The system supports three user roles: clients seeking psychological help, psychologists providing services, and administrators managing the platform.
 
 The platform enables clients to search for psychologists, book appointments, and conduct sessions via video, audio, or chat. Psychologists can manage their profiles, schedules, and conduct consultations while receiving payments. Administrators oversee user verification, platform management, and analytics.
+
+## Recent Changes (January 17, 2025)
+- Successfully deployed working MVP with all core features
+- Fixed dialog transparency issues for better user experience
+- Implemented role-based authentication and dashboards
+- Added demo accounts for testing all user types
+- Set up object storage for file uploads
+- Platform is running and fully functional
 
 # User Preferences
 
