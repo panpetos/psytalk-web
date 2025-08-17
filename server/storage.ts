@@ -62,6 +62,7 @@ export interface IStorage {
   getAllUsers(): Promise<User[]>;
   getPendingPsychologists(): Promise<PsychologistWithUser[]>;
   approvePsychologist(psychologistId: string): Promise<void>;
+  rejectPsychologist(psychologistId: string): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -429,6 +430,17 @@ export class MemStorage implements IStorage {
 
   async approvePsychologist(psychologistId: string): Promise<void> {
     await this.updatePsychologist(psychologistId, { isApproved: true });
+  }
+
+  async rejectPsychologist(psychologistId: string): Promise<void> {
+    const psychologist = this.psychologists.get(psychologistId);
+    if (psychologist) {
+      // Delete the psychologist profile
+      this.psychologists.delete(psychologistId);
+      
+      // Also delete the user account associated with this psychologist
+      await this.deleteUser(psychologist.userId);
+    }
   }
 }
 

@@ -95,6 +95,35 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleRejectPsychologist = async (psychologistId: string, psychologistName: string) => {
+    if (!confirm(`Вы уверены, что хотите отклонить заявку психолога ${psychologistName}? Профиль будет удален.`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/admin/psychologists/${psychologistId}/reject`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Успешно",
+          description: `Заявка психолога ${psychologistName} отклонена`,
+        });
+        refetchPending();
+        refetchUsers();
+      } else {
+        throw new Error('Не удалось отклонить заявку');
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка",
+        description: `Не удалось отклонить заявку: ${error}`,
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleUserAction = async (userId: string, action: string, user: any) => {
     try {
       let response;
@@ -566,6 +595,7 @@ export default function AdminDashboard() {
                           <Button
                             variant="outline"
                             className="border-red-300 text-red-600 hover:bg-red-50"
+                            onClick={() => handleRejectPsychologist(psychologist.id, `${psychologist.user?.firstName} ${psychologist.user?.lastName}`)}
                             data-testid={`button-reject-${psychologist.id}`}
                           >
                             Отклонить

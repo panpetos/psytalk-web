@@ -208,6 +208,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ success: true });
   });
 
+  app.delete("/api/admin/psychologists/:id/reject", async (req, res) => {
+    try {
+      await storage.rejectPsychologist(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(400).json({ error: "Failed to reject psychologist" });
+    }
+  });
+
   // Stats routes for admin dashboard
   app.get("/api/admin/stats", async (req, res) => {
     const users = await storage.getAllUsers();
