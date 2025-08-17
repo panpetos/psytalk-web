@@ -211,6 +211,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // User management routes
+  app.put("/api/admin/users/:id/freeze", async (req, res) => {
+    try {
+      await storage.updateUser(req.params.id, { isFrozen: true });
+      res.json({ success: true });
+    } catch (error) {
+      res.status(400).json({ error: "Failed to freeze user" });
+    }
+  });
+
+  app.put("/api/admin/users/:id/unfreeze", async (req, res) => {
+    try {
+      await storage.updateUser(req.params.id, { isFrozen: false });
+      res.json({ success: true });
+    } catch (error) {
+      res.status(400).json({ error: "Failed to unfreeze user" });
+    }
+  });
+
+  app.delete("/api/admin/users/:id", async (req, res) => {
+    try {
+      await storage.deleteUser(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(400).json({ error: "Failed to delete user" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

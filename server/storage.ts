@@ -24,6 +24,7 @@ export interface IStorage {
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: string, updates: Partial<User>): Promise<User | undefined>;
+  deleteUser(id: string): Promise<boolean>;
   
   // Psychologists
   getPsychologist(id: string): Promise<Psychologist | undefined>;
@@ -155,6 +156,7 @@ export class MemStorage implements IStorage {
       id,
       avatar: insertUser.avatar || null,
       isVerified: false,
+      isFrozen: false,
       createdAt: new Date(),
     };
     this.users.set(id, user);
@@ -168,6 +170,26 @@ export class MemStorage implements IStorage {
     const updatedUser = { ...user, ...updates };
     this.users.set(id, updatedUser);
     return updatedUser;
+  }
+
+  async deleteUser(id: string): Promise<boolean> {
+    // Also delete related psychologist profile if exists
+    const psychologist = Array.from(this.psychologists.values()).find(p => p.userId === id);
+    if (psychologist) {
+      this.psychologists.delete(psychologist.id);
+    }
+    
+    // Delete user appointments
+    Array.from(this.appointments.values())
+      .filter(apt => apt.clientId === id)
+      .forEach(apt => this.appointments.delete(apt.id));
+    
+    // Delete user messages
+    Array.from(this.messages.values())
+      .filter(msg => msg.senderId === id || msg.receiverId === id)
+      .forEach(msg => this.messages.delete(msg.id));
+    
+    return this.users.delete(id);
   }
 
   // Psychologist methods

@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { 
   BarChart3, 
   Users, 
@@ -14,7 +21,11 @@ import {
   TrendingUp, 
   AlertTriangle,
   CheckCircle,
-  Clock
+  Clock,
+  MoreVertical,
+  UserX,
+  Trash2,
+  ShieldCheck
 } from "lucide-react";
 import { authService } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
@@ -79,6 +90,68 @@ export default function AdminDashboard() {
       toast({
         title: "Ошибка",
         description: "Не удалось одобрить специалиста",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleUserAction = async (userId: string, action: string, user: any) => {
+    try {
+      let response;
+      let successMessage = "";
+      
+      switch (action) {
+        case 'freeze':
+          response = await fetch(`/api/admin/users/${userId}/freeze`, {
+            method: 'PUT',
+          });
+          successMessage = `Пользователь ${user.firstName} ${user.lastName} заморожен`;
+          break;
+        case 'unfreeze':
+          response = await fetch(`/api/admin/users/${userId}/unfreeze`, {
+            method: 'PUT',
+          });
+          successMessage = `Пользователь ${user.firstName} ${user.lastName} разморожен`;
+          break;
+        case 'delete':
+          if (!confirm(`Вы уверены, что хотите удалить пользователя ${user.firstName} ${user.lastName}? Это действие нельзя отменить.`)) {
+            return;
+          }
+          response = await fetch(`/api/admin/users/${userId}`, {
+            method: 'DELETE',
+          });
+          successMessage = `Пользователь ${user.firstName} ${user.lastName} удален`;
+          break;
+        case 'approve':
+          // For psychologists - find their psychologist profile and approve it
+          const psychologist = await fetch(`/api/psychologists/user/${userId}`);
+          if (psychologist.ok) {
+            const psychData = await psychologist.json();
+            await handleApprovePsychologist(psychData.id);
+            return; // handleApprovePsychologist already shows success message
+          } else {
+            throw new Error('Профиль психолога не найден');
+          }
+        default:
+          break;
+      }
+      
+      if (response && response.ok) {
+        toast({
+          title: "Успешно",
+          description: successMessage,
+        });
+        refetchUsers();
+        if (action === 'approve') {
+          queryClient.invalidateQueries({ queryKey: ['/api/psychologists/search'] });
+        }
+      } else {
+        throw new Error('Операция не выполнена');
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка",
+        description: `Не удалось выполнить операцию: ${error}`,
         variant: "destructive",
       });
     }
@@ -387,9 +460,43 @@ export default function AdminDashboard() {
                           {new Date(user.createdAt).toLocaleDateString('ru-RU')}
                         </td>
                         <td className="py-3 px-4">
-                          <Button variant="outline" size="sm">
-                            Управление
-                          </Button>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" size="sm" data-testid={`button-manage-${user.id}`}>
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              {user.role === 'psychologist' && (
+                                <>
+                                  <DropdownMenuItem 
+                                    onClick={() => handleUserAction(user.id, 'approve', user)}
+                                    data-testid={`action-approve-${user.id}`}
+                                  >
+                                    <ShieldCheck className="h-4 w-4 mr-2" />
+                                    Одобрить как психолога
+                                  </DropdownMenuItem>
+                                  <DropdownMenuSeparator />
+                                </>
+                              )}
+                              <DropdownMenuItem 
+                                onClick={() => handleUserAction(user.id, user.isFrozen ? 'unfreeze' : 'freeze', user)}
+                                data-testid={`action-freeze-${user.id}`}
+                              >
+                                <UserX className="h-4 w-4 mr-2" />
+                                {user.isFrozen ? 'Разморозить' : 'Заморозить'}
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem 
+                                onClick={() => handleUserAction(user.id, 'delete', user)}
+                                className="text-red-600 focus:text-red-600"
+                                data-testid={`action-delete-${user.id}`}
+                              >
+                                <Trash2 className="h-4 w-4 mr-2" />
+                                Удалить пользователя
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
                         </td>
                       </tr>
                     ))}

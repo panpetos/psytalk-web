@@ -12,6 +12,7 @@ export const users = pgTable("users", {
   lastName: text("last_name").notNull(),
   avatar: text("avatar"),
   isVerified: boolean("is_verified").default(false),
+  isFrozen: boolean("is_frozen").default(false),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
