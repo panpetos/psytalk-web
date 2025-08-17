@@ -30,6 +30,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         password: hashedPassword,
       });
       
+      // If user is a psychologist, create psychologist profile
+      if (userData.role === 'psychologist') {
+        await storage.createPsychologist({
+          userId: user.id,
+          specialization: "Не указана",
+          experience: 0,
+          education: "Не указано",
+          description: "Заполните профиль",
+          price: "0.00",
+          formats: ["video"],
+          certifications: []
+        });
+      }
+      
       // Remove password from response
       const { password, ...userResponse } = user;
       res.status(201).json(userResponse);

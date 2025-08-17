@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   const currentUser = authService.getCurrentUser();
   const { toast } = useToast();
 
-  const { data: stats } = useQuery({
+  const { data: stats = {} } = useQuery({
     queryKey: ['/api/admin/stats'],
     enabled: !!currentUser && currentUser.role === 'admin',
   });
@@ -35,7 +35,7 @@ export default function AdminDashboard() {
     enabled: !!currentUser && currentUser.role === 'admin' && activeTab === 'users',
   });
 
-  const { data: pendingPsychologists = [] } = useQuery({
+  const { data: pendingPsychologists = [], refetch: refetchPending } = useQuery({
     queryKey: ['/api/admin/psychologists/pending'],
     enabled: !!currentUser && currentUser.role === 'admin' && activeTab === 'approvals',
   });
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
           description: "Специалист успешно верифицирован и может принимать клиентов",
         });
         // Refresh the pending list
-        window.location.reload();
+        refetchPending();
       } else {
         throw new Error('Failed to approve');
       }
@@ -163,7 +163,7 @@ export default function AdminDashboard() {
                     <div>
                       <p className="text-sm text-gray-600">Всего пользователей</p>
                       <p className="text-2xl font-bold text-text-custom" data-testid="stat-total-users">
-                        {stats?.totalUsers || 0}
+                        {(stats as any)?.totalUsers || 0}
                       </p>
                     </div>
                     <div className="bg-primary-custom text-white p-3 rounded-lg">
@@ -184,7 +184,7 @@ export default function AdminDashboard() {
                     <div>
                       <p className="text-sm text-gray-600">Активных психологов</p>
                       <p className="text-2xl font-bold text-text-custom" data-testid="stat-active-psychologists">
-                        {stats?.activePsychologists || 0}
+                        {(stats as any)?.activePsychologists || 0}
                       </p>
                     </div>
                     <div className="bg-secondary-custom text-white p-3 rounded-lg">
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
                     <div>
                       <p className="text-sm text-gray-600">Сессий за месяц</p>
                       <p className="text-2xl font-bold text-text-custom" data-testid="stat-monthly-sessions">
-                        {stats?.monthlySessions || 0}
+                        {(stats as any)?.monthlySessions || 0}
                       </p>
                     </div>
                     <div className="bg-accent-custom text-white p-3 rounded-lg">
@@ -226,7 +226,7 @@ export default function AdminDashboard() {
                     <div>
                       <p className="text-sm text-gray-600">Доход платформы</p>
                       <p className="text-2xl font-bold text-text-custom" data-testid="stat-platform-revenue">
-                        ₽{stats?.platformRevenue ? parseFloat(stats.platformRevenue).toLocaleString() : 0}
+                        ₽{(stats as any)?.platformRevenue ? parseFloat((stats as any).platformRevenue).toLocaleString() : 0}
                       </p>
                     </div>
                     <div className="bg-yellow-500 text-white p-3 rounded-lg">
@@ -280,7 +280,7 @@ export default function AdminDashboard() {
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-600">Верификация документов</span>
                         <Badge variant="destructive" data-testid="pending-verifications">
-                          {pendingPsychologists.length}
+                          {(pendingPsychologists as any[]).length}
                         </Badge>
                       </div>
                       <div className="flex items-center justify-between">
@@ -346,7 +346,7 @@ export default function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((user: any) => (
+                    {(users as any[]).map((user: any) => (
                       <tr key={user.id} className="border-b hover:bg-gray-50">
                         <td className="py-3 px-4">
                           <div className="flex items-center space-x-3">
@@ -403,7 +403,7 @@ export default function AdminDashboard() {
               <h2 className="text-xl font-semibold text-text-custom mb-6">
                 Верификация психологов
               </h2>
-              {pendingPsychologists.length === 0 ? (
+              {(pendingPsychologists as any[]).length === 0 ? (
                 <div className="text-center py-12">
                   <UserCheck className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -415,7 +415,7 @@ export default function AdminDashboard() {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  {pendingPsychologists.map((psychologist: any) => (
+                  {(pendingPsychologists as any[]).map((psychologist: any) => (
                     <div key={psychologist.id} className="border rounded-lg p-6">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start space-x-4">
