@@ -84,14 +84,14 @@ export default function PsychologistSearch() {
                     Специализация
                   </Label>
                   <Select 
-                    value={filters.specialization || ''} 
-                    onValueChange={(value) => handleFilterChange('specialization', value || undefined)}
+                    value={filters.specialization || undefined} 
+                    onValueChange={(value) => handleFilterChange('specialization', value === 'all' ? undefined : value)}
                   >
                     <SelectTrigger data-testid="select-specialization">
                       <SelectValue placeholder="Все специализации" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Все специализации</SelectItem>
+                      <SelectItem value="all">Все специализации</SelectItem>
                       <SelectItem value="anxiety">Тревожные расстройства</SelectItem>
                       <SelectItem value="depression">Депрессия</SelectItem>
                       <SelectItem value="relationships">Отношения</SelectItem>
