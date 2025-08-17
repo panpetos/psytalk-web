@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -30,7 +31,7 @@ export default function AdminDashboard() {
     enabled: !!currentUser && currentUser.role === 'admin',
   });
 
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch: refetchUsers } = useQuery({
     queryKey: ['/api/admin/users'],
     enabled: !!currentUser && currentUser.role === 'admin' && activeTab === 'users',
   });
@@ -66,8 +67,11 @@ export default function AdminDashboard() {
           title: "Психолог одобрен",
           description: "Специалист успешно верифицирован и может принимать клиентов",
         });
-        // Refresh the pending list
+        // Refresh both pending list and users list
         refetchPending();
+        refetchUsers();
+        // Invalidate psychologist search cache so approved psychologists appear in search
+        queryClient.invalidateQueries({ queryKey: ['/api/psychologists/search'] });
       } else {
         throw new Error('Failed to approve');
       }
