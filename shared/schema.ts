@@ -74,7 +74,7 @@ export const availability = pgTable("availability", {
 
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).omit({ id: true, createdAt: true });
-export const insertPsychologistSchema = createInsertSchema(psychologists).omit({ id: true, userId: true, isApproved: true, rating: true, totalReviews: true });
+export const insertPsychologistSchema = createInsertSchema(psychologists).omit({ id: true, isApproved: true, rating: true, totalReviews: true });
 export const insertAppointmentSchema = createInsertSchema(appointments).omit({ id: true, createdAt: true });
 export const insertReviewSchema = createInsertSchema(reviews).omit({ id: true, isModerated: true, createdAt: true });
 export const insertMessageSchema = createInsertSchema(messages).omit({ id: true, isRead: true, createdAt: true });

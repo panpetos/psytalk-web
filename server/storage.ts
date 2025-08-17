@@ -104,6 +104,9 @@ export class MemStorage implements IStorage {
       price: "2500.00",
       formats: ["video", "audio", "chat"],
     });
+    
+    // Approve demo psychologists
+    await this.approvePsychologist(psychologist1.id);
 
     const psychologist2User = await this.createUser({
       email: "mikhail.sidorov@psychplatform.com",
@@ -123,6 +126,8 @@ export class MemStorage implements IStorage {
       price: "3000.00",
       formats: ["video", "audio"],
     });
+    
+    await this.approvePsychologist(psychologist2.id);
 
     // Create sample client
     const clientUser = await this.createUser({
@@ -182,6 +187,8 @@ export class MemStorage implements IStorage {
       isApproved: false,
       rating: "0",
       totalReviews: 0,
+      certifications: Array.isArray(insertPsychologist.certifications) ? insertPsychologist.certifications as string[] : null,
+      formats: Array.isArray(insertPsychologist.formats) ? insertPsychologist.formats as string[] : null,
     };
     this.psychologists.set(id, psychologist);
     return psychologist;
@@ -225,7 +232,7 @@ export class MemStorage implements IStorage {
     
     if (filters.formats && filters.formats.length > 0) {
       results = results.filter(p => 
-        p.formats && filters.formats!.some(format => p.formats.includes(format))
+        p.formats && Array.isArray(p.formats) && filters.formats!.some(format => p.formats!.includes(format))
       );
     }
     
