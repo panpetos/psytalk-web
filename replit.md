@@ -15,6 +15,7 @@ The platform enables clients to search for psychologists, book appointments, and
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+Preferred language: Russian (all communication should be in Russian).
 
 # System Architecture
 
