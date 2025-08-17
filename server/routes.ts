@@ -1,9 +1,16 @@
-import type { Express } from "express";
+import type { Express, Request } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertPsychologistSchema, insertAppointmentSchema, insertReviewSchema } from "@shared/schema";
 import bcrypt from "bcrypt";
 import { z } from "zod";
+
+// Extend Request type to include session
+declare module 'express-session' {
+  interface SessionData {
+    userId: string;
+  }
+}
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -66,7 +73,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(401).json({ error: "Invalid credentials" });
       }
       
-      // In a real app, you'd create a JWT token here
+      // Set user session
+      req.session.userId = user.id;
+      
       const { password: _, ...userResponse } = user;
       res.json(userResponse);
     } catch (error: any) {
@@ -86,6 +95,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     const { password, ...safeUser } = user;
     res.json(safeUser);
+  });
+
+  app.post("/api/auth/logout", async (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Could not log out" });
+      }
+      res.json({ message: "Logged out successfully" });
+    });
   });
 
   // User routes

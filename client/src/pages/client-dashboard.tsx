@@ -9,6 +9,7 @@ import { Link, useLocation } from "wouter";
 import { authService } from "@/lib/auth";
 import AppointmentCard from "@/components/appointment-card";
 import { useToast } from "@/hooks/use-toast";
+import type { AppointmentWithDetails, Appointment } from "@shared/schema";
 
 type TabType = 'appointments' | 'messages' | 'profile' | 'billing';
 
@@ -18,7 +19,7 @@ export default function ClientDashboard() {
   const currentUser = authService.getCurrentUser();
   const { toast } = useToast();
 
-  const { data: appointments = [], isLoading: appointmentsLoading } = useQuery({
+  const { data: appointments = [], isLoading: appointmentsLoading } = useQuery<AppointmentWithDetails[]>({
     queryKey: ['/api/appointments/client', currentUser?.id],
     enabled: !!currentUser?.id && activeTab === 'appointments',
   });
@@ -43,11 +44,11 @@ export default function ClientDashboard() {
     );
   }
 
-  const upcomingAppointments = appointments.filter((apt: any) => 
+  const upcomingAppointments = appointments.filter((apt) => 
     new Date(apt.dateTime) > new Date() && apt.status === 'scheduled'
   );
 
-  const pastAppointments = appointments.filter((apt: any) => 
+  const pastAppointments = appointments.filter((apt) => 
     new Date(apt.dateTime) < new Date() || apt.status === 'completed'
   );
 
@@ -247,7 +248,7 @@ export default function ClientDashboard() {
                     <div className="flex justify-between">
                       <span className="text-gray-600">Активных психологов:</span>
                       <span className="font-medium" data-testid="stat-active-psychologists">
-                        {new Set(appointments.map((apt: any) => apt.psychologist.id)).size}
+                        {new Set(appointments.map((apt) => apt.psychologist.id)).size}
                       </span>
                     </div>
                     <div className="flex justify-between">
@@ -270,12 +271,12 @@ export default function ClientDashboard() {
                     </p>
                   ) : (
                     <div className="space-y-3">
-                      {[...new Map(appointments.map((apt: any) => [apt.psychologist.id, apt.psychologist])).values()]
+                      {Array.from(new Map(appointments.map((apt) => [apt.psychologist.id, apt.psychologist])).values())
                         .slice(0, 3)
-                        .map((psychologist: any) => (
+                        .map((psychologist) => (
                         <div key={psychologist.id} className="flex items-center space-x-3">
                           <Avatar className="w-10 h-10">
-                            <AvatarImage src={psychologist.user.avatar} />
+                            <AvatarImage src={psychologist.user.avatar || undefined} />
                             <AvatarFallback className="bg-primary-custom text-white">
                               {psychologist.user.firstName[0]}{psychologist.user.lastName[0]}
                             </AvatarFallback>
