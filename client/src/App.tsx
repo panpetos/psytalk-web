@@ -15,6 +15,7 @@ import ClientDashboard from "./pages/client-dashboard";
 import PsychologistDashboard from "./pages/psychologist-dashboard";
 import AdminDashboard from "./pages/admin-dashboard";
 import VideoConsultation from "./pages/video-consultation";
+import EditProfile from "./pages/edit-profile";
 import LoginModal from "./components/auth/login-modal";
 import RegisterModal from "./components/auth/register-modal";
 import NotFound from "@/pages/not-found";
@@ -56,6 +57,7 @@ function Router() {
         <Route path="/search" component={PsychologistSearch} />
         <Route path="/booking/:psychologistId" component={Booking} />
         <Route path="/consultation/:appointmentId" component={VideoConsultation} />
+        <Route path="/edit-profile" component={EditProfile} />
         
         {/* Protected routes based on user role */}
         {user?.role === 'client' && (

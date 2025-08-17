@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { queryClient } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,7 +26,8 @@ import {
   MoreVertical,
   UserX,
   Trash2,
-  ShieldCheck
+  ShieldCheck,
+  Settings
 } from "lucide-react";
 import { authService } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
@@ -34,6 +36,7 @@ type TabType = 'overview' | 'users' | 'approvals' | 'payments' | 'reports';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<TabType>('overview');
+  const [, navigate] = useLocation();
   const currentUser = authService.getCurrentUser();
   const { toast } = useToast();
 

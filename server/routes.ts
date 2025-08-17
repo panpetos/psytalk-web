@@ -74,6 +74,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/auth/me", async (req, res) => {
+    if (!req.session.userId) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
+    
+    const user = await storage.getUser(req.session.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    
+    const { password, ...safeUser } = user;
+    res.json(safeUser);
+  });
+
   // User routes
   app.get("/api/users/:id", async (req, res) => {
     const user = await storage.getUser(req.params.id);
@@ -141,6 +155,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
     
     res.json(psychologist);
+  });
+
+  // User profile routes
+  app.get("/api/users/:id", async (req, res) => {
+    const user = await storage.getUser(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    
+    const { password, ...safeUser } = user;
+    res.json(safeUser);
+  });
+
+  app.put("/api/users/:id", async (req, res) => {
+    const updates = req.body;
+    const user = await storage.updateUser(req.params.id, updates);
+    
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    
+    const { password, ...safeUser } = user;
+    res.json(safeUser);
   });
 
   // Appointment routes

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +13,7 @@ type TabType = 'schedule' | 'clients' | 'earnings' | 'profile';
 
 export default function PsychologistDashboard() {
   const [activeTab, setActiveTab] = useState<TabType>('schedule');
+  const [, navigate] = useLocation();
   const currentUser = authService.getCurrentUser();
   const { toast } = useToast();
 
@@ -493,7 +495,11 @@ export default function PsychologistDashboard() {
                     </Badge>
                   </div>
 
-                  <Button className="bg-primary-custom text-white hover:bg-primary-custom/90">
+                  <Button 
+                    className="bg-primary-custom text-white hover:bg-primary-custom/90"
+                    onClick={() => navigate("/edit-profile")}
+                    data-testid="button-edit-profile"
+                  >
                     Редактировать профиль
                   </Button>
                 </div>

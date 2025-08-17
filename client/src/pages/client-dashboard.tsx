@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Calendar, MessageSquare, User, CreditCard, Search, Star } from "lucide-react";
-import { Link } from "wouter";
+import { Calendar, MessageSquare, User, CreditCard, Search, Star, Settings } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import { authService } from "@/lib/auth";
 import AppointmentCard from "@/components/appointment-card";
 import { useToast } from "@/hooks/use-toast";
@@ -14,6 +14,7 @@ type TabType = 'appointments' | 'messages' | 'profile' | 'billing';
 
 export default function ClientDashboard() {
   const [activeTab, setActiveTab] = useState<TabType>('appointments');
+  const [, navigate] = useLocation();
   const currentUser = authService.getCurrentUser();
   const { toast } = useToast();
 
@@ -368,7 +369,12 @@ export default function ClientDashboard() {
                     {currentUser.isVerified ? "Верифицирован" : "Не верифицирован"}
                   </Badge>
                 </div>
-                <Button className="bg-primary-custom text-white hover:bg-primary-custom/90">
+                <Button 
+                  onClick={() => navigate("/edit-profile")}
+                  className="bg-primary-custom text-white hover:bg-primary-custom/90 flex items-center gap-2"
+                  data-testid="button-edit-profile"
+                >
+                  <Settings className="h-4 w-4" />
                   Редактировать профиль
                 </Button>
               </div>
