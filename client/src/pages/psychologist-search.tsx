@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,16 +16,7 @@ export default function PsychologistSearch() {
   const [filters, setFilters] = useState<SearchFilters>({});
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: psychologists = [], isLoading } = useQuery({
-    queryKey: ['/api/psychologists/search', filters],
-    enabled: true,
-  });
-
-  const handleFilterChange = (key: keyof SearchFilters, value: any) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
-  };
-
-  const formatFilters = (filters: SearchFilters) => {
+  const formatFilters = useCallback((filters: SearchFilters) => {
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
       if (value !== undefined && value !== '' && value !== null) {
@@ -37,6 +28,22 @@ export default function PsychologistSearch() {
       }
     });
     return params.toString();
+  }, []);
+
+  const { data: psychologists = [], isLoading } = useQuery({
+    queryKey: ['/api/psychologists/search', formatFilters(filters)],
+    queryFn: async () => {
+      const queryString = formatFilters(filters);
+      const url = queryString ? `/api/psychologists/search?${queryString}` : '/api/psychologists/search';
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Failed to fetch psychologists');
+      return response.json();
+    },
+    enabled: true,
+  });
+
+  const handleFilterChange = (key: keyof SearchFilters, value: any) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
   };
 
   const filteredPsychologists = (psychologists as any[]).filter((psychologist: any) => {
