@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Редактирование профиля - PsychPlatform</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-container">
+      <a href="/" class="nav-brand">PsychPlatform</a>
+      <ul class="nav-menu">
+        <li><a href="#" id="back-link" class="nav-link">Назад</a></li>
+        <li><button class="btn btn-sm" id="logout-btn">Выйти</button></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container container-sm" style="margin-top: 40px;">
+    <div class="card">
+      <h1 class="card-title">Редактирование профиля</h1>
+      
+      <form id="profile-form">
+        <div class="grid grid-cols-2">
+          <div class="form-group">
+            <label class="form-label">Имя</label>
+            <input type="text" id="firstName" class="form-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Фамилия</label>
+            <input type="text" id="lastName" class="form-input" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="email" class="form-input" disabled>
+        </div>
+        
+        <!-- Psychologist-specific fields -->
+        <div id="psychologist-fields" class="hidden">
+          <hr class="my-4" style="border-color: var(--color-border);">
+          <h3 class="mb-3">Профессиональная информация</h3>
+          
+          <div class="form-group">
+            <label class="form-label">Специализация</label>
+            <input type="text" id="specialization" class="form-input">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Опыт работы (лет)</label>
+            <input type="number" id="experience" class="form-input" min="0">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Образование</label>
+            <textarea id="education" class="form-textarea" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">О себе</label>
+            <textarea id="description" class="form-textarea" rows="5"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Стоимость консультации (₽)</label>
+            <input type="number" id="price" class="form-input" min="0" step="100">
+          </div>
+        </div>
+        
+        <div id="form-error" class="alert alert-danger hidden"></div>
+        <div id="form-success" class="alert alert-success hidden"></div>
+        
+        <button type="submit" class="btn w-full">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    let currentUser = null;
+    let psychologist = null;
+    
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await Auth.logout();
+      window.location.href = '/';
+    });
+    
+    // Load profile data
+    async function loadProfile() {
+      try {
+        currentUser = Auth.getUser();
+        
+        // Set back link
+        const backLink = document.getElementById('back-link');
+        if (currentUser.role === 'client') {
+          backLink.href = '/client-dashboard.html';
+        } else if (currentUser.role === 'psychologist') {
+          backLink.href = '/psychologist-dashboard.html';
+        } else {
+          backLink.href = '/admin-dashboard.html';
+        }
+        
+        // Fill user fields
+        document.getElementById('firstName').value = currentUser.firstName;
+        document.getElementById('lastName').value = currentUser.lastName;
+        document.getElementById('email').value = currentUser.email;
+        
+        // Load psychologist data if applicable
+        if (currentUser.role === 'psychologist') {
+          document.getElementById('psychologist-fields').classList.remove('hidden');
+          psychologist = await API.psychologists.getByUserId(currentUser.id);
+          
+          if (psychologist) {
+            document.getElementById('specialization').value = psychologist.specialization || '';
+            document.getElementById('experience').value = psychologist.experience || 0;
+            document.getElementById('education').value = psychologist.education || '';
+            document.getElementById('description').value = psychologist.description || '';
+            document.getElementById('price').value = psychologist.price || 0;
+          }
+        }
+      } catch (error) {
+        console.error('Error loading profile:', error);
+      }
+    }
+    
+    // Submit form
+    document.getElementById('profile-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const errorEl = document.getElementById('form-error');
+      const successEl = document.getElementById('form-success');
+      errorEl.classList.add('hidden');
+      successEl.classList.add('hidden');
+      
+      try {
+        // Update user
+        const userData = {
+          firstName: document.getElementById('firstName').value,
+          lastName: document.getElementById('lastName').value
+        };
+        
+        await API.users.update(currentUser.id, userData);
+        
+        // Update psychologist if applicable
+        if (currentUser.role === 'psychologist' && psychologist) {
+          const psychData = {
+            specialization: document.getElementById('specialization').value,
+            experience: parseInt(document.getElementById('experience').value),
+            education: document.getElementById('education').value,
+            description: document.getElementById('description').value,
+            price: document.getElementById('price').value
+          };
+          
+          await API.psychologists.update(psychologist.id, psychData);
+        }
+        
+        successEl.textContent = 'Профиль успешно обновлен!';
+        successEl.classList.remove('hidden');
+        
+        // Refresh auth state
+        await Auth.init();
+        
+        setTimeout(() => {
+          window.location.href = document.getElementById('back-link').href;
+        }, 1500);
+        
+      } catch (error) {
+        errorEl.textContent = error.message;
+        errorEl.classList.remove('hidden');
+      }
+    });
+    
+    // Initialize
+    Auth.requireAuth().then(ok => {
+      if (ok) {
+        loadProfile();
+      }
+    });
+  </script>
+</body>
+</html>
