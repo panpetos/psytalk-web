@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo режим - PsychPlatform</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .demo-banner {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .demo-card {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .feature-item {
+      padding: 1.5rem;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+    .feature-item.available {
+      background: #f0fdf4;
+      border-color: #22c55e;
+    }
+    .feature-item.unavailable {
+      background: #fef2f2;
+      border-color: #ef4444;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">
+    <h1 style="margin: 0; font-size: 2.5rem;">📄 PsychPlatform - Demo режим</h1>
+    <p style="margin: 1rem 0 0 0; font-size: 1.2rem;">Статический просмотр интерфейса</p>
+  </div>
+  
+  <div class="container">
+    <div class="demo-card card">
+      <h2>Что это такое?</h2>
+      <p>Вы видите <strong>демонстрационную версию</strong> платформы PsychPlatform. Это статический просмотр пользовательского интерфейса без подключения к базе данных.</p>
+      
+      <div class="alert alert-warning">
+        <h3 style="margin-top: 0;">⚠️ Важно!</h3>
+        <p>Replit не имеет встроенной поддержки MySQL, поэтому приложение запущено в режиме просмотра интерфейса.</p>
+        <p class="mb-0">Для полной функциональности необходимо развернуть приложение на сервере с MySQL.</p>
+      </div>
+      
+      <h2 class="mt-4">Что работает?</h2>
+      <div class="feature-grid">
+        <div class="feature-item available">
+          <h3>✅ Интерфейс</h3>
+          <p>Все HTML страницы доступны для просмотра</p>
+        </div>
+        <div class="feature-item available">
+          <h3>✅ Дизайн</h3>
+          <p>CSS стили и компоненты работают</p>
+        </div>
+        <div class="feature-item available">
+          <h3>✅ Навигация</h3>
+          <p>Можно переходить между страницами</p>
+        </div>
+      </div>
+      
+      <h2 class="mt-4">Что НЕ работает?</h2>
+      <div class="feature-grid">
+        <div class="feature-item unavailable">
+          <h3>❌ Регистрация/Вход</h3>
+          <p>Нет базы данных для хранения пользователей</p>
+        </div>
+        <div class="feature-item unavailable">
+          <h3>❌ API запросы</h3>
+          <p>Все API endpoints возвращают ошибку 503</p>
+        </div>
+        <div class="feature-item unavailable">
+          <h3>❌ Данные</h3>
+          <p>Нет сохранения и получения данных</p>
+        </div>
+      </div>
+      
+      <h2 class="mt-4">Доступные страницы для просмотра:</h2>
+      <ul class="mb-3">
+        <li><a href="/index.html">Главная (поиск психологов)</a></li>
+        <li><a href="/login.html">Вход и регистрация</a></li>
+        <li><a href="/client-dashboard.html">Личный кабинет клиента</a></li>
+        <li><a href="/psychologist-dashboard.html">Личный кабинет психолога</a></li>
+        <li><a href="/admin-dashboard.html">Административная панель</a></li>
+        <li><a href="/psychologist-profile.html?id=1">Профиль психолога</a></li>
+        <li><a href="/edit-profile.html">Редактирование профиля</a></li>
+        <li><a href="/consultation.html?id=1">Страница консультации</a></li>
+        <li><a href="/leave-review.html?psychologist=1">Оставить отзыв</a></li>
+      </ul>
+      
+      <div class="alert alert-info">
+        <h3 style="margin-top: 0;">🚀 Как получить полную версию?</h3>
+        <p><strong>Вариант 1:</strong> Развернуть на рег.ру с MySQL</p>
+        <ul>
+          <li>Следуйте инструкциям в <code>DEPLOYMENT_REG_RU.md</code></li>
+          <li>Используйте предоставленные учетные данные MySQL</li>
+          <li>Загрузите файлы через FTP</li>
+        </ul>
+        
+        <p class="mt-3"><strong>Вариант 2:</strong> Запустить локально</p>
+        <ul>
+          <li>Установите MySQL на своем компьютере</li>
+          <li>Следуйте инструкциям в <code>QUICK_START.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="/index.html" class="btn btn-primary" style="text-decoration: none;">Начать просмотр интерфейса</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
