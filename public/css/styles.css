@@ -219,7 +219,7 @@ p {
 }
 
 .btn-primary:hover {
-  background-color: hsl(208 100% 50%);
+  background-color: hsl(258 80% 50%);
 }
 
 .btn-secondary {
@@ -228,7 +228,7 @@ p {
 }
 
 .btn-secondary:hover {
-  background-color: hsl(115 41% 50%);
+  background-color: hsl(270 90% 92%);
 }
 
 .btn-outline {

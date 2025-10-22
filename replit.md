@@ -6,16 +6,27 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - psytalk.pro Rebranding
+### Latest Update - Design Refinements and UX Improvements
+- **Terminology standardization**: All instances of "сессия" replaced with "консультация" across all pages
+- **Pricing corrections**: Updated first consultation price from 100₽ to 2500₽ everywhere
+- **3D Icon System**: Added gradient icons with shadow effects and hover animations (class="icon-3d")
+- **FAQ Enhancement**: Implemented smooth accordion animation (300ms transitions) with custom arrows
+- **Dropdown Styling**: All select elements now have rounded corners (border-radius: 0.5rem) and custom purple arrows
+- **Mobile Responsiveness**: 
+  - Added mobile-friendly filter sidebar with slide-in animation
+  - Floating filter button on mobile (purple gradient, bottom-right corner)
+  - Mobile overlay for sidebar with smooth transitions
+  - Responsive grid fixes for all breakpoints
+- **Updated pages**:
+  - **index.html**: 3D icons, correct pricing (2500₽), FAQ animations, "консультация" terminology
+  - **search.html**: Mobile filters, styled dropdowns, filter labels redesign, responsive layout
+  - **client-dashboard.html**: "консультация" terminology, promo code section text corrections
+
+### Previous Update - psytalk.pro Rebranding
 - **Complete platform rebranding**: PsychPlatform → psytalk.pro
 - **New visual identity**: Purple color scheme (#7C3AED primary, #F3E8FF secondary)
 - **Minimalist EgoDrive-style redesign**: Clean, modern aesthetics with focus on content
 - **Logo redesign**: Text-based "psy" (black) + "talk.pro" (purple italic), no icons
-- **Updated pages**:
-  - **index.html**: Minimalist hero, purple accents, "Первая консультация бесплатно" badge
-  - **search.html**: Purple gradient sidebar, modern psychologist cards with photos, time slots
-  - **client-dashboard.html**: Pink gradient next session card, support section, promocodes
-  - **register.html**: Clean role selection (client/psychologist), purple styling
 - **Bug fixes**: Fixed API fetch method (POST → GET), corrected badge text
 
 ### Previous Changes
