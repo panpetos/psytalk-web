@@ -165,6 +165,7 @@
   <script>
     let currentUser = null;
     let appointments = [];
+    let isDemoMode = false;
 
     // Tab switching
     document.querySelectorAll('.tab-button').forEach(button => {
@@ -177,30 +178,129 @@
       });
     });
 
-    // Load user data
-    Auth.init().then(async (user) => {
-      if (!user || user.role !== 'client') {
-        window.location.href = '/login.html';
-        return;
+    // Check if in DEMO mode
+    async function checkDemoMode() {
+      try {
+        const response = await fetch('/api/auth/me');
+        return response.status === 503 || response.status === 404;
+      } catch (error) {
+        return true;
       }
+    }
 
-      currentUser = user;
-      document.getElementById('welcome-text').textContent = `Добро пожаловать, ${user.firstName} ${user.lastName}!`;
+    // Initialize page
+    async function init() {
+      isDemoMode = await checkDemoMode();
       
-      // Load profile
-      document.getElementById('profile-firstName').value = user.firstName;
-      document.getElementById('profile-lastName').value = user.lastName;
-      document.getElementById('profile-email').value = user.email;
+      if (isDemoMode) {
+        // DEMO MODE: Show mock data
+        currentUser = {
+          id: 1,
+          firstName: 'Мария',
+          lastName: 'Иванова',
+          email: 'maria@example.com',
+          role: 'client'
+        };
+        
+        document.getElementById('welcome-text').textContent = `Добро пожаловать, ${currentUser.firstName} ${currentUser.lastName}!`;
+        document.getElementById('profile-firstName').value = currentUser.firstName;
+        document.getElementById('profile-lastName').value = currentUser.lastName;
+        document.getElementById('profile-email').value = currentUser.email;
+        
+        loadDemoAppointments();
+        lucide.createIcons();
+      } else {
+        // REAL MODE: Use Auth
+        Auth.init().then(async (user) => {
+          if (!user || user.role !== 'client') {
+            window.location.href = '/login.html';
+            return;
+          }
 
-      // Load appointments
-      await loadAppointments();
-      lucide.createIcons();
-    });
+          currentUser = user;
+          document.getElementById('welcome-text').textContent = `Добро пожаловать, ${user.firstName} ${user.lastName}!`;
+          
+          document.getElementById('profile-firstName').value = user.firstName;
+          document.getElementById('profile-lastName').value = user.lastName;
+          document.getElementById('profile-email').value = user.email;
+
+          await loadAppointments();
+          lucide.createIcons();
+        });
+      }
+    }
+
+    init();
+
+    // Load demo appointments
+    function loadDemoAppointments() {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(14, 0, 0, 0);
+      
+      const nextWeek = new Date();
+      nextWeek.setDate(nextWeek.getDate() + 7);
+      nextWeek.setHours(16, 30, 0, 0);
+      
+      const lastWeek = new Date();
+      lastWeek.setDate(lastWeek.getDate() - 7);
+      lastWeek.setHours(10, 0, 0, 0);
+
+      appointments = [
+        {
+          id: 1,
+          dateTime: tomorrow.toISOString(),
+          status: 'scheduled',
+          format: 'Видео',
+          psychologist: {
+            id: 1,
+            price: 3500,
+            user: { firstName: 'Анна', lastName: 'Петрова' }
+          }
+        },
+        {
+          id: 2,
+          dateTime: nextWeek.toISOString(),
+          status: 'scheduled',
+          format: 'Аудио',
+          psychologist: {
+            id: 2,
+            price: 4000,
+            user: { firstName: 'Дмитрий', lastName: 'Соколов' }
+          }
+        },
+        {
+          id: 3,
+          dateTime: lastWeek.toISOString(),
+          status: 'completed',
+          format: 'Видео',
+          psychologist: {
+            id: 1,
+            price: 3500,
+            user: { firstName: 'Анна', lastName: 'Петрова' }
+          }
+        }
+      ];
+
+      const upcoming = appointments.filter(apt => new Date(apt.dateTime) > new Date() && apt.status === 'scheduled');
+      const past = appointments.filter(apt => new Date(apt.dateTime) < new Date() || apt.status === 'completed');
+
+      renderAppointments('upcoming-appointments', upcoming, true);
+      renderAppointments('past-appointments', past, false);
+
+      document.getElementById('stat-total').textContent = appointments.length;
+      document.getElementById('stat-psychologists').textContent = '2';
+      document.getElementById('stat-spent').textContent = '3 500 ₽';
+    }
 
     // Logout
     document.getElementById('logout-btn').addEventListener('click', async () => {
-      await Auth.logout();
-      window.location.href = '/';
+      if (isDemoMode) {
+        window.location.href = '/';
+      } else {
+        await Auth.logout();
+        window.location.href = '/';
+      }
     });
 
     // Load appointments
