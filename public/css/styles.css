@@ -1084,6 +1084,34 @@ select option {
     border-bottom: none;
     margin-top: 1rem !important;
   }
+  
+  /* Hero CTA Buttons - mobile vertical layout */
+  .hero-cta-buttons {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  
+  .hero-cta-buttons .btn {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Hero section - single column on mobile */
+  .section .grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  /* Hero title - smaller on mobile */
+  .section h1 {
+    font-size: 2rem !important;
+  }
+  
+  /* Hero image - full width on mobile */
+  .section .grid > div:last-child {
+    order: -1;
+  }
 }
 
 /* ============================================

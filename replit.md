@@ -6,7 +6,16 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Mobile Horizontal Scroll Fix
+### Latest Update - Mobile Hero Buttons Fix
+- **Fixed hero section buttons on mobile**: Buttons now properly adapted for mobile devices
+  - Hero CTA buttons (Найти психолога, Стать психологом) now display vertically on mobile
+  - Buttons stretch to full width (100%) on mobile devices
+  - 20px gap between buttons for better spacing
+  - Hero section becomes single-column layout on mobile (< 1024px)
+  - Hero image displayed first, text content second on mobile
+  - Smaller heading size (2rem) on mobile for better readability
+
+### Previous Update - Mobile Horizontal Scroll Fix
 - **Fixed horizontal scroll on mobile**: No more unwanted right scrolling on mobile/tablet devices
   - Added `overflow-x: hidden` on html/body for mobile (max-width: 1023px)
   - Added `width: 100%` and `overflow-x: hidden` on .nav container
