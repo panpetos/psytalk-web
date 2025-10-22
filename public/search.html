@@ -74,53 +74,115 @@
               </button>
             </div>
 
-            <!-- Search Input -->
-            <div class="form-group">
-              <label class="form-label" for="search-input" style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">
-                С кем хотите поговорить?
+            <!-- Gender Filter -->
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+                Пол психолога
               </label>
-              <select id="gender-select" class="form-select" data-testid="select-gender" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem;">
-                <option value="">Выберите пол</option>
-                <option value="male">Мужчина</option>
-                <option value="female">Женщина</option>
-                <option value="any">Не важно</option>
-              </select>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="gender" value="male" class="filter-checkbox" data-testid="checkbox-male" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Мужчина</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="gender" value="female" class="filter-checkbox" data-testid="checkbox-female" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Женщина</span>
+                </label>
+              </div>
             </div>
 
-            <!-- Issue Select -->
-            <div class="form-group">
-              <label class="form-label" for="issue-select" style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">
-                О чем хотите поговорить?
+            <!-- Issues Filter -->
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+                Специализация
               </label>
-              <select id="issue-select" class="form-select" data-testid="select-issue" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem;">
-                <option value="">Выберите темы</option>
-                <option value="relationships">Отношения</option>
-                <option value="anxiety">Тревога и стресс</option>
-                <option value="self">Самопознание</option>
-                <option value="career">Карьера</option>
-                <option value="family">Семья</option>
-              </select>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="relationships" class="filter-checkbox" data-testid="checkbox-relationships" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Отношения</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="anxiety" class="filter-checkbox" data-testid="checkbox-anxiety" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Тревога и стресс</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="self" class="filter-checkbox" data-testid="checkbox-self" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Самопознание</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="career" class="filter-checkbox" data-testid="checkbox-career" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Карьера</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="family" class="filter-checkbox" data-testid="checkbox-family" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Семья и дети</span>
+                </label>
+              </div>
             </div>
 
-            <!-- Age Range -->
-            <div class="form-group">
-              <label class="form-label" for="age-input" style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">
-                Возраст психолога
+            <!-- Format Filter -->
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+                Формат работы
               </label>
-              <input 
-                type="text" 
-                id="age-input" 
-                class="form-input" 
-                placeholder="24 года"
-                data-testid="input-age"
-                style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem;"
-              />
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="format" value="video" class="filter-checkbox" data-testid="checkbox-video" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Видео</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="format" value="audio" class="filter-checkbox" data-testid="checkbox-audio" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Аудио</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" name="format" value="chat" class="filter-checkbox" data-testid="checkbox-chat" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Чат</span>
+                </label>
+              </div>
             </div>
 
-            <!-- Apply Button -->
-            <button class="btn w-full mt-2" style="background: white; color: #7C3AED; border: none; font-weight: 600;" data-testid="button-apply-filters">
-              Применить
-            </button>
+            <!-- Price Range Filter -->
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+                Цена за консультацию
+              </label>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <input 
+                  type="number" 
+                  id="price-min" 
+                  class="form-input" 
+                  placeholder="От"
+                  min="0"
+                  step="500"
+                  data-testid="input-price-min"
+                  style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem; padding: 0.5rem; width: 100%;"
+                />
+                <span style="color: rgba(255,255,255,0.7);">—</span>
+                <input 
+                  type="number" 
+                  id="price-max" 
+                  class="form-input" 
+                  placeholder="До"
+                  min="0"
+                  step="500"
+                  data-testid="input-price-max"
+                  style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem; padding: 0.5rem; width: 100%;"
+                />
+              </div>
+              <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 0.5rem;">
+                Например: от 2000 до 5000 ₽
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn w-full" style="background: white; color: #7C3AED; border: none; font-weight: 600; flex: 1;" data-testid="button-apply-filters" onclick="applyFilters()">
+                Применить
+              </button>
+              <button class="btn" style="background: rgba(255,255,255,0.2); color: white; border: none; font-weight: 600; padding: 0.75rem 1rem;" data-testid="button-reset-filters" onclick="resetFilters()">
+                Сброс
+              </button>
+            </div>
           </div>
         </aside>
 
@@ -362,21 +424,87 @@
 
     // Apply filters
     function applyFilters() {
-      const genderFilter = document.getElementById('gender-select').value.toLowerCase();
-      const issueFilter = document.getElementById('issue-select').value.toLowerCase();
+      // Get selected genders
+      const selectedGenders = Array.from(document.querySelectorAll('input[name="gender"]:checked'))
+        .map(cb => cb.value);
+      
+      // Get selected issues
+      const selectedIssues = Array.from(document.querySelectorAll('input[name="issue"]:checked'))
+        .map(cb => cb.value);
+      
+      // Get selected formats
+      const selectedFormats = Array.from(document.querySelectorAll('input[name="format"]:checked'))
+        .map(cb => cb.value);
+      
+      // Get price range
+      const priceMin = parseInt(document.getElementById('price-min').value) || 0;
+      const priceMax = parseInt(document.getElementById('price-max').value) || Infinity;
 
       filteredPsychologists = allPsychologists.filter(psych => {
-        // Add filter logic here
+        // Gender filter
+        if (selectedGenders.length > 0) {
+          const psychGender = psych.user?.gender || 'any';
+          if (!selectedGenders.includes(psychGender)) {
+            return false;
+          }
+        }
+        
+        // Issues filter (check if psychologist has any of selected issues)
+        if (selectedIssues.length > 0) {
+          // For demo, we'll match based on specialization keywords
+          const spec = psych.specialization?.toLowerCase() || '';
+          const hasIssue = selectedIssues.some(issue => {
+            if (issue === 'relationships' && spec.includes('семейн')) return true;
+            if (issue === 'anxiety' && (spec.includes('тревог') || spec.includes('стресс'))) return true;
+            if (issue === 'self' && spec.includes('само')) return true;
+            if (issue === 'career' && spec.includes('карьер')) return true;
+            if (issue === 'family' && spec.includes('семейн')) return true;
+            return false;
+          });
+          if (!hasIssue) return false;
+        }
+        
+        // Format filter
+        if (selectedFormats.length > 0) {
+          const hasFormat = selectedFormats.some(format => 
+            psych.formats && psych.formats.includes(format)
+          );
+          if (!hasFormat) return false;
+        }
+        
+        // Price filter
+        const price = parseInt(psych.price) || 0;
+        if (price < priceMin || price > priceMax) {
+          return false;
+        }
+        
         return true;
       });
 
       renderPsychologists();
     }
+    
+    // Reset filters
+    function resetFilters() {
+      // Uncheck all checkboxes
+      document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+      
+      // Clear price inputs
+      document.getElementById('price-min').value = '';
+      document.getElementById('price-max').value = '';
+      
+      // Reset filtered list
+      filteredPsychologists = allPsychologists;
+      renderPsychologists();
+    }
 
-    // Event listeners
-    document.getElementById('gender-select')?.addEventListener('change', applyFilters);
-    document.getElementById('issue-select')?.addEventListener('change', applyFilters);
-    document.querySelector('[data-testid="button-apply-filters"]')?.addEventListener('click', applyFilters);
+    // Event listeners - auto-apply on checkbox change
+    document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', applyFilters);
+    });
+    
+    document.getElementById('price-min')?.addEventListener('input', applyFilters);
+    document.getElementById('price-max')?.addEventListener('input', applyFilters);
 
     // Initialize
     checkDemoMode();

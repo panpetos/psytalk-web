@@ -6,7 +6,18 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Adaptive Psychologist Cards & Mobile Navigation
+### Latest Update - Checkbox Filters & Price Range
+- **Filters redesigned with checkboxes**: Improved usability and instant filtering
+  - **Пол психолога**: Checkboxes (мужчина, женщина)
+  - **Специализация**: Multiple checkboxes (отношения, тревога, самопознание, карьера, семья)
+  - **Формат работы**: Checkboxes (видео, аудио, чат)
+  - **Цена за консультацию**: Price range inputs (от/до) with instant filtering
+  - Auto-apply filters on checkbox/input change
+  - Reset button to clear all filters at once
+- **Logo spacing fix**: Footer logo "psytalk.pro" now displays without gaps on all pages
+- **Navigation fixes**: All internal links work correctly across pages (search, blog, offers)
+
+### Previous Update - Adaptive Psychologist Cards & Mobile Navigation
 - **Psychologist cards complete redesign**: Fully adaptive, compact design
   - **Mobile (<=480px)**: Compact layout, 60px photo, description hidden, vertical price/button
   - **Tablet (<=768px)**: Medium layout, 70px photo, description hidden
