@@ -6,7 +6,23 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Design Refinements and UX Improvements
+### Latest Update - Login Page Redesign & Complete Branding Refresh
+- **Login page (login.html) complete redesign**: Beautiful minimalist design matching register.html style
+  - 3D purple gradient lock icon with shadow effects
+  - Input fields with icons (email, password)
+  - Purple button (#7C3AED) with hover effect (#6D28D9)
+  - Quick registration buttons: "Я клиент" and "Я психолог"
+  - Demo accounts info block with purple background (#F3E8FF)
+- **Complete branding audit**: Replaced ALL remaining "PsychPlatform" mentions with "psytalk.pro"
+  - Updated page titles across all HTML files
+  - Fixed demo account emails: @psychplatform.com → @psytalk.pro
+  - Corrected navigation logos on all pages (consultation, edit-profile, psychologist-profile, demo-notice, admin-dashboard, leave-review, psychologist-dashboard)
+- **Navigation improvements**: 
+  - Added working anchor links on index.html: #services, #offers, #blog
+  - Fixed logo spacing across all pages using HTML comments to eliminate visual gaps
+- **Hero image**: Added professional video call image from Freepik on main page
+
+### Previous Update - Design Refinements and UX Improvements
 - **Terminology standardization**: All instances of "сессия" replaced with "консультация" across all pages
 - **Pricing corrections**: Updated first consultation price from 100₽ to 2500₽ everywhere
 - **3D Icon System**: Added gradient icons with shadow effects and hover animations (class="icon-3d")
