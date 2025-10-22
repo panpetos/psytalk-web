@@ -159,11 +159,7 @@
     // Check if in DEMO mode
     async function checkDemoMode() {
       try {
-        const response = await fetch('/api/psychologists/search', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({})
-        });
+        const response = await fetch('/api/psychologists/search');
         
         if (response.status === 503) {
           isDemoMode = true;
