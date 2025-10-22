@@ -6,7 +6,13 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Checkbox Filters & Price Range
+### Latest Update - Mobile Horizontal Scroll Fix
+- **Fixed horizontal scroll on mobile**: No more unwanted right scrolling on mobile/tablet devices
+  - Added `overflow-x: hidden` on html/body for mobile (max-width: 1023px)
+  - Added `width: 100%` and `overflow-x: hidden` on .nav container
+  - Tested on multiple pages (/, /search.html, /blog.html) - works perfectly
+
+### Previous Update - Checkbox Filters & Price Range
 - **Filters redesigned with icons and improved styling**: Enhanced UX with instant filtering
   - **Пол психолога**: Styled dropdown select (users icon) - "Не важно", "Мужчина", "Женщина"
   - **Специализация**: Custom rounded checkboxes (brain icon) - отношения, тревога, самопознание, карьера, семья
