@@ -1281,6 +1281,23 @@ select option {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
+/* Auth buttons - responsive layout */
+@media (max-width: 768px) {
+  .auth-buttons {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .auth-buttons .btn,
+  .auth-buttons label {
+    width: 100% !important;
+  }
+  
+  .auth-buttons .flex-1 {
+    flex: none !important;
+  }
+}
+
 .filter-price-input::-moz-placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
 }

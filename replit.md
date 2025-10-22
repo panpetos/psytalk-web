@@ -32,3 +32,21 @@ Real-time consultation capabilities include:
 
 ## UI and Component Libraries
 - Lucide icons (via CDN)
+
+# Recent Changes (October 22, 2025)
+
+## Latest Update - Auth Pages Mobile Fix
+- **Added burger menu to login and register pages**: Full navigation on all pages
+  - Added complete navigation menu with burger button on login.html and register.html
+  - Menu includes: услуги, психологи, блог, спец. предложения + auth button
+  - Same mobile menu functionality as other pages (scroll lock, auto-close, click outside)
+- **Fixed auth buttons for mobile**: Buttons now stack vertically on mobile devices
+  - "Я клиент" / "Я психолог" buttons on login.html display vertically (<768px)
+  - Role selection buttons on register.html adapt to vertical layout
+  - Added .auth-buttons responsive class with flex-direction: column
+
+## Previous Updates
+- **Mobile Card Layout**: Fixed psychologist card order - Button before Price on mobile
+- **Navigation**: Fixed position with z-index hierarchy, removed backdrop-filter blur
+- **Standardized Buttons**: All buttons use border-radius: 0.5rem consistently
+- **Icon Fixes**: 3D icons (.icon-3d) don't stretch - flex-shrink: 0, min-width/height: 4rem

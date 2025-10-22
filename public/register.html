@@ -16,8 +16,19 @@
           <span style="color: #1A1A1A;">psy</span><!--
        --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
         </a>
-        <ul class="nav-menu">
-          <li><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
+        
+        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/#services" class="nav-link" data-testid="link-services">услуги</a></li>
+          <li><a href="/search.html" class="nav-link" data-testid="link-psychologists">психологи</a></li>
+          <li><a href="/blog.html" class="nav-link" data-testid="link-blog">блог</a></li>
+          <li><a href="/offers.html" class="nav-link" data-testid="link-offers">спец. предложения</a></li>
+          <li style="margin-left: 2rem;"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
         </ul>
       </div>
     </div>
@@ -44,7 +55,7 @@
           <!-- User Type Selection -->
           <div class="form-group">
             <label class="form-label">Я хочу зарегистрироваться как:</label>
-            <div class="flex gap-3">
+            <div class="flex gap-3 auth-buttons">
               <label class="flex-1" style="cursor: pointer;">
                 <input 
                   type="radio" 
@@ -279,6 +290,47 @@
 
     // Initialize Lucide icons
     lucide.createIcons();
+    
+    // Mobile menu functionality
+    const navMenu = document.getElementById('navMenu');
+    const burgerMenu = document.getElementById('burgerMenu');
+    
+    if (navMenu && burgerMenu) {
+      // Toggle menu on burger click
+      burgerMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
+        burgerMenu.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (navMenu.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (navMenu.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            !burgerMenu.contains(e.target)) {
+          navMenu.classList.remove('active');
+          burgerMenu.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+      
+      // Close menu when clicking on a link
+      const menuLinks = navMenu.querySelectorAll('a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          burgerMenu.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+    }
   </script>
 </body>
 </html>
