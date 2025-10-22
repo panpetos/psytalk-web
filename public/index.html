@@ -3,281 +3,314 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PsychPlatform - Найдите своего психолога онлайн</title>
-  <meta name="description" content="Профессиональная психологическая помощь от квалифицированных специалистов. Безопасно, удобно, конфиденциально.">
+  <title>psytalk.pro - Онлайн консультации с психологами</title>
+  <meta name="description" content="Профессиональная психологическая помощь онлайн. Подберите психолога и получите поддержку в удобное время.">
   <link rel="stylesheet" href="/css/styles.css">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body style="background-color: #FAFAFA;">
   <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
     <div class="container">
       <div class="nav-container">
-        <a href="/" class="nav-brand" data-testid="link-home">
-          <i data-lucide="brain-circuit"></i>
-          PsychPlatform
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600;">
+          <span style="color: #1A1A1A;">psy</span><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
         </a>
         <ul class="nav-menu">
-          <li><a href="/search.html" class="nav-link" data-testid="link-search">Психологи</a></li>
-          <li><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
-          <li><a href="/register.html" class="btn btn-primary btn-sm" data-testid="button-register">Регистрация</a></li>
+          <li><a href="#services" class="nav-link" data-testid="link-services">услуги</a></li>
+          <li><a href="/search.html" class="nav-link" data-testid="link-psychologists">психологи</a></li>
+          <li><a href="#blog" class="nav-link" data-testid="link-blog">блог</a></li>
+          <li><a href="#offers" class="nav-link" data-testid="link-offers">спец. предложения</a></li>
+          <li style="margin-left: 2rem;"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="bg-gradient-hero section" style="padding: 5rem 0;">
+  <section class="section" style="padding: 5rem 0; background: white;">
     <div class="container">
-      <div class="grid lg:grid-cols-2 items-center" style="gap: 3rem;">
-        <!-- Hero Text -->
-        <div>
-          <h1 class="text-4xl font-bold text-text-custom mb-4" data-testid="text-hero-title">
-            Найдите своего <span class="text-primary-custom">психолога</span> онлайн
-          </h1>
-          <p class="text-xl text-muted mb-6" style="line-height: 1.8;" data-testid="text-hero-description">
-            Профессиональная психологическая помощь от квалифицированных специалистов. 
-            Безопасно, удобно, конфиденциально.
-          </p>
-          <div class="flex gap-3 flex-wrap">
-            <a href="/search.html" class="btn btn-primary btn-lg" data-testid="button-find-psychologist">
-              Найти специалиста
-            </a>
-            <a href="/register.html?type=psychologist" class="btn btn-outline btn-lg" data-testid="button-become-psychologist">
-              Стать психологом
-            </a>
-          </div>
+      <div class="text-center" style="max-width: 900px; margin: 0 auto;">
+        <h1 class="font-bold mb-4" style="font-size: 3rem; line-height: 1.2; color: #1A1A1A;" data-testid="text-hero-title">
+          Подберите психолога,<br>который вас поймет
+        </h1>
+        <p class="text-xl mb-6" style="color: #666; line-height: 1.8; max-width: 700px; margin: 0 auto 2rem;" data-testid="text-hero-description">
+          Онлайн консультации с квалифицированными специалистами. Конфиденциально, удобно и эффективно.
+        </p>
+        
+        <!-- Call to Action -->
+        <div class="flex gap-3 justify-center flex-wrap mb-8">
+          <a href="/search.html" class="btn btn-primary btn-lg" data-testid="button-find-psychologist">
+            Найти психолога
+          </a>
+          <a href="/register.html?type=psychologist" class="btn btn-outline btn-lg" data-testid="button-become-psychologist">
+            Стать психологом
+          </a>
         </div>
 
-        <!-- Hero Image -->
-        <div class="relative">
-          <img 
-            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-            alt="Professional therapy session" 
-            class="rounded shadow-lg w-full"
-            style="border-radius: 1rem;"
-          />
-          <!-- Floating Card -->
-          <div class="card absolute" style="bottom: -1.5rem; left: -1.5rem; padding: 1.5rem; max-width: 300px;">
-            <div class="flex items-center gap-3">
-              <div class="bg-secondary flex items-center justify-center" style="width: 3rem; height: 3rem; border-radius: 50%;">
-                <i data-lucide="shield-check" style="color: white; width: 1.5rem; height: 1.5rem;"></i>
-              </div>
-              <div>
-                <p class="font-semibold text-text-custom mb-0">100% Конфиденциально</p>
-                <p class="text-sm text-muted mb-0">Защищенные сессии</p>
-              </div>
-            </div>
-          </div>
+        <!-- First session badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2" style="background-color: #F3E8FF; border-radius: 2rem; color: #7C3AED;">
+          <i data-lucide="check-circle" style="width: 1rem; height: 1rem;"></i>
+          <span style="font-weight: 500;">Первая сессия всего 100 ₽</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="section bg-background">
+  <!-- How it Works -->
+  <section class="section" style="padding: 4rem 0; background: #FAFAFA;">
     <div class="container">
-      <!-- Section Header -->
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-bold text-text-custom mb-3" data-testid="text-features-title">
-          Почему выбирают нашу платформу
+        <h2 class="text-3xl font-bold mb-3" style="color: #1A1A1A;" data-testid="text-how-title">
+          С чем поможет психолог наших клиентов
         </h2>
-        <p class="text-xl text-muted" style="max-width: 42rem; margin: 0 auto;" data-testid="text-features-description">
-          Мы создали безопасную и удобную среду для получения психологической помощи
+        <p class="text-lg" style="color: #666; max-width: 600px; margin: 0 auto;">
+          Наши специалисты помогают справиться с различными жизненными ситуациями
         </p>
       </div>
 
-      <!-- Features Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Feature 1 -->
-        <div class="card text-center" style="background-color: hsl(208 100% 97%); border: none; padding: 2rem;" data-testid="card-feature-specialists">
-          <div class="bg-primary flex items-center justify-center mx-auto mb-4" style="width: 4rem; height: 4rem; border-radius: 50%;">
-            <i data-lucide="users" style="color: white; width: 2rem; height: 2rem;"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-text-custom mb-3">Проверенные специалисты</h3>
-          <p class="text-muted">
-            Все психологи проходят тщательную верификацию документов и имеют подтвержденную квалификацию
-          </p>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="card text-center" style="background-color: hsl(115 50% 97%); border: none; padding: 2rem;" data-testid="card-feature-formats">
-          <div class="bg-secondary flex items-center justify-center mx-auto mb-4" style="width: 4rem; height: 4rem; border-radius: 50%;">
-            <i data-lucide="video" style="color: white; width: 2rem; height: 2rem;"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-text-custom mb-3">Удобные форматы</h3>
-          <p class="text-muted">
-            Выберите комфортный для вас формат: видео, аудио или текстовый чат
-          </p>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="card text-center" style="background-color: hsl(278 52% 97%); border: none; padding: 2rem;" data-testid="card-feature-scheduling">
-          <div style="background-color: hsl(var(--accent));" class="flex items-center justify-center mx-auto mb-4" style="width: 4rem; height: 4rem; border-radius: 50%; background-color: hsl(var(--accent));">
-            <i data-lucide="calendar" style="color: white; width: 2rem; height: 2rem;"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-text-custom mb-3">Гибкое расписание</h3>
-          <p class="text-muted">
-            Записывайтесь на удобное время без привязки к конкретной локации
-          </p>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="card text-center" style="background-color: hsl(0 84% 97%); border: none; padding: 2rem;" data-testid="card-feature-security">
-          <div class="bg-destructive flex items-center justify-center mx-auto mb-4" style="width: 4rem; height: 4rem; border-radius: 50%;">
-            <i data-lucide="shield" style="color: white; width: 2rem; height: 2rem;"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-text-custom mb-3">Безопасность данных</h3>
-          <p class="text-muted">
-            Шифрование всех данных и полная конфиденциальность ваших сессий
-          </p>
-        </div>
-
-        <!-- Feature 5 -->
-        <div class="card text-center" style="background-color: hsl(45 93% 97%); border: none; padding: 2rem;" data-testid="card-feature-payment">
-          <div class="flex items-center justify-center mx-auto mb-4" style="width: 4rem; height: 4rem; border-radius: 50%; background-color: hsl(45 93% 47%);">
-            <i data-lucide="credit-card" style="color: white; width: 2rem; height: 2rem;"></i>
-          </div>
-          <h3 class="text-xl font-semibold text-text-custom mb-3">Прозрачные цены</h3>
-          <p class="text-muted">
-            Фиксированная стоимость сессий без скрытых комиссий и доплат
-          </p>
-        </div>
-
-        <!-- Feature 6 -->
-        <div class="card text-center" style="background-color: hsl(175 60% 97%); border: none; padding: 2rem;" data-testid="card-feature-support">
-          <div class="flex items-center justify-center mx-auto mb-4" style="width: 4rem; height: 4rem; border-radius: 50%; background-color: hsl(175 60% 45%);">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Issue 1 -->
+        <div class="card text-center" style="padding: 2rem; background-color: white;">
+          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
             <i data-lucide="heart" style="color: white; width: 2rem; height: 2rem;"></i>
           </div>
-          <h3 class="text-xl font-semibold text-text-custom mb-3">Круглосуточная поддержка</h3>
-          <p class="text-muted">
-            Наша служба поддержки всегда готова помочь вам в любое время
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Отношения</h3>
+          <p class="text-sm" style="color: #666;">
+            Проблемы в паре, семейные конфликты, построение здоровых отношений
+          </p>
+        </div>
+
+        <!-- Issue 2 -->
+        <div class="card text-center" style="padding: 2rem; background-color: white;">
+          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
+            <i data-lucide="trending-down" style="color: white; width: 2rem; height: 2rem;"></i>
+          </div>
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Тревога и стресс</h3>
+          <p class="text-sm" style="color: #666;">
+            Панические атаки, хронический стресс, беспокойство о будущем
+          </p>
+        </div>
+
+        <!-- Issue 3 -->
+        <div class="card text-center" style="padding: 2rem; background-color: white;">
+          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
+            <i data-lucide="user-search" style="color: white; width: 2rem; height: 2rem;"></i>
+          </div>
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Самопознание</h3>
+          <p class="text-sm" style="color: #666;">
+            Поиск себя, определение целей, повышение самооценки
+          </p>
+        </div>
+
+        <!-- Issue 4 -->
+        <div class="card text-center" style="padding: 2rem; background-color: white;">
+          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
+            <i data-lucide="briefcase" style="color: white; width: 2rem; height: 2rem;"></i>
+          </div>
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Карьера</h3>
+          <p class="text-sm" style="color: #666;">
+            Выгорание, смена работы, построение карьеры, баланс work-life
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section class="section bg-muted">
+  <!-- Statistics -->
+  <section class="section" style="padding: 4rem 0; background: white;">
+    <div class="container">
+      <div class="grid md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">300+</div>
+          <p style="color: #666; font-size: 1.125rem;">психологов</p>
+        </div>
+        <div>
+          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">5000+</div>
+          <p style="color: #666; font-size: 1.125rem;">клиентов</p>
+        </div>
+        <div>
+          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">98%</div>
+          <p style="color: #666; font-size: 1.125rem;">довольных</p>
+        </div>
+        <div>
+          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">24/7</div>
+          <p style="color: #666; font-size: 1.125rem;">поддержка</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" style="padding: 4rem 0; background: #FAFAFA;">
     <div class="container">
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-bold text-text-custom mb-3" data-testid="text-how-it-works-title">
-          Как это работает
-        </h2>
-        <p class="text-xl text-muted">Простой путь к психологическому благополучию</p>
+        <h2 class="text-3xl font-bold mb-3" style="color: #1A1A1A;">Как это работает</h2>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-4">
+      <div class="grid md:grid-cols-3 gap-6">
         <!-- Step 1 -->
-        <div class="card text-center" data-testid="card-step-search">
-          <div class="card-content">
-            <div class="bg-primary flex items-center justify-center mx-auto mb-4" style="width: 3rem; height: 3rem; border-radius: 50%; font-size: 1.5rem; font-weight: 700; color: white;">
+        <div class="card" style="padding: 2rem; background-color: white;">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center" style="width: 3rem; height: 3rem; background: #7C3AED; border-radius: 50%; color: white; font-weight: 600; font-size: 1.25rem;">
               1
             </div>
-            <h3 class="text-lg font-semibold text-text-custom mb-2">Найдите специалиста</h3>
-            <p class="text-muted text-sm">
-              Используйте фильтры по специализации, опыту и формату консультации
-            </p>
+            <h3 class="font-semibold" style="color: #1A1A1A; font-size: 1.25rem;">Выберите психолога</h3>
           </div>
+          <p style="color: #666;">
+            Изучите профили специалистов, их опыт, подходы и отзывы. Фильтруйте по специализации и стоимости.
+          </p>
         </div>
 
         <!-- Step 2 -->
-        <div class="card text-center" data-testid="card-step-book">
-          <div class="card-content">
-            <div class="bg-secondary flex items-center justify-center mx-auto mb-4" style="width: 3rem; height: 3rem; border-radius: 50%; font-size: 1.5rem; font-weight: 700; color: white;">
+        <div class="card" style="padding: 2rem; background-color: white;">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center" style="width: 3rem; height: 3rem; background: #7C3AED; border-radius: 50%; color: white; font-weight: 600; font-size: 1.25rem;">
               2
             </div>
-            <h3 class="text-lg font-semibold text-text-custom mb-2">Забронируйте сессию</h3>
-            <p class="text-muted text-sm">
-              Выберите удобное время и оплатите консультацию безопасным способом
-            </p>
+            <h3 class="font-semibold" style="color: #1A1A1A; font-size: 1.25rem;">Запишитесь на сессию</h3>
           </div>
+          <p style="color: #666;">
+            Выберите удобное время в календаре психолога. Первая консультация может быть короче для знакомства.
+          </p>
         </div>
 
         <!-- Step 3 -->
-        <div class="card text-center" data-testid="card-step-consult">
-          <div class="card-content">
-            <div class="flex items-center justify-center mx-auto mb-4" style="width: 3rem; height: 3rem; border-radius: 50%; font-size: 1.5rem; font-weight: 700; color: white; background-color: hsl(var(--accent));">
+        <div class="card" style="padding: 2rem; background-color: white;">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center" style="width: 3rem; height: 3rem; background: #7C3AED; border-radius: 50%; color: white; font-weight: 600; font-size: 1.25rem;">
               3
             </div>
-            <h3 class="text-lg font-semibold text-text-custom mb-2">Получите помощь</h3>
-            <p class="text-muted text-sm">
-              Проведите сессию в выбранном формате в безопасной среде
-            </p>
+            <h3 class="font-semibold" style="color: #1A1A1A; font-size: 1.25rem;">Начните работу</h3>
           </div>
+          <p style="color: #666;">
+            Подключайтесь к видео, аудио или текстовой консультации прямо на платформе. Все конфиденциально.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA Section -->
-  <section class="section bg-gradient-secondary" style="background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%); color: white;">
-    <div class="container text-center">
-      <h2 class="text-3xl font-bold mb-4" style="color: white;" data-testid="text-cta-title">
-        Готовы начать свой путь к психологическому благополучию?
-      </h2>
-      <p class="text-xl mb-6" style="color: rgba(255, 255, 255, 0.9); max-width: 42rem; margin: 0 auto 1.5rem;" data-testid="text-cta-description">
-        Найдите подходящего психолога и запишитесь на первую консультацию уже сегодня
-      </p>
-      <a href="/search.html" class="btn btn-lg" style="background-color: white; color: hsl(var(--primary)); font-weight: 600;" data-testid="button-cta-search">
-        Найти психолога
-      </a>
+  <section class="section" style="padding: 5rem 0; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);">
+    <div class="container">
+      <div class="text-center" style="max-width: 700px; margin: 0 auto; color: white;">
+        <h2 class="font-bold mb-4" style="font-size: 2.5rem; color: white;">
+          Готовы начать путь к себе?
+        </h2>
+        <p class="text-xl mb-6" style="color: rgba(255,255,255,0.9);">
+          Первая консультация всего 100 рублей. Найдите своего психолога уже сегодня.
+        </p>
+        <a href="/search.html" class="btn btn-lg" style="background: white; color: #7C3AED; border: none; padding: 1rem 3rem; font-weight: 600;" data-testid="button-cta-find">
+          Найти психолога
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding: 4rem 0; background: white;">
+    <div class="container" style="max-width: 800px;">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold mb-3" style="color: #1A1A1A;">Часто задаваемые вопросы</h2>
+      </div>
+
+      <div class="flex flex-column gap-3">
+        <!-- FAQ 1 -->
+        <details class="card" style="padding: 1.5rem; background-color: #FAFAFA; cursor: pointer;">
+          <summary class="font-semibold" style="color: #1A1A1A; cursor: pointer;">
+            Как проходит онлайн-консультация?
+          </summary>
+          <p style="color: #666; margin-top: 1rem;">
+            Консультация проходит через видеозвонок, аудиозвонок или текстовый чат прямо на нашей платформе. 
+            Вы можете выбрать наиболее комфортный для вас формат.
+          </p>
+        </details>
+
+        <!-- FAQ 2 -->
+        <details class="card" style="padding: 1.5rem; background-color: #FAFAFA; cursor: pointer;">
+          <summary class="font-semibold" style="color: #1A1A1A; cursor: pointer;">
+            Как выбрать психолога?
+          </summary>
+          <p style="color: #666; margin-top: 1rem;">
+            Изучите профили специалистов: их образование, опыт, специализацию и отзывы клиентов. 
+            Вы также можете воспользоваться фильтрами по запросу, стоимости и формату работы.
+          </p>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="card" style="padding: 1.5rem; background-color: #FAFAFA; cursor: pointer;">
+          <summary class="font-semibold" style="color: #1A1A1A; cursor: pointer;">
+            Конфиденциальны ли консультации?
+          </summary>
+          <p style="color: #666; margin-top: 1rem;">
+            Да, мы гарантируем полную конфиденциальность. Все данные защищены, а психологи соблюдают 
+            профессиональную этику и не разглашают информацию о клиентах.
+          </p>
+        </details>
+
+        <!-- FAQ 4 -->
+        <details class="card" style="padding: 1.5rem; background-color: #FAFAFA; cursor: pointer;">
+          <summary class="font-semibold" style="color: #1A1A1A; cursor: pointer;">
+            Сколько стоит консультация?
+          </summary>
+          <p style="color: #666; margin-top: 1rem;">
+            Стоимость зависит от психолога и составляет от 1000 до 5000 рублей за сессию. 
+            Первая консультация доступна по специальной цене 100 рублей.
+          </p>
+        </details>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer style="background-color: var(--text-custom); color: white; padding: 3rem 0;">
+  <footer style="background: #1A1A1A; color: white; padding: 3rem 0 1.5rem;">
     <div class="container">
-      <div class="grid md:grid-cols-4 gap-4">
-        <!-- Company Info -->
+      <div class="grid md:grid-cols-4 gap-6 mb-6">
+        <!-- About -->
         <div>
-          <h3 class="text-xl font-bold mb-3">PsychPlatform</h3>
-          <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem;" class="mb-3">
+          <div class="font-semibold mb-3" style="font-size: 1.25rem;">
+            <span style="color: white;">psy</span><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+          </div>
+          <p style="color: #999; font-size: 0.875rem;">
             Профессиональная психологическая помощь онлайн
           </p>
         </div>
 
-        <!-- For Clients -->
+        <!-- Links 1 -->
         <div>
-          <h4 class="font-semibold mb-3">Для клиентов</h4>
-          <ul style="list-style: none; padding: 0; margin: 0;">
-            <li style="margin-bottom: 0.5rem;"><a href="/search.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Найти психолога</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/about.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Как это работает</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/pricing.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Цены</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/faq.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">FAQ</a></li>
+          <h4 class="font-semibold mb-3">Платформа</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="/search.html" style="color: #999; text-decoration: none;">Психологи</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Как это работает</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Цены</a></li>
           </ul>
         </div>
 
-        <!-- For Psychologists -->
+        <!-- Links 2 -->
         <div>
-          <h4 class="font-semibold mb-3">Для психологов</h4>
-          <ul style="list-style: none; padding: 0; margin: 0;">
-            <li style="margin-bottom: 0.5rem;"><a href="/register.html?type=psychologist" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Стать специалистом</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/requirements.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Требования</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/conditions.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Условия работы</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/support.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Поддержка</a></li>
+          <h4 class="font-semibold mb-3">Информация</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="#" style="color: #999; text-decoration: none;">О нас</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Блог</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Контакты</a></li>
           </ul>
         </div>
 
-        <!-- Company -->
+        <!-- Links 3 -->
         <div>
-          <h4 class="font-semibold mb-3">Компания</h4>
-          <ul style="list-style: none; padding: 0; margin: 0;">
-            <li style="margin-bottom: 0.5rem;"><a href="/about.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">О нас</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/career.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Карьера</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/privacy.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Политика конфиденциальности</a></li>
-            <li style="margin-bottom: 0.5rem;"><a href="/terms.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem;">Условия использования</a></li>
+          <h4 class="font-semibold mb-3">Поддержка</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="#" style="color: #999; text-decoration: none;">Помощь</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Политика конфиденциальности</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Условия использования</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Copyright -->
-      <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: 2rem; padding-top: 2rem; text-center;">
-        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem; margin: 0;">
-          &copy; 2024 PsychPlatform. Все права защищены.
-        </p>
+      <div style="border-top: 1px solid #333; padding-top: 1.5rem; text-align: center; color: #666; font-size: 0.875rem;">
+        © 2025 psytalk.pro. Все права защищены.
       </div>
     </div>
   </footer>
