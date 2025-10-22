@@ -1,18 +1,26 @@
 # Overview
 
-This is a comprehensive online psychology platform called "PsychPlatform" that connects clients with qualified psychologists for remote consultations. The platform is built as a full-stack web application using **pure HTML/CSS/JavaScript** for the frontend and Express.js for the backend with MySQL database. The system supports three user roles: clients seeking psychological help, psychologists providing services, and administrators managing the platform.
+This is a comprehensive online psychology platform called **"psytalk.pro"** that connects clients with qualified psychologists for remote consultations. The platform is built as a full-stack web application using **pure HTML/CSS/JavaScript** for the frontend and Express.js for the backend with MySQL database. The system supports three user roles: clients seeking psychological help, psychologists providing services, and administrators managing the platform.
 
 The platform enables clients to search for psychologists, book appointments, and conduct sessions via video, audio, or chat. Psychologists can manage their profiles, schedules, and conduct consultations while receiving payments. Administrators oversee user verification, platform management, and analytics.
 
 ## Recent Changes (October 22, 2025)
+
+### Latest Update - psytalk.pro Rebranding
+- **Complete platform rebranding**: PsychPlatform → psytalk.pro
+- **New visual identity**: Purple color scheme (#7C3AED primary, #F3E8FF secondary)
+- **Minimalist EgoDrive-style redesign**: Clean, modern aesthetics with focus on content
+- **Logo redesign**: Text-based "psy" (black) + "talk.pro" (purple italic), no icons
+- **Updated pages**:
+  - **index.html**: Minimalist hero, purple accents, "Первая консультация бесплатно" badge
+  - **search.html**: Purple gradient sidebar, modern psychologist cards with photos, time slots
+  - **client-dashboard.html**: Pink gradient next session card, support section, promocodes
+  - **register.html**: Clean role selection (client/psychologist), purple styling
+- **Bug fixes**: Fixed API fetch method (POST → GET), corrected badge text
+
+### Previous Changes
 - **Completed HTML/CSS/JS migration** from React to pure web technologies
-- **Recreated shadcn/ui design** - all pages now have the same beautiful design quality as the original React version
 - **Migrated to MySQL** from PostgreSQL for reg.ru hosting compatibility
-- **New page designs:**
-  - Landing page: Hero section with gradients, features cards, CTA sections, footer
-  - Search page: Sticky sidebar filters, responsive grid of psychologist cards, live filtering
-  - Client Dashboard: Tabs navigation, appointment cards, sidebar statistics
-  - All pages use Lucide icons, shadcn/ui-inspired components, responsive layouts
 - **CSS Design System**: Complete CSS with HSL color variables, card/button/form components, skeleton loaders
 - Server runs in DEMO mode without MySQL, serves static pages for UI preview
 - Ready for deployment to reg.ru with MySQL database
