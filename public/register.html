@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация - PsychPlatform</title>
+  <meta name="description" content="Зарегистрируйтесь на платформе PsychPlatform для поиска психолога или предоставления услуг.">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-muted">
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-container">
+        <a href="/" class="nav-brand" data-testid="link-home">
+          <i data-lucide="brain-circuit"></i>
+          PsychPlatform
+        </a>
+        <ul class="nav-menu">
+          <li><a href="/search.html" class="nav-link" data-testid="link-search">Психологи</a></li>
+          <li><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="section" style="padding: 3rem 0;">
+    <div class="container" style="max-width: 600px;">
+      <div class="card">
+        <div class="card-header text-center">
+          <h1 class="text-2xl font-bold text-text-custom mb-2">Регистрация</h1>
+          <p class="text-muted mb-0">Создайте аккаунт для доступа к платформе</p>
+        </div>
+        
+        <div class="card-content">
+          <form id="register-form">
+            <div class="form-group">
+              <label class="form-label" for="register-role">Тип аккаунта</label>
+              <select id="register-role" class="form-select" required data-testid="select-role">
+                <option value="">Выберите тип</option>
+                <option value="client">Клиент (ищу психолога)</option>
+                <option value="psychologist">Психолог (предоставляю услуги)</option>
+              </select>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3">
+              <div class="form-group">
+                <label class="form-label" for="register-firstName">Имя</label>
+                <input type="text" id="register-firstName" class="form-input" required data-testid="input-firstName">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="register-lastName">Фамилия</label>
+                <input type="text" id="register-lastName" class="form-input" required data-testid="input-lastName">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="register-email">Email</label>
+              <input type="email" id="register-email" class="form-input" required data-testid="input-email">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="register-password">Пароль</label>
+              <input type="password" id="register-password" class="form-input" minlength="6" required data-testid="input-password">
+              <small class="text-sm text-muted">Минимум 6 символов</small>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="register-password-confirm">Подтвердите пароль</label>
+              <input type="password" id="register-password-confirm" class="form-input" minlength="6" required data-testid="input-password-confirm">
+            </div>
+            
+            <div id="register-error" class="alert alert-danger hidden"></div>
+            <div id="register-success" class="alert alert-success hidden"></div>
+            
+            <button type="submit" class="btn btn-primary w-full" data-testid="button-submit">
+              Зарегистрироваться
+            </button>
+          </form>
+          
+          <div class="mt-4 text-center">
+            <p class="text-sm text-muted">
+              Уже есть аккаунт? 
+              <a href="/login.html" class="text-primary-custom font-medium" data-testid="link-login">Войти</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    // Check if type parameter provided
+    const urlParams = new URLSearchParams(window.location.search);
+    const typeParam = urlParams.get('type');
+    if (typeParam === 'psychologist') {
+      document.getElementById('register-role').value = 'psychologist';
+    }
+
+    // Register form
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const role = document.getElementById('register-role').value;
+      const firstName = document.getElementById('register-firstName').value;
+      const lastName = document.getElementById('register-lastName').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const passwordConfirm = document.getElementById('register-password-confirm').value;
+      const errorEl = document.getElementById('register-error');
+      const successEl = document.getElementById('register-success');
+      
+      errorEl.classList.add('hidden');
+      successEl.classList.add('hidden');
+      
+      // Validate passwords match
+      if (password !== passwordConfirm) {
+        errorEl.textContent = 'Пароли не совпадают';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+      
+      try {
+        await Auth.register({ role, firstName, lastName, email, password });
+        
+        successEl.textContent = 'Регистрация успешна! Перенаправление...';
+        successEl.classList.remove('hidden');
+        
+        // Redirect after short delay
+        setTimeout(() => {
+          Auth.redirectToDashboard();
+        }, 1500);
+      } catch (error) {
+        errorEl.textContent = error.message || 'Ошибка регистрации. Попробуйте еще раз.';
+        errorEl.classList.remove('hidden');
+      }
+    });
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>

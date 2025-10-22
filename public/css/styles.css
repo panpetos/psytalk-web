@@ -144,20 +144,21 @@ p {
    Card Component (shadcn/ui style)
    ============================================ */
 .card {
-  background-color: hsl(var(--card));
+  background-color: #ffffff !important;
   border-radius: var(--radius);
   border: 1px solid hsl(var(--border));
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   transition: box-shadow 0.2s;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
 }
 
 .card-header {
   padding: var(--spacing-lg);
   border-bottom: 1px solid hsl(var(--border));
+  background-color: #ffffff;
 }
 
 .card-title {
@@ -175,6 +176,7 @@ p {
 
 .card-content {
   padding: var(--spacing-lg);
+  background-color: #ffffff;
 }
 
 .card-footer {
@@ -402,43 +404,46 @@ p {
   border-radius: var(--radius);
   border: 1px solid;
   margin-bottom: var(--spacing-lg);
+  background-color: #ffffff;
+  box-shadow: var(--shadow-md);
 }
 
 .alert-info {
-  background-color: hsl(208 100% 97%);
-  border-color: hsl(208 100% 85%);
-  color: hsl(208 100% 40%);
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+  color: #1565c0;
 }
 
 .alert-success {
-  background-color: hsl(115 50% 95%);
-  border-color: hsl(115 50% 80%);
-  color: hsl(115 50% 30%);
+  background-color: #e8f5e9;
+  border-color: #81c784;
+  color: #2e7d32;
 }
 
 .alert-warning {
-  background-color: hsl(45 93% 95%);
-  border-color: hsl(45 93% 80%);
-  color: hsl(45 93% 30%);
+  background-color: #fff3e0;
+  border-color: #ffb74d;
+  color: #e65100;
 }
 
 .alert-danger {
-  background-color: hsl(0 84% 95%);
-  border-color: hsl(0 84% 80%);
-  color: hsl(0 84% 40%);
+  background-color: #ffebee;
+  border-color: #e57373;
+  color: #c62828;
 }
 
 /* ============================================
    Navigation
    ============================================ */
 .nav {
-  background-color: hsl(var(--background));
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid hsl(var(--border));
   padding: var(--spacing-md) 0;
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
 }
 
 .nav-container {

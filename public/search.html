@@ -20,11 +20,11 @@
         </a>
         <ul class="nav-menu">
           <li><a href="/search.html" class="nav-link active" data-testid="link-search">Психологи</a></li>
-          <li><a href="/about.html" class="nav-link" data-testid="link-about">О платформе</a></li>
           <li id="nav-user-menu" class="hidden">
             <a href="#" class="nav-link" id="nav-dashboard-link" data-testid="link-dashboard">Личный кабинет</a>
           </li>
           <li id="nav-login"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
+          <li id="nav-register"><a href="/register.html" class="btn btn-primary btn-sm" data-testid="button-register">Регистрация</a></li>
           <li id="nav-logout" class="hidden"><button class="btn btn-outline btn-sm" id="logout-btn" data-testid="button-logout">Выйти</button></li>
         </ul>
       </div>
@@ -45,8 +45,8 @@
         
         <!-- Filters Sidebar (Sticky) -->
         <aside class="sticky" style="top: 5rem;">
-          <div class="card">
-            <div class="card-content">
+          <div class="card" style="background-color: white;">
+            <div class="card-content" style="background-color: white;">
               <h3 class="text-lg font-semibold text-text-custom mb-4">Фильтры</h3>
 
               <!-- Search Input -->
@@ -271,8 +271,8 @@
       ).join('');
 
       return `
-        <div class="card" data-testid="psychologist-card-${psych.id}">
-          <div class="card-content">
+        <div class="card" data-testid="psychologist-card-${psych.id}" style="background-color: white;">
+          <div class="card-content" style="background-color: white;">
             <div class="flex gap-3 mb-3">
               <!-- Avatar -->
               <div class="flex items-center justify-center" style="width: 4rem; height: 4rem; border-radius: 50%; background-color: hsl(var(--primary)); color: white; font-weight: 600; font-size: 1.25rem; flex-shrink: 0;">
