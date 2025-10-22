@@ -1098,6 +1098,10 @@ select option {
     width: 100% !important;
     text-align: center !important;
     justify-content: center !important;
+    min-height: 56px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.75rem 2rem !important;
   }
   
   /* Hero section - single column on mobile */

@@ -17,6 +17,7 @@ The platform enables clients to search for psychologists, book appointments, and
 - **Fixed hero section buttons on mobile**: Buttons now properly adapted for mobile devices
   - Hero CTA buttons (Найти психолога, Стать психологом) now display vertically on mobile
   - Buttons stretch to full width (100%) on mobile devices
+  - **Equal height for both buttons** (min-height: 56px) with centered text
   - 20px gap between buttons for better spacing
   - Hero section becomes single-column layout on mobile (< 1024px)
   - Hero image displayed first, text content second on mobile
