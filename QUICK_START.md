@@ -48,10 +48,8 @@ cp .env.example .env
 ### Шаг 3: Инициализация базы данных
 
 ```bash
-# Перейдите в папку с новым сервером
-cd server-new
-
 # Создайте таблицы и заполните демо-данными
+cd server
 node seed.js
 ```
 
@@ -68,7 +66,7 @@ node seed.js
 
 ```bash
 # Из корневой папки проекта
-node server-new/index.js
+node server/index.js
 ```
 
 Или используя npm:

@@ -8,7 +8,7 @@
 
 ```
 project/
-├── server-new/          # Новый бекенд (MySQL + JavaScript)
+├── server/              # Бекенд (MySQL + JavaScript)
 ├── public/              # Фронтенд (HTML/CSS/JS)
 ├── QUICK_START.md       # ⭐ НАЧНИТЕ С ЭТОГО ФАЙЛА
 ├── DEPLOYMENT_REG_RU.md # Инструкция по деплою на рег.ру
@@ -28,7 +28,7 @@ npm install express express-session express-mysql-session mysql2 bcrypt
 cp .env.example .env
 
 # 3. Инициализируйте базу данных
-cd server-new && node seed.js
+cd server && node seed.js
 
 # 4. Запустите сервер
 node index.js

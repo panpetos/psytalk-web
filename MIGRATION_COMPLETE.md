@@ -64,7 +64,7 @@
 
 ```
 project/
-├── server-new/                    # Новый бекенд (MySQL + JavaScript)
+├── server/                        # Бекенд (MySQL + JavaScript)
 │   ├── index.js                  # Express сервер
 │   ├── routes.js                 # API endpoints (auth, users, psychologists, etc.)
 │   ├── storage.js                # MySQL storage layer (16KB)
