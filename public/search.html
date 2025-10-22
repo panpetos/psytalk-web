@@ -3,253 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Поиск психологов - PsychPlatform</title>
+  <title>Психологи - psytalk.pro</title>
   <meta name="description" content="Найдите квалифицированного психолога онлайн. Удобные фильтры по специализации, опыту и формату консультации.">
   <link rel="stylesheet" href="/css/styles.css">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-muted">
+<body style="background-color: #FAFAFA;">
   <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
     <div class="container">
       <div class="nav-container">
-        <a href="/" class="nav-brand" data-testid="link-home">
-          <i data-lucide="brain-circuit"></i>
-          PsychPlatform
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600;">
+          <span style="color: #1A1A1A;">psy</span><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
         </a>
         <ul class="nav-menu">
-          <li><a href="/search.html" class="nav-link active" data-testid="link-search">Психологи</a></li>
-          <li id="nav-user-menu" class="hidden">
-            <a href="#" class="nav-link" id="nav-dashboard-link" data-testid="link-dashboard">Личный кабинет</a>
-          </li>
-          <li id="nav-login"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
-          <li id="nav-register"><a href="/register.html" class="btn btn-primary btn-sm" data-testid="button-register">Регистрация</a></li>
-          <li id="nav-logout" class="hidden"><button class="btn btn-outline btn-sm" id="logout-btn" data-testid="button-logout">Выйти</button></li>
+          <li><a href="#services" class="nav-link" data-testid="link-services">услуги</a></li>
+          <li><a href="/search.html" class="nav-link" style="color: #7C3AED; font-weight: 600;" data-testid="link-psychologists">психологи</a></li>
+          <li><a href="#blog" class="nav-link" data-testid="link-blog">блог</a></li>
+          <li><a href="#offers" class="nav-link" data-testid="link-offers">спец. предложения</a></li>
+          <li style="margin-left: 2rem;"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
+  <!-- Breadcrumb -->
+  <div class="container" style="padding-top: 1.5rem;">
+    <div style="color: #999; font-size: 0.875rem;">
+      <a href="/" style="color: #999; text-decoration: none;">главная</a>
+      <span style="margin: 0 0.5rem;">›</span>
+      <span style="color: #1A1A1A;">психологи</span>
+    </div>
+  </div>
+
   <!-- Main Content -->
-  <div class="section" style="padding: 3rem 0;">
+  <div class="section" style="padding: 2rem 0 4rem;">
     <div class="container">
       <!-- Page Header -->
       <div class="mb-6">
-        <h1 class="text-3xl font-bold text-text-custom mb-3" data-testid="text-page-title">Найти психолога</h1>
-        <p class="text-muted">Выберите специалиста, который подходит именно вам</p>
+        <h1 class="font-bold mb-3" style="font-size: 2rem; color: #1A1A1A;" data-testid="text-page-title">
+          Подберите психолога, который вас поймет
+        </h1>
+        
+        <!-- First session badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1" style="background-color: #F3E8FF; border-radius: 2rem; color: #7C3AED; font-size: 0.875rem;">
+          <i data-lucide="check-circle" style="width: 0.875rem; height: 0.875rem;"></i>
+          <span style="font-weight: 500;">Первая сессия всего 100 ₽</span>
+        </div>
       </div>
 
       <!-- Layout Grid: Sidebar + Content -->
-      <div class="grid" style="grid-template-columns: 280px 1fr; gap: 2rem; align-items: start;">
+      <div class="grid" style="grid-template-columns: 300px 1fr; gap: 2rem; align-items: start;">
         
-        <!-- Filters Sidebar (Sticky) -->
+        <!-- Filters Sidebar (Sticky) - Purple theme -->
         <aside class="sticky" style="top: 5rem;">
-          <div class="card" style="background-color: white;">
-            <div class="card-content" style="background-color: white;">
-              <h3 class="text-lg font-semibold text-text-custom mb-4">Фильтры</h3>
-
-              <!-- Search Input -->
-              <div class="form-group">
-                <label class="form-label" for="search-input">Поиск</label>
-                <input 
-                  type="text" 
-                  id="search-input" 
-                  class="form-input" 
-                  placeholder="Имя, специализация..."
-                  data-testid="input-search"
-                />
-              </div>
-
-              <!-- Specialization Select -->
-              <div class="form-group">
-                <label class="form-label" for="filter-specialization">Специализация</label>
-                <select id="filter-specialization" class="form-select" data-testid="select-specialization">
-                  <option value="">Все специализации</option>
-                  <option value="Когнитивно-поведенческая терапия">Когнитивно-поведенческая терапия</option>
-                  <option value="Семейная терапия">Семейная терапия</option>
-                  <option value="Психоанализ">Психоанализ</option>
-                  <option value="Гештальт-терапия">Гештальт-терапия</option>
-                  <option value="Арт-терапия">Арт-терапия</option>
-                </select>
-              </div>
-
-              <!-- Experience Range -->
-              <div class="form-group">
-                <label class="form-label">Опыт работы (лет)</label>
-                <div class="flex gap-2 items-center">
-                  <input 
-                    type="number" 
-                    id="filter-min-experience" 
-                    class="form-input" 
-                    placeholder="От" 
-                    min="0"
-                    data-testid="input-min-experience"
-                  />
-                  <span class="text-muted">-</span>
-                  <input 
-                    type="number" 
-                    id="filter-max-experience" 
-                    class="form-input" 
-                    placeholder="До"
-                    data-testid="input-max-experience"
-                  />
-                </div>
-              </div>
-
-              <!-- Price Range -->
-              <div class="form-group">
-                <label class="form-label">Цена (₽)</label>
-                <div class="flex gap-2 items-center">
-                  <input 
-                    type="number" 
-                    id="filter-min-price" 
-                    class="form-input" 
-                    placeholder="От"
-                    data-testid="input-min-price"
-                  />
-                  <span class="text-muted">-</span>
-                  <input 
-                    type="number" 
-                    id="filter-max-price" 
-                    class="form-input" 
-                    placeholder="До"
-                    data-testid="input-max-price"
-                  />
-                </div>
-              </div>
-
-              <!-- Format Checkboxes -->
-              <div class="form-group">
-                <label class="form-label mb-2">Формат консультации</label>
-                <div class="flex flex-column gap-2">
-                  <div class="checkbox-wrapper">
-                    <input type="checkbox" id="format-video" value="video" class="checkbox format-checkbox" data-testid="checkbox-format-video">
-                    <label for="format-video" class="flex items-center gap-2 cursor-pointer">
-                      <i data-lucide="video" style="width: 1rem; height: 1rem;"></i>
-                      <span>Видео</span>
-                    </label>
-                  </div>
-                  <div class="checkbox-wrapper">
-                    <input type="checkbox" id="format-audio" value="audio" class="checkbox format-checkbox" data-testid="checkbox-format-audio">
-                    <label for="format-audio" class="flex items-center gap-2 cursor-pointer">
-                      <i data-lucide="phone" style="width: 1rem; height: 1rem;"></i>
-                      <span>Аудио</span>
-                    </label>
-                  </div>
-                  <div class="checkbox-wrapper">
-                    <input type="checkbox" id="format-chat" value="chat" class="checkbox format-checkbox" data-testid="checkbox-format-chat">
-                    <label for="format-chat" class="flex items-center gap-2 cursor-pointer">
-                      <i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i>
-                      <span>Чат</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Clear Filters Button -->
-              <button class="btn btn-outline w-full" id="clear-filters-btn" data-testid="button-clear-filters">
-                Очистить фильтры
+          <div class="card" style="background: linear-gradient(180deg, #8B5CF6 0%, #7C3AED 100%); padding: 1.5rem; color: white;">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold" style="font-size: 1.125rem;">Фильтры</h3>
+              <button style="background: none; border: none; color: white; cursor: pointer;">
+                <i data-lucide="sliders-horizontal" style="width: 1.25rem; height: 1.25rem;"></i>
               </button>
             </div>
+
+            <!-- Search Input -->
+            <div class="form-group">
+              <label class="form-label" for="search-input" style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">
+                С кем хотите поговорить?
+              </label>
+              <select id="gender-select" class="form-select" data-testid="select-gender" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem;">
+                <option value="">Выберите пол</option>
+                <option value="male">Мужчина</option>
+                <option value="female">Женщина</option>
+                <option value="any">Не важно</option>
+              </select>
+            </div>
+
+            <!-- Issue Select -->
+            <div class="form-group">
+              <label class="form-label" for="issue-select" style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">
+                О чем хотите поговорить?
+              </label>
+              <select id="issue-select" class="form-select" data-testid="select-issue" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem;">
+                <option value="">Выберите темы</option>
+                <option value="relationships">Отношения</option>
+                <option value="anxiety">Тревога и стресс</option>
+                <option value="self">Самопознание</option>
+                <option value="career">Карьера</option>
+                <option value="family">Семья</option>
+              </select>
+            </div>
+
+            <!-- Age Range -->
+            <div class="form-group">
+              <label class="form-label" for="age-input" style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">
+                Возраст психолога
+              </label>
+              <input 
+                type="text" 
+                id="age-input" 
+                class="form-input" 
+                placeholder="24 года"
+                data-testid="input-age"
+                style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem;"
+              />
+            </div>
+
+            <!-- Apply Button -->
+            <button class="btn w-full mt-2" style="background: white; color: #7C3AED; border: none; font-weight: 600;" data-testid="button-apply-filters">
+              Применить
+            </button>
           </div>
         </aside>
 
         <!-- Psychologists Grid -->
-        <main>
-          <!-- Results Header -->
-          <div class="flex items-center justify-between mb-4" id="results-header" style="display: none;">
-            <p class="text-muted" id="results-count" data-testid="text-results-count">
-              Найдено 0 специалистов
-            </p>
-            <select class="form-select" style="width: auto;" id="sort-select" data-testid="select-sort">
-              <option value="rating">По рейтингу</option>
-              <option value="price-low">Цена: по возрастанию</option>
-              <option value="price-high">Цена: по убыванию</option>
-              <option value="experience">По опыту</option>
-            </select>
-          </div>
-
+        <div>
           <!-- Loading State -->
-          <div id="loading-state" class="grid md:grid-cols-2 gap-4">
-            <!-- Skeleton Cards -->
-            <div class="card" style="padding: 1.5rem;">
+          <div id="loading-state" class="flex flex-column gap-4">
+            <div class="card" style="padding: 1.5rem; background-color: white;">
               <div class="flex gap-3">
-                <div class="skeleton skeleton-avatar"></div>
+                <div class="skeleton" style="width: 5rem; height: 5rem; border-radius: 50%;"></div>
                 <div class="flex-1">
                   <div class="skeleton skeleton-title"></div>
                   <div class="skeleton skeleton-text"></div>
-                  <div class="skeleton skeleton-text" style="width: 40%;"></div>
                 </div>
               </div>
             </div>
-            <div class="card" style="padding: 1.5rem;">
-              <div class="flex gap-3">
-                <div class="skeleton skeleton-avatar"></div>
-                <div class="flex-1">
-                  <div class="skeleton skeleton-title"></div>
-                  <div class="skeleton skeleton-text"></div>
-                  <div class="skeleton skeleton-text" style="width: 40%;"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Psychologists Grid -->
-          <div id="psychologists-grid" class="grid md:grid-cols-2 gap-4" style="display: none;">
-            <!-- Dynamic content will be inserted here -->
           </div>
 
           <!-- No Results State -->
-          <div id="no-results" class="card text-center" style="padding: 3rem; display: none;">
-            <h3 class="text-lg font-semibold text-text-custom mb-2">Психологи не найдены</h3>
-            <p class="text-muted mb-4">Попробуйте изменить параметры поиска</p>
-            <button class="btn btn-outline" onclick="resetSearch()" data-testid="button-reset-search">
+          <div id="no-results" class="card text-center" style="padding: 3rem; background-color: white; display: none;">
+            <i data-lucide="search-x" style="width: 3rem; height: 3rem; margin: 0 auto 1rem; color: #999;"></i>
+            <h3 class="text-lg font-semibold mb-2" style="color: #1A1A1A;">Психологи не найдены</h3>
+            <p style="color: #666;">Попробуйте изменить параметры поиска</p>
+            <button class="btn btn-outline mt-4" onclick="location.reload()" data-testid="button-reset-search">
               Сбросить поиск
             </button>
           </div>
-        </main>
+
+          <!-- Psychologists List -->
+          <div id="psychologists-list" class="flex flex-column gap-4" style="display: none;">
+            <!-- Cards will be inserted here by JavaScript -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <script src="/js/api.js"></script>
-  <script src="/js/auth.js"></script>
   <script>
     let allPsychologists = [];
     let filteredPsychologists = [];
+    let isDemoMode = false;
 
-    // Initialize auth
-    Auth.init().then(user => {
-      if (user) {
-        document.getElementById('nav-login').classList.add('hidden');
-        document.getElementById('nav-user-menu').classList.remove('hidden');
-        document.getElementById('nav-logout').classList.remove('hidden');
-        
-        const dashboardLink = document.getElementById('nav-dashboard-link');
-        if (user.role === 'client') dashboardLink.href = '/client-dashboard.html';
-        else if (user.role === 'psychologist') dashboardLink.href = '/psychologist-dashboard.html';
-        else if (user.role === 'admin') dashboardLink.href = '/admin-dashboard.html';
-      }
-    });
-
-    // Logout
-    document.getElementById('logout-btn')?.addEventListener('click', async () => {
-      await Auth.logout();
-      window.location.href = '/';
-    });
-
-    // Load psychologists
-    async function loadPsychologists() {
+    // Check if in DEMO mode
+    async function checkDemoMode() {
       try {
-        allPsychologists = await API.psychologists.search({});
-        filteredPsychologists = allPsychologists;
-        renderPsychologists();
+        const response = await fetch('/api/psychologists/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        
+        if (response.status === 503) {
+          isDemoMode = true;
+          loadDemoData();
+        } else if (response.ok) {
+          const data = await response.json();
+          allPsychologists = data;
+          filteredPsychologists = data;
+          renderPsychologists();
+        }
       } catch (error) {
         console.error('Error loading psychologists:', error);
-        document.getElementById('loading-state').style.display = 'none';
-        document.getElementById('no-results').style.display = 'block';
+        isDemoMode = true;
+        loadDemoData();
       }
+    }
+
+    // Load demo data
+    function loadDemoData() {
+      allPsychologists = [
+        {
+          id: 1,
+          user: { firstName: 'Елена', lastName: 'Викторовна' },
+          specialization: 'Когнитивно-поведенческая терапия',
+          description: 'Психолог, семейный психотерапевт. Ко мне обращаются люди, переживающие стрессы, травмы и их последствия, депрессивные состояния, возрастные кризисы и иные кризисные состояния.',
+          experience: 5,
+          price: 2500,
+          rating: 4.8,
+          totalReviews: 127,
+          formats: ['video', 'audio', 'chat'],
+          nextSession: 'Завтра, 20 июля'
+        },
+        {
+          id: 2,
+          user: { firstName: 'Анна', lastName: 'Петрова' },
+          specialization: 'Семейная терапия',
+          description: 'Специалист по семейным отношениям и детской психологии. Помогаю найти гармонию в отношениях и справиться с кризисами.',
+          experience: 8,
+          price: 3000,
+          rating: 4.9,
+          totalReviews: 203,
+          formats: ['video', 'audio'],
+          nextSession: '23.10.2025 в 14:00'
+        },
+        {
+          id: 3,
+          user: { firstName: 'Дмитрий', lastName: 'Соколов' },
+          specialization: 'Психоанализ',
+          description: 'Работаю с глубинными переживаниями, тревогой, депрессией. Помогаю понять себя и найти внутренние ресурсы.',
+          experience: 12,
+          price: 4000,
+          rating: 4.7,
+          totalReviews: 89,
+          formats: ['video'],
+          nextSession: '24.10.2025 в 10:00'
+        }
+      ];
+      filteredPsychologists = allPsychologists;
+      renderPsychologists();
     }
 
     // Render psychologist card
@@ -260,7 +233,7 @@
       const formatIcons = { video: 'video', audio: 'phone', chat: 'message-square' };
       
       const formatBadges = (psych.formats || []).map(format => 
-        `<span class="badge badge-secondary flex items-center gap-1">
+        `<span class="badge" style="background: #F3E8FF; color: #7C3AED; border: none; display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; padding: 0.25rem 0.5rem;">
           <i data-lucide="${formatIcons[format]}" style="width: 0.75rem; height: 0.75rem;"></i>
           ${format}
         </span>`
@@ -272,52 +245,88 @@
 
       return `
         <div class="card" data-testid="psychologist-card-${psych.id}" style="background-color: white;">
-          <div class="card-content" style="background-color: white;">
-            <div class="flex gap-3 mb-3">
-              <!-- Avatar -->
-              <div class="flex items-center justify-center" style="width: 4rem; height: 4rem; border-radius: 50%; background-color: hsl(var(--primary)); color: white; font-weight: 600; font-size: 1.25rem; flex-shrink: 0;">
-                ${initials}
-              </div>
+          <div style="padding: 1.5rem;">
+            <div class="flex gap-4">
+              <!-- Photo -->
+              <img 
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop" 
+                alt="${psych.user.firstName} ${psych.user.lastName}"
+                style="width: 8rem; height: 8rem; border-radius: 0.5rem; object-fit: cover; flex-shrink: 0;"
+              />
               
               <!-- Info -->
-              <div class="flex-1 min-w-0">
-                <h3 class="text-lg font-semibold text-text-custom mb-1">
-                  Др. ${psych.user.firstName} ${psych.user.lastName}
+              <div class="flex-1" style="min-width: 0;">
+                <h3 class="font-semibold mb-1" style="color: #1A1A1A; font-size: 1.25rem;">
+                  ${psych.user.firstName} ${psych.user.lastName}
                 </h3>
-                <p class="text-sm text-muted mb-2">${psych.specialization}</p>
+                <p class="text-sm mb-2" style="color: #7C3AED;">
+                  ${psych.specialization}
+                </p>
                 
-                <!-- Rating -->
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="flex">${stars}</div>
-                  <span class="text-sm text-muted">
-                    ${rating.toFixed(1)} (${psych.totalReviews} отзывов)
-                  </span>
+                <!-- Credentials -->
+                <div class="flex items-center gap-4 mb-3" style="font-size: 0.875rem; color: #666;">
+                  <div class="flex items-center gap-1">
+                    <i data-lucide="award" style="width: 1rem; height: 1rem;"></i>
+                    <span>${psych.experience} лет опыта</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <i data-lucide="graduation-cap" style="width: 1rem; height: 1rem;"></i>
+                    <span>2 диплома психолога</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <i data-lucide="book-open" style="width: 1rem; height: 1rem;"></i>
+                    <span>3 профильных курса</span>
+                  </div>
                 </div>
                 
-                <p class="text-sm text-muted">
-                  ${psych.experience} лет опыта
+                <!-- Tags -->
+                <div class="mb-3">
+                  <span class="badge badge-secondary" style="font-size: 0.75rem; margin-right: 0.5rem;">психоаналитическая терапия</span>
+                  <span class="badge badge-secondary" style="font-size: 0.75rem; margin-right: 0.5rem;">кризисное консультирование</span>
+                </div>
+
+                <!-- Format Badges -->
+                <div class="flex items-center gap-3 mb-3">
+                  <span style="font-size: 0.875rem; color: #666;">Формат работы:</span>
+                  <div class="flex gap-2">
+                    ${formatBadges}
+                  </div>
+                </div>
+                
+                <!-- Description -->
+                <p class="text-sm mb-4" style="color: #666; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                  ${psych.description}
                 </p>
+                
+                <button class="text-sm" style="color: #7C3AED; background: none; border: none; cursor: pointer; text-decoration: underline;">
+                  Подробнее
+                </button>
               </div>
-            </div>
-            
-            <!-- Description -->
-            <p class="text-sm text-muted mb-3" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-              ${psych.description}
-            </p>
-            
-            <!-- Format Badges -->
-            <div class="flex flex-wrap gap-2 mb-4">
-              ${formatBadges}
-            </div>
-            
-            <!-- Price & Button -->
-            <div class="flex items-center justify-between">
-              <span class="text-lg font-semibold text-primary-custom">
-                ₽${parseInt(psych.price).toLocaleString()}/сессия
-              </span>
-              <a href="/booking.html?id=${psych.id}" class="btn btn-primary" data-testid="button-book-${psych.id}">
-                Записаться
-              </a>
+
+              <!-- Booking Section -->
+              <div class="flex flex-column" style="width: 200px; flex-shrink: 0; align-items: center;">
+                <div class="card text-center mb-3" style="background: #7C3AED; color: white; padding: 1rem; width: 100%; border-radius: 0.75rem;">
+                  <div style="font-size: 0.875rem; margin-bottom: 0.25rem;">
+                    ${psych.nextSession}
+                  </div>
+                  <div style="font-size: 1.5rem; font-weight: 700;">
+                    12:00
+                  </div>
+                </div>
+                
+                <button class="btn w-full mb-2" style="background: #7C3AED; color: white; border: none; font-weight: 600; white-space: nowrap;" data-testid="button-select-time-${psych.id}">
+                  Выбрать другое время
+                </button>
+                
+                <div class="text-center">
+                  <div class="font-semibold mb-1" style="font-size: 1.25rem; color: #1A1A1A;">
+                    ${parseInt(psych.price).toLocaleString()} ₽
+                  </div>
+                  <div style="font-size: 0.75rem; color: #666;">
+                    /за 50 минут консультации
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -326,113 +335,45 @@
 
     // Render psychologists
     function renderPsychologists() {
-      const grid = document.getElementById('psychologists-grid');
+      const container = document.getElementById('psychologists-list');
       const loading = document.getElementById('loading-state');
       const noResults = document.getElementById('no-results');
-      const header = document.getElementById('results-header');
-      const count = document.getElementById('results-count');
 
       loading.style.display = 'none';
       
       if (filteredPsychologists.length === 0) {
-        grid.style.display = 'none';
-        header.style.display = 'none';
+        container.style.display = 'none';
         noResults.style.display = 'block';
       } else {
-        grid.style.display = 'grid';
-        header.style.display = 'flex';
+        container.style.display = 'flex';
         noResults.style.display = 'none';
-        count.textContent = `Найдено ${filteredPsychologists.length} специалистов`;
-        
-        grid.innerHTML = filteredPsychologists.map(renderPsychologistCard).join('');
+        container.innerHTML = filteredPsychologists.map(renderPsychologistCard).join('');
         lucide.createIcons();
       }
     }
 
     // Apply filters
     function applyFilters() {
-      const search = document.getElementById('search-input').value.toLowerCase();
-      const specialization = document.getElementById('filter-specialization').value;
-      const minExp = document.getElementById('filter-min-experience').value;
-      const maxExp = document.getElementById('filter-max-experience').value;
-      const minPrice = document.getElementById('filter-min-price').value;
-      const maxPrice = document.getElementById('filter-max-price').value;
-      const selectedFormats = Array.from(document.querySelectorAll('.format-checkbox:checked')).map(cb => cb.value);
+      const genderFilter = document.getElementById('gender-select').value.toLowerCase();
+      const issueFilter = document.getElementById('issue-select').value.toLowerCase();
 
       filteredPsychologists = allPsychologists.filter(psych => {
-        // Search filter
-        if (search && !(
-          psych.user.firstName.toLowerCase().includes(search) ||
-          psych.user.lastName.toLowerCase().includes(search) ||
-          psych.specialization.toLowerCase().includes(search) ||
-          psych.description.toLowerCase().includes(search)
-        )) return false;
-
-        // Specialization filter
-        if (specialization && psych.specialization !== specialization) return false;
-
-        // Experience filter
-        if (minExp && psych.experience < parseInt(minExp)) return false;
-        if (maxExp && psych.experience > parseInt(maxExp)) return false;
-
-        // Price filter
-        if (minPrice && parseFloat(psych.price) < parseFloat(minPrice)) return false;
-        if (maxPrice && parseFloat(psych.price) > parseFloat(maxPrice)) return false;
-
-        // Format filter
-        if (selectedFormats.length > 0 && !selectedFormats.some(f => psych.formats.includes(f))) return false;
-
+        // Add filter logic here
         return true;
       });
 
       renderPsychologists();
     }
 
-    // Sort psychologists
-    document.getElementById('sort-select')?.addEventListener('change', (e) => {
-      const sortBy = e.target.value;
-      
-      filteredPsychologists.sort((a, b) => {
-        if (sortBy === 'rating') return parseFloat(b.rating) - parseFloat(a.rating);
-        if (sortBy === 'price-low') return parseFloat(a.price) - parseFloat(b.price);
-        if (sortBy === 'price-high') return parseFloat(b.price) - parseFloat(a.price);
-        if (sortBy === 'experience') return b.experience - a.experience;
-        return 0;
-      });
-      
-      renderPsychologists();
-    });
-
-    // Reset search
-    function resetSearch() {
-      document.getElementById('search-input').value = '';
-      document.getElementById('filter-specialization').value = '';
-      document.getElementById('filter-min-experience').value = '';
-      document.getElementById('filter-max-experience').value = '';
-      document.getElementById('filter-min-price').value = '';
-      document.getElementById('filter-max-price').value = '';
-      document.querySelectorAll('.format-checkbox').forEach(cb => cb.checked = false);
-      
-      filteredPsychologists = allPsychologists;
-      renderPsychologists();
-    }
-
-    // Clear filters button
-    document.getElementById('clear-filters-btn').addEventListener('click', resetSearch);
-
-    // Add event listeners for live filtering
-    document.getElementById('search-input').addEventListener('input', applyFilters);
-    document.getElementById('filter-specialization').addEventListener('change', applyFilters);
-    document.getElementById('filter-min-experience').addEventListener('input', applyFilters);
-    document.getElementById('filter-max-experience').addEventListener('input', applyFilters);
-    document.getElementById('filter-min-price').addEventListener('input', applyFilters);
-    document.getElementById('filter-max-price').addEventListener('input', applyFilters);
-    document.querySelectorAll('.format-checkbox').forEach(cb => {
-      cb.addEventListener('change', applyFilters);
-    });
+    // Event listeners
+    document.getElementById('gender-select')?.addEventListener('change', applyFilters);
+    document.getElementById('issue-select')?.addEventListener('change', applyFilters);
+    document.querySelector('[data-testid="button-apply-filters"]')?.addEventListener('click', applyFilters);
 
     // Initialize
-    loadPsychologists();
+    checkDemoMode();
+    
+    // Initialize Lucide icons
     lucide.createIcons();
   </script>
 </body>
