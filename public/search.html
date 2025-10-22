@@ -76,45 +76,42 @@
 
             <!-- Gender Filter -->
             <div class="form-group" style="margin-bottom: 1.5rem;">
-              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="users" style="width: 1rem; height: 1rem;"></i>
                 Пол психолога
               </label>
-              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="gender" value="male" class="filter-checkbox" data-testid="checkbox-male" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
-                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Мужчина</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="gender" value="female" class="filter-checkbox" data-testid="checkbox-female" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
-                  <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Женщина</span>
-                </label>
-              </div>
+              <select id="gender-select" class="filter-select" data-testid="select-gender" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem; padding: 0.5rem; width: 100%; cursor: pointer;">
+                <option value="" style="background: #7C3AED; color: white;">Не важно</option>
+                <option value="male" style="background: #7C3AED; color: white;">Мужчина</option>
+                <option value="female" style="background: #7C3AED; color: white;">Женщина</option>
+              </select>
             </div>
 
             <!-- Issues Filter -->
             <div class="form-group" style="margin-bottom: 1.5rem;">
-              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="brain" style="width: 1rem; height: 1rem;"></i>
                 Специализация
               </label>
               <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="issue" value="relationships" class="filter-checkbox" data-testid="checkbox-relationships" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="relationships" class="filter-checkbox" data-testid="checkbox-relationships">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Отношения</span>
                 </label>
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="issue" value="anxiety" class="filter-checkbox" data-testid="checkbox-anxiety" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="anxiety" class="filter-checkbox" data-testid="checkbox-anxiety">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Тревога и стресс</span>
                 </label>
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="issue" value="self" class="filter-checkbox" data-testid="checkbox-self" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="self" class="filter-checkbox" data-testid="checkbox-self">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Самопознание</span>
                 </label>
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="issue" value="career" class="filter-checkbox" data-testid="checkbox-career" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="career" class="filter-checkbox" data-testid="checkbox-career">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Карьера</span>
                 </label>
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="issue" value="family" class="filter-checkbox" data-testid="checkbox-family" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="issue" value="family" class="filter-checkbox" data-testid="checkbox-family">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Семья и дети</span>
                 </label>
               </div>
@@ -122,20 +119,21 @@
 
             <!-- Format Filter -->
             <div class="form-group" style="margin-bottom: 1.5rem;">
-              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="video" style="width: 1rem; height: 1rem;"></i>
                 Формат работы
               </label>
               <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="format" value="video" class="filter-checkbox" data-testid="checkbox-video" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="format" value="video" class="filter-checkbox" data-testid="checkbox-video">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Видео</span>
                 </label>
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="format" value="audio" class="filter-checkbox" data-testid="checkbox-audio" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="format" value="audio" class="filter-checkbox" data-testid="checkbox-audio">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Аудио</span>
                 </label>
                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="format" value="chat" class="filter-checkbox" data-testid="checkbox-chat" style="width: 1.125rem; height: 1.125rem; cursor: pointer;">
+                  <input type="checkbox" name="format" value="chat" class="filter-checkbox" data-testid="checkbox-chat">
                   <span style="color: rgba(255,255,255,0.95); font-size: 0.875rem;">Чат</span>
                 </label>
               </div>
@@ -143,30 +141,31 @@
 
             <!-- Price Range Filter -->
             <div class="form-group" style="margin-bottom: 1.5rem;">
-              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: block;">
+              <label class="form-label" style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="wallet" style="width: 1rem; height: 1rem;"></i>
                 Цена за консультацию
               </label>
               <div style="display: flex; gap: 0.5rem; align-items: center;">
                 <input 
                   type="number" 
                   id="price-min" 
-                  class="form-input" 
+                  class="form-input filter-price-input" 
                   placeholder="От"
                   min="0"
                   step="500"
                   data-testid="input-price-min"
-                  style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem; padding: 0.5rem; width: 100%;"
+                  style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white !important; border-radius: 0.5rem; padding: 0.5rem; width: 100%;"
                 />
                 <span style="color: rgba(255,255,255,0.7);">—</span>
                 <input 
                   type="number" 
                   id="price-max" 
-                  class="form-input" 
+                  class="form-input filter-price-input" 
                   placeholder="До"
                   min="0"
                   step="500"
                   data-testid="input-price-max"
-                  style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 0.5rem; padding: 0.5rem; width: 100%;"
+                  style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white !important; border-radius: 0.5rem; padding: 0.5rem; width: 100%;"
                 />
               </div>
               <div style="color: rgba(255,255,255,0.7); font-size: 0.75rem; margin-top: 0.5rem;">
@@ -424,9 +423,8 @@
 
     // Apply filters
     function applyFilters() {
-      // Get selected genders
-      const selectedGenders = Array.from(document.querySelectorAll('input[name="gender"]:checked'))
-        .map(cb => cb.value);
+      // Get selected gender from dropdown
+      const selectedGender = document.getElementById('gender-select').value;
       
       // Get selected issues
       const selectedIssues = Array.from(document.querySelectorAll('input[name="issue"]:checked'))
@@ -442,9 +440,9 @@
 
       filteredPsychologists = allPsychologists.filter(psych => {
         // Gender filter
-        if (selectedGenders.length > 0) {
+        if (selectedGender && selectedGender !== '') {
           const psychGender = psych.user?.gender || 'any';
-          if (!selectedGenders.includes(psychGender)) {
+          if (psychGender !== selectedGender) {
             return false;
           }
         }
@@ -486,6 +484,9 @@
     
     // Reset filters
     function resetFilters() {
+      // Reset gender select
+      document.getElementById('gender-select').value = '';
+      
       // Uncheck all checkboxes
       document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
       
@@ -498,7 +499,9 @@
       renderPsychologists();
     }
 
-    // Event listeners - auto-apply on checkbox change
+    // Event listeners - auto-apply on changes
+    document.getElementById('gender-select')?.addEventListener('change', applyFilters);
+    
     document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', applyFilters);
     });

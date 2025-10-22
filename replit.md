@@ -7,12 +7,15 @@ The platform enables clients to search for psychologists, book appointments, and
 ## Recent Changes (October 22, 2025)
 
 ### Latest Update - Checkbox Filters & Price Range
-- **Filters redesigned with checkboxes**: Improved usability and instant filtering
-  - **Пол психолога**: Checkboxes (мужчина, женщина)
-  - **Специализация**: Multiple checkboxes (отношения, тревога, самопознание, карьера, семья)
-  - **Формат работы**: Checkboxes (видео, аудио, чат)
-  - **Цена за консультацию**: Price range inputs (от/до) with instant filtering
-  - Auto-apply filters on checkbox/input change
+- **Filters redesigned with icons and improved styling**: Enhanced UX with instant filtering
+  - **Пол психолога**: Styled dropdown select (users icon) - "Не важно", "Мужчина", "Женщина"
+  - **Специализация**: Custom rounded checkboxes (brain icon) - отношения, тревога, самопознание, карьера, семья
+  - **Формат работы**: Custom rounded checkboxes (video icon) - видео, аудио, чат
+  - **Цена за консультацию**: Price range inputs with white text (wallet icon) - от/до with instant filtering
+  - **Custom checkboxes**: Purple rounded checkboxes (#7C3AED) with white checkmarks, smooth transitions
+  - **Filter icons**: Each filter group has a Lucide icon for better visual hierarchy
+  - **White text**: All input fields and placeholders are white for better readability on purple background
+  - Auto-apply filters on any change (checkbox/select/input)
   - Reset button to clear all filters at once
 - **Logo spacing fix**: Footer logo "psytalk.pro" now displays without gaps on all pages
 - **Navigation fixes**: All internal links work correctly across pages (search, blog, offers)

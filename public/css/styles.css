@@ -1218,3 +1218,68 @@ select option {
     overflow: hidden !important;
   }
 }
+
+/* Filter inputs - white text and placeholder */
+.filter-price-input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.filter-price-input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.filter-price-input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.filter-price-input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Filter select styling */
+.filter-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  padding-right: 2rem !important;
+}
+
+/* Custom rounded checkboxes */
+.filter-checkbox {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 1.125rem !important;
+  height: 1.125rem !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 0.25rem !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.filter-checkbox:checked {
+  background-color: #7C3AED !important;
+  border-color: #7C3AED !important;
+}
+
+.filter-checkbox:checked::after {
+  content: '' !important;
+  position: absolute !important;
+  display: block !important;
+  left: 3px !important;
+  top: 0px !important;
+  width: 5px !important;
+  height: 10px !important;
+  border: solid white !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+.filter-checkbox:hover {
+  border-color: rgba(255, 255, 255, 0.8) !important;
+}
