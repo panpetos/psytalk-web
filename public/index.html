@@ -132,28 +132,99 @@
   </section>
 
   <!-- Statistics -->
-  <section class="section" style="padding: 4rem 0; background: white;">
+  <section class="section" style="padding: 4rem 0; background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%);">
     <div class="container">
-      <div class="grid md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">300+</div>
-          <p style="color: #666; font-size: 1.125rem;">психологов</p>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- Mobile/Tablet: vertical layout -->
+        <div class="grid gap-4" style="display: grid; grid-template-columns: 1fr;">
+          <!-- Desktop: horizontal layout -->
+          <div style="display: none;" class="stats-desktop">
+            <div style="display: flex; justify-content: space-around; align-items: center; gap: 2rem;">
+              <!-- Stat 1 -->
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i data-lucide="users" style="width: 2rem; height: 2rem; color: white;"></i>
+                </div>
+                <div>
+                  <div class="font-bold" style="font-size: 2rem; color: white;">+200 психологов</div>
+                  <p style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">подключены к сервису</p>
+                </div>
+              </div>
+              
+              <!-- Stat 2 -->
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i data-lucide="heart" style="width: 2rem; height: 2rem; color: white;"></i>
+                </div>
+                <div>
+                  <div class="font-bold" style="font-size: 2rem; color: white;">96 человек</div>
+                  <p style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">меняют свою жизнь прямо сейчас</p>
+                </div>
+              </div>
+              
+              <!-- Stat 3 -->
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i data-lucide="calendar" style="width: 2rem; height: 2rem; color: white;"></i>
+                </div>
+                <div>
+                  <div class="font-bold" style="font-size: 2rem; color: white;">с 2021 года</div>
+                  <p style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">оказываем помощь вам</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">5000+</div>
-          <p style="color: #666; font-size: 1.125rem;">клиентов</p>
-        </div>
-        <div>
-          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">98%</div>
-          <p style="color: #666; font-size: 1.125rem;">довольных</p>
-        </div>
-        <div>
-          <div class="font-bold mb-2" style="font-size: 3rem; color: #7C3AED;">24/7</div>
-          <p style="color: #666; font-size: 1.125rem;">поддержка</p>
+        
+        <!-- Mobile stats (column layout) -->
+        <div class="stats-mobile" style="display: grid; gap: 1.5rem;">
+          <!-- Stat 1 Mobile -->
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="users" style="width: 2rem; height: 2rem; color: white;"></i>
+            </div>
+            <div>
+              <div class="font-bold" style="font-size: 1.5rem; color: white;">+200 психологов</div>
+              <p style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">подключены к сервису</p>
+            </div>
+          </div>
+          
+          <!-- Stat 2 Mobile -->
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="heart" style="width: 2rem; height: 2rem; color: white;"></i>
+            </div>
+            <div>
+              <div class="font-bold" style="font-size: 1.5rem; color: white;">96 человек</div>
+              <p style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">меняют свою жизнь прямо сейчас</p>
+            </div>
+          </div>
+          
+          <!-- Stat 3 Mobile -->
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="calendar" style="width: 2rem; height: 2rem; color: white;"></i>
+            </div>
+            <div>
+              <div class="font-bold" style="font-size: 1.5rem; color: white;">с 2021 года</div>
+              <p style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">оказываем помощь вам</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+  
+  <style>
+    @media (min-width: 768px) {
+      .stats-desktop {
+        display: block !important;
+      }
+      .stats-mobile {
+        display: none !important;
+      }
+    }
+  </style>
 
   <!-- Features -->
   <section class="section" style="padding: 4rem 0; background: #FAFAFA;">
