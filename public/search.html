@@ -18,11 +18,18 @@
           <span style="color: #1A1A1A;">psy</span><!--
        --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
         </a>
-        <ul class="nav-menu">
-          <li><a href="#services" class="nav-link" data-testid="link-services">услуги</a></li>
+        
+        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/#services" class="nav-link" data-testid="link-services">услуги</a></li>
           <li><a href="/search.html" class="nav-link" style="color: #7C3AED; font-weight: 600;" data-testid="link-psychologists">психологи</a></li>
-          <li><a href="#blog" class="nav-link" data-testid="link-blog">блог</a></li>
-          <li><a href="#offers" class="nav-link" data-testid="link-offers">спец. предложения</a></li>
+          <li><a href="/blog.html" class="nav-link" data-testid="link-blog">блог</a></li>
+          <li><a href="/offers.html" class="nav-link" data-testid="link-offers">спец. предложения</a></li>
           <li style="margin-left: 2rem;"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
         </ul>
       </div>
@@ -376,6 +383,14 @@
     
     // Initialize Lucide icons
     lucide.createIcons();
+    
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const burgerMenu = document.getElementById('burgerMenu');
+      navMenu.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+    }
   </script>
 </body>
 </html>
