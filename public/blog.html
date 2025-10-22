@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Блог - psytalk.pro</title>
+  <meta name="description" content="Статьи о психологии, саморазвитии и ментальном здоровье от профессиональных психологов.">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="background-color: #FAFAFA;">
+  <!-- Navigation -->
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
+    <div class="container">
+      <div class="nav-container">
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600; word-spacing: 0; letter-spacing: 0;">
+          <span style="color: #1A1A1A;">psy</span><!--
+       --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+        </a>
+        
+        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/#services" class="nav-link" data-testid="link-services">услуги</a></li>
+          <li><a href="/search.html" class="nav-link" data-testid="link-psychologists">психологи</a></li>
+          <li><a href="/blog.html" class="nav-link" data-testid="link-blog" style="color: #7C3AED; font-weight: 600;">блог</a></li>
+          <li><a href="/offers.html" class="nav-link" data-testid="link-offers">спец. предложения</a></li>
+          <li style="margin-left: 2rem;"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="section" style="padding: 4rem 0; background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%);">
+    <div class="container">
+      <div style="text-align: center; color: white;">
+        <h1 class="font-bold mb-4" style="font-size: 3rem; line-height: 1.2;" data-testid="text-blog-title">
+          Блог о психологии
+        </h1>
+        <p class="text-xl" style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto;">
+          Статьи от профессиональных психологов о ментальном здоровье, отношениях и саморазвитии
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts -->
+  <section class="section" style="padding: 4rem 0;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
+        
+        <!-- Article 1 -->
+        <article class="card" style="overflow: hidden; cursor: pointer; transition: transform 0.2s;" data-testid="article-burnout">
+          <div style="height: 200px; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); position: relative;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; color: white;">
+              <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.875rem;">Психология</span>
+            </div>
+          </div>
+          <div style="padding: 1.5rem;">
+            <h3 class="font-semibold mb-2" style="font-size: 1.25rem; color: #1A1A1A;">Как справиться с профессиональным выгоранием</h3>
+            <p style="color: #666; margin-bottom: 1rem;">
+              Признаки выгорания, его причины и практические советы по восстановлению энергии и мотивации.
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: #999; font-size: 0.875rem;">
+              <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
+              <span>15 января 2025</span>
+              <span style="margin-left: auto;">5 мин чтения</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="card" style="overflow: hidden; cursor: pointer; transition: transform 0.2s;" data-testid="article-anxiety">
+          <div style="height: 200px; background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%); position: relative;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; color: white;">
+              <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.875rem;">Здоровье</span>
+            </div>
+          </div>
+          <div style="padding: 1.5rem;">
+            <h3 class="font-semibold mb-2" style="font-size: 1.25rem; color: #1A1A1A;">Техники борьбы с тревожностью</h3>
+            <p style="color: #666; margin-bottom: 1rem;">
+              Простые и эффективные методы снижения тревоги: от дыхательных практик до когнитивных техник.
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: #999; font-size: 0.875rem;">
+              <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
+              <span>10 января 2025</span>
+              <span style="margin-left: auto;">7 мин чтения</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="card" style="overflow: hidden; cursor: pointer; transition: transform 0.2s;" data-testid="article-relationships">
+          <div style="height: 200px; background: linear-gradient(135deg, #10B981 0%, #34D399 100%); position: relative;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; color: white;">
+              <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.875rem;">Отношения</span>
+            </div>
+          </div>
+          <div style="padding: 1.5rem;">
+            <h3 class="font-semibold mb-2" style="font-size: 1.25rem; color: #1A1A1A;">Здоровые границы в отношениях</h3>
+            <p style="color: #666; margin-bottom: 1rem;">
+              Почему важно уметь говорить «нет» и как выстраивать личные границы без конфликтов.
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: #999; font-size: 0.875rem;">
+              <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
+              <span>5 января 2025</span>
+              <span style="margin-left: auto;">6 мин чтения</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 4 -->
+        <article class="card" style="overflow: hidden; cursor: pointer; transition: transform 0.2s;" data-testid="article-self-esteem">
+          <div style="height: 200px; background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%); position: relative;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; color: white;">
+              <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.875rem;">Саморазвитие</span>
+            </div>
+          </div>
+          <div style="padding: 1.5rem;">
+            <h3 class="font-semibold mb-2" style="font-size: 1.25rem; color: #1A1A1A;">Как повысить самооценку</h3>
+            <p style="color: #666; margin-bottom: 1rem;">
+              Практические упражнения для развития уверенности в себе и позитивного самовосприятия.
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: #999; font-size: 0.875rem;">
+              <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
+              <span>1 января 2025</span>
+              <span style="margin-left: auto;">8 мин чтения</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 5 -->
+        <article class="card" style="overflow: hidden; cursor: pointer; transition: transform 0.2s;" data-testid="article-stress">
+          <div style="height: 200px; background: linear-gradient(135deg, #6366F1 0%, #818CF8 100%); position: relative;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; color: white;">
+              <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.875rem;">Здоровье</span>
+            </div>
+          </div>
+          <div style="padding: 1.5rem;">
+            <h3 class="font-semibold mb-2" style="font-size: 1.25rem; color: #1A1A1A;">Управление стрессом в повседневной жизни</h3>
+            <p style="color: #666; margin-bottom: 1rem;">
+              Как распознать стресс на ранней стадии и какие техники помогают справляться с ним.
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: #999; font-size: 0.875rem;">
+              <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
+              <span>28 декабря 2024</span>
+              <span style="margin-left: auto;">6 мин чтения</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 6 -->
+        <article class="card" style="overflow: hidden; cursor: pointer; transition: transform 0.2s;" data-testid="article-meditation">
+          <div style="height: 200px; background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); position: relative;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; color: white;">
+              <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.875rem;">Практики</span>
+            </div>
+          </div>
+          <div style="padding: 1.5rem;">
+            <h3 class="font-semibold mb-2" style="font-size: 1.25rem; color: #1A1A1A;">Медитация для начинающих</h3>
+            <p style="color: #666; margin-bottom: 1rem;">
+              С чего начать практику медитации и как она влияет на ментальное здоровье и концентрацию.
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: #999; font-size: 0.875rem;">
+              <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
+              <span>20 декабря 2024</span>
+              <span style="margin-left: auto;">10 мин чтения</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section" style="padding: 4rem 0; background: #F3E8FF;">
+    <div class="container">
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <h2 class="text-3xl font-bold mb-4" style="color: #1A1A1A;">Нужна помощь психолога?</h2>
+        <p class="text-lg mb-6" style="color: #666;">
+          Подберите специалиста и начните путь к улучшению ментального здоровья
+        </p>
+        <a 
+          href="/search.html" 
+          class="btn btn-lg" 
+          style="background: #7C3AED; color: white; padding: 0.75rem 2rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s; display: inline-block;"
+          onmouseover="this.style.background='#6D28D9'; this.style.color='white';" 
+          onmouseout="this.style.background='#7C3AED'; this.style.color='white';"
+          data-testid="button-find-psychologist"
+        >
+          Найти психолога
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section" style="padding: 3rem 0; background: #1A1A1A; color: white;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <div>
+          <div class="nav-brand mb-3" style="font-size: 1.25rem; font-weight: 600; word-spacing: 0; letter-spacing: 0;">
+            <span style="color: white;">psy</span><!--
+         --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+          </div>
+          <p style="color: #999; font-size: 0.875rem;">
+            Профессиональная психологическая помощь онлайн
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-3">Платформа</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="/search.html" style="color: #999; text-decoration: none;">Психологи</a></li>
+            <li><a href="/#services" style="color: #999; text-decoration: none;">Услуги</a></li>
+            <li><a href="/offers.html" style="color: #999; text-decoration: none;">Спец. предложения</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-3">Информация</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="/blog.html" style="color: #999; text-decoration: none;">Блог</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">О нас</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Контакты</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-3">Поддержка</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="#" style="color: #999; text-decoration: none;">Помощь</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Политика конфиденциальности</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Условия использования</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #333; padding-top: 1.5rem; text-align: center; color: #666; font-size: 0.875rem;">
+        © 2025 psytalk.pro. Все права защищены.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    
+    function toggleMobileMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const burgerMenu = document.getElementById('burgerMenu');
+      navMenu.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

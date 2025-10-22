@@ -6,7 +6,20 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Login Page Redesign & Complete Branding Refresh
+### Latest Update - Mobile Navigation & New Pages
+- **Burger menu implementation**: Responsive mobile/tablet navigation (три фиолетовые полоски #7C3AED)
+  - Shows on mobile/tablet (<1024px), hidden on desktop
+  - Smooth slide-in animation from right
+  - CSS media queries with !important to ensure proper display
+- **New pages created**:
+  - **/blog.html**: Blog page with 6 psychology articles (burnout, anxiety, relationships, self-esteem, stress, meditation)
+  - **/offers.html**: Special offers page with 3 pricing packages (first session 2500₽, 5-session package 22000₽, 10-session package 42000₽)
+- **UI refinements**:
+  - Service cards icons centered vertically (flexbox column alignment)
+  - Button hover states fixed: white text maintained on hover for all primary/secondary/destructive buttons
+  - Services grid responsive: 4 columns desktop, 2 columns tablet, 1 column mobile
+
+### Previous Update - Login Page Redesign & Complete Branding Refresh
 - **Login page (login.html) complete redesign**: Beautiful minimalist design matching register.html style
   - 3D purple gradient lock icon with shadow effects
   - Input fields with icons (email, password)

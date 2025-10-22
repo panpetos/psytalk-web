@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Специальные предложения - psytalk.pro</title>
+  <meta name="description" content="Акции и специальные предложения на психологические консультации. Скидки для новых клиентов и пакетные предложения.">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="background-color: #FAFAFA;">
+  <!-- Navigation -->
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
+    <div class="container">
+      <div class="nav-container">
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600; word-spacing: 0; letter-spacing: 0;">
+          <span style="color: #1A1A1A;">psy</span><!--
+       --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+        </a>
+        
+        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/#services" class="nav-link" data-testid="link-services">услуги</a></li>
+          <li><a href="/search.html" class="nav-link" data-testid="link-psychologists">психологи</a></li>
+          <li><a href="/blog.html" class="nav-link" data-testid="link-blog">блог</a></li>
+          <li><a href="/offers.html" class="nav-link" data-testid="link-offers" style="color: #7C3AED; font-weight: 600;">спец. предложения</a></li>
+          <li style="margin-left: 2rem;"><a href="/login.html" class="btn btn-ghost btn-sm" data-testid="button-login">Войти</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="section" style="padding: 4rem 0; background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%);">
+    <div class="container">
+      <div style="text-align: center; color: white;">
+        <h1 class="font-bold mb-4" style="font-size: 3rem; line-height: 1.2;" data-testid="text-offers-title">
+          Специальные предложения
+        </h1>
+        <p class="text-xl" style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto;">
+          Акции и выгодные пакеты консультаций для вашего комфорта
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Offers -->
+  <section class="section" style="padding: 4rem 0;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        
+        <!-- Offer 1 - First Session -->
+        <div class="card" style="padding: 2rem; position: relative; overflow: hidden; border: 2px solid #7C3AED;" data-testid="offer-first-session">
+          <div style="position: absolute; top: 1rem; right: 1rem; background: #7C3AED; color: white; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.875rem; font-weight: 600;">
+            -50%
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <div class="icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center;">
+              <i data-lucide="sparkles" style="color: white; width: 2rem; height: 2rem;"></i>
+            </div>
+          </div>
+          <h3 class="font-bold mb-2" style="font-size: 1.5rem; color: #1A1A1A;">Первая консультация</h3>
+          <p style="color: #666; margin-bottom: 1.5rem;">
+            Скидка 50% на первую консультацию для новых клиентов
+          </p>
+          <div style="margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="font-size: 2rem; font-weight: 700; color: #7C3AED;">2500 ₽</span>
+              <span style="font-size: 1.25rem; text-decoration: line-through; color: #999;">5000 ₽</span>
+            </div>
+            <p style="color: #666; font-size: 0.875rem;">за 50 минут</p>
+          </div>
+          <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <i data-lucide="check" style="color: #7C3AED; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">Все специалисты платформы</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <i data-lucide="check" style="color: #7C3AED; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">Видео, аудио или чат</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="check" style="color: #7C3AED; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">Полная конфиденциальность</span>
+            </li>
+          </ul>
+          <a 
+            href="/search.html" 
+            class="btn btn-lg" 
+            style="background: #7C3AED; color: white; width: 100%; padding: 0.75rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s; display: block; text-align: center;"
+            onmouseover="this.style.background='#6D28D9'; this.style.color='white';" 
+            onmouseout="this.style.background='#7C3AED'; this.style.color='white';"
+            data-testid="button-book-first"
+          >
+            Записаться
+          </a>
+        </div>
+
+        <!-- Offer 2 - Package 5 -->
+        <div class="card" style="padding: 2rem; position: relative; overflow: hidden;" data-testid="offer-package-5">
+          <div style="position: absolute; top: 1rem; right: 1rem; background: #F3E8FF; color: #7C3AED; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.875rem; font-weight: 600;">
+            Популярно
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <div class="icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center;">
+              <i data-lucide="package" style="color: white; width: 2rem; height: 2rem;"></i>
+            </div>
+          </div>
+          <h3 class="font-bold mb-2" style="font-size: 1.5rem; color: #1A1A1A;">Пакет из 5 консультаций</h3>
+          <p style="color: #666; margin-bottom: 1.5rem;">
+            Экономия 3000 ₽ при покупке пакета из 5 сессий
+          </p>
+          <div style="margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="font-size: 2rem; font-weight: 700; color: #7C3AED;">22 000 ₽</span>
+              <span style="font-size: 1.25rem; text-decoration: line-through; color: #999;">25 000 ₽</span>
+            </div>
+            <p style="color: #666; font-size: 0.875rem;">4400 ₽ за консультацию</p>
+          </div>
+          <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <i data-lucide="check" style="color: #7C3AED; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">5 консультаций по 50 минут</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <i data-lucide="check" style="color: #7C3AED; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">Экономия 3000 ₽</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="check" style="color: #7C3AED; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">Приоритетная запись</span>
+            </li>
+          </ul>
+          <a 
+            href="/search.html" 
+            class="btn btn-outline btn-lg" 
+            style="width: 100%; padding: 0.75rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; display: block; text-align: center;"
+            data-testid="button-book-package-5"
+          >
+            Выбрать пакет
+          </a>
+        </div>
+
+        <!-- Offer 3 - Package 10 -->
+        <div class="card" style="padding: 2rem; position: relative; overflow: hidden; border: 2px solid #10B981;" data-testid="offer-package-10">
+          <div style="position: absolute; top: 1rem; right: 1rem; background: #10B981; color: white; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.875rem; font-weight: 600;">
+            Максимум
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <div style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #10B981 0%, #34D399 100%); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);">
+              <i data-lucide="zap" style="color: white; width: 2rem; height: 2rem;"></i>
+            </div>
+          </div>
+          <h3 class="font-bold mb-2" style="font-size: 1.5rem; color: #1A1A1A;">Пакет из 10 консультаций</h3>
+          <p style="color: #666; margin-bottom: 1.5rem;">
+            Максимальная экономия 8000 ₽ при покупке 10 сессий
+          </p>
+          <div style="margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="font-size: 2rem; font-weight: 700; color: #10B981;">42 000 ₽</span>
+              <span style="font-size: 1.25rem; text-decoration: line-through; color: #999;">50 000 ₽</span>
+            </div>
+            <p style="color: #666; font-size: 0.875rem;">4200 ₽ за консультацию</p>
+          </div>
+          <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <i data-lucide="check" style="color: #10B981; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">10 консультаций по 50 минут</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <i data-lucide="check" style="color: #10B981; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">Экономия 8000 ₽</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="check" style="color: #10B981; width: 1.25rem; height: 1.25rem;"></i>
+              <span style="color: #666;">VIP поддержка</span>
+            </li>
+          </ul>
+          <a 
+            href="/search.html" 
+            class="btn btn-lg" 
+            style="background: #10B981; color: white; width: 100%; padding: 0.75rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s; display: block; text-align: center;"
+            onmouseover="this.style.background='#059669'; this.style.color='white';" 
+            onmouseout="this.style.background='#10B981'; this.style.color='white';"
+            data-testid="button-book-package-10"
+          >
+            Выбрать пакет
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section" style="padding: 4rem 0; background: white;">
+    <div class="container">
+      <h2 class="text-3xl font-bold mb-6 text-center" style="color: #1A1A1A;">Почему выбирают пакеты?</h2>
+      
+      <div class="services-grid">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; background: #F3E8FF; margin-bottom: 1rem;">
+            <i data-lucide="piggy-bank" style="color: #7C3AED; width: 2rem; height: 2rem;"></i>
+          </div>
+          <h3 class="font-semibold mb-2" style="font-size: 1.125rem; color: #1A1A1A;">Экономия</h3>
+          <p style="color: #666; font-size: 0.875rem;">
+            Существенная скидка на каждую консультацию при покупке пакета
+          </p>
+        </div>
+
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; background: #F3E8FF; margin-bottom: 1rem;">
+            <i data-lucide="calendar-check" style="color: #7C3AED; width: 2rem; height: 2rem;"></i>
+          </div>
+          <h3 class="font-semibold mb-2" style="font-size: 1.125rem; color: #1A1A1A;">Регулярность</h3>
+          <p style="color: #666; font-size: 0.875rem;">
+            Регулярные встречи с психологом дают лучший результат
+          </p>
+        </div>
+
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; background: #F3E8FF; margin-bottom: 1rem;">
+            <i data-lucide="trending-up" style="color: #7C3AED; width: 2rem; height: 2rem;"></i>
+          </div>
+          <h3 class="font-semibold mb-2" style="font-size: 1.125rem; color: #1A1A1A;">Прогресс</h3>
+          <p style="color: #666; font-size: 0.875rem;">
+            Планомерная работа над собой приводит к стабильным результатам
+          </p>
+        </div>
+
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; background: #F3E8FF; margin-bottom: 1rem;">
+            <i data-lucide="shield-check" style="color: #7C3AED; width: 2rem; height: 2rem;"></i>
+          </div>
+          <h3 class="font-semibold mb-2" style="font-size: 1.125rem; color: #1A1A1A;">Гарантия</h3>
+          <p style="color: #666; font-size: 0.875rem;">
+            Возврат неиспользованных консультаций в течение 30 дней
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section" style="padding: 4rem 0; background: #FAFAFA;">
+    <div class="container">
+      <h2 class="text-3xl font-bold mb-6 text-center" style="color: #1A1A1A;">Часто задаваемые вопросы</h2>
+      
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="card" style="padding: 1.5rem; margin-bottom: 1rem;">
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A;">Как использовать пакет консультаций?</h3>
+          <p style="color: #666;">
+            После покупки пакета вы можете записываться на консультации к выбранному психологу. Каждая консультация будет автоматически списываться из вашего пакета.
+          </p>
+        </div>
+
+        <div class="card" style="padding: 1.5rem; margin-bottom: 1rem;">
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A;">Есть ли срок действия пакета?</h3>
+          <p style="color: #666;">
+            Да, пакеты действительны в течение 6 месяцев с момента покупки. Это дает достаточно времени для регулярной работы с психологом.
+          </p>
+        </div>
+
+        <div class="card" style="padding: 1.5rem; margin-bottom: 1rem;">
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A;">Можно ли вернуть неиспользованные консультации?</h3>
+          <p style="color: #666;">
+            Да, в течение 30 дней с момента покупки вы можете вернуть неиспользованные консультации и получить возврат средств.
+          </p>
+        </div>
+
+        <div class="card" style="padding: 1.5rem;">
+          <h3 class="font-semibold mb-2" style="color: #1A1A1A;">Можно ли менять психолога в рамках пакета?</h3>
+          <p style="color: #666;">
+            Да, вы можете использовать консультации из пакета с разными психологами на платформе. Главное - найти того специалиста, с которым вам комфортно.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section" style="padding: 3rem 0; background: #1A1A1A; color: white;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <div>
+          <div class="nav-brand mb-3" style="font-size: 1.25rem; font-weight: 600; word-spacing: 0; letter-spacing: 0;">
+            <span style="color: white;">psy</span><!--
+         --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+          </div>
+          <p style="color: #999; font-size: 0.875rem;">
+            Профессиональная психологическая помощь онлайн
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-3">Платформа</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="/search.html" style="color: #999; text-decoration: none;">Психологи</a></li>
+            <li><a href="/#services" style="color: #999; text-decoration: none;">Услуги</a></li>
+            <li><a href="/offers.html" style="color: #999; text-decoration: none;">Спец. предложения</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-3">Информация</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="/blog.html" style="color: #999; text-decoration: none;">Блог</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">О нас</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Контакты</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-3">Поддержка</h4>
+          <ul class="flex flex-column gap-2" style="list-style: none;">
+            <li><a href="#" style="color: #999; text-decoration: none;">Помощь</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Политика конфиденциальности</a></li>
+            <li><a href="#" style="color: #999; text-decoration: none;">Условия использования</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #333; padding-top: 1.5rem; text-align: center; color: #666; font-size: 0.875rem;">
+        © 2025 psytalk.pro. Все права защищены.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    
+    function toggleMobileMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const burgerMenu = document.getElementById('burgerMenu');
+      navMenu.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
