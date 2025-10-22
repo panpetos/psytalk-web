@@ -35,7 +35,16 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Blog Page Mobile Adaptation (October 22, 2025)
+## Latest Update - Psychologist Photos Fix + UI Improvements (October 22, 2025)
+- **Fixed psychologist photos on mobile**: Photos now always visible and not squished
+  - Added min-width and min-height to prevent compression on all screen sizes
+  - Desktop: 80x80px, Tablet: 70x70px, Mobile: 60x60px
+  - Added display: block for reliability
+- **Centered login icon**: Lock icon now properly centered with margin-left/right: auto
+- **Unified auth buttons**: "Зарегистрироваться" button now matches "Войти" button colors
+  - Background: #7C3AED, Hover: #6D28D9, White text
+
+## Previous Update - Blog Page Mobile Adaptation
 - **Mobile-responsive blog grid**: Articles now display in single column on mobile
   - Changed from multi-column grid to single column (<768px)
   - Reduced gap between articles from 2rem to 1.5rem
