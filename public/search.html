@@ -57,12 +57,12 @@
       <div class="grid" style="grid-template-columns: 300px 1fr; gap: 2rem; align-items: start;">
         
         <!-- Filters Sidebar (Sticky) - Purple theme -->
-        <aside class="sticky" style="top: 5rem;">
+        <aside class="sticky" style="top: 5rem;" id="filters-sidebar">
           <div class="card" style="background: linear-gradient(180deg, #8B5CF6 0%, #7C3AED 100%); padding: 1.5rem; color: white;">
             <div class="flex items-center justify-between mb-4">
               <h3 class="font-semibold" style="font-size: 1.125rem;">Фильтры</h3>
-              <button style="background: none; border: none; color: white; cursor: pointer;">
-                <i data-lucide="sliders-horizontal" style="width: 1.25rem; height: 1.25rem;"></i>
+              <button id="close-filters-btn" style="background: none; border: none; color: white; cursor: pointer; display: none;">
+                <i data-lucide="x" style="width: 1.25rem; height: 1.25rem;"></i>
               </button>
             </div>
 
@@ -150,7 +150,44 @@
     </div>
   </div>
 
+  <!-- Mobile Filters Toggle Button -->
+  <button class="mobile-filters-toggle" id="mobile-filters-btn" data-testid="button-mobile-filters" style="display: none;">
+    <i data-lucide="sliders-horizontal" style="width: 1.5rem; height: 1.5rem;"></i>
+  </button>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+
   <script src="/js/api.js"></script>
+  <script>
+    // Mobile filters toggle
+    const mobileFiltersBtn = document.getElementById('mobile-filters-btn');
+    const closeFiltersBtn = document.getElementById('close-filters-btn');
+    const filtersSidebar = document.getElementById('filters-sidebar');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function toggleMobileFilters() {
+      filtersSidebar.classList.toggle('active');
+      mobileOverlay.classList.toggle('active');
+    }
+
+    // Show close button on mobile
+    if (window.innerWidth <= 768) {
+      if (closeFiltersBtn) closeFiltersBtn.style.display = 'block';
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        if (closeFiltersBtn) closeFiltersBtn.style.display = 'block';
+      } else {
+        if (closeFiltersBtn) closeFiltersBtn.style.display = 'none';
+      }
+    });
+
+    mobileFiltersBtn?.addEventListener('click', toggleMobileFilters);
+    closeFiltersBtn?.addEventListener('click', toggleMobileFilters);
+    mobileOverlay?.addEventListener('click', toggleMobileFilters);
+  </script>
   <script>
     let allPsychologists = [];
     let filteredPsychologists = [];

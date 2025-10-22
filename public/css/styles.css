@@ -891,4 +891,68 @@ select option {
   .md\:grid-cols-4 {
     grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
   }
+  
+  /* Search page: sidebar to full width on mobile */
+  .grid[style*="grid-template-columns: 300px 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Hide sidebar on mobile by default */
+  #filters-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 90% !important;
+    max-width: 350px !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+    transition: left 0.3s ease !important;
+    overflow-y: auto !important;
+  }
+  
+  #filters-sidebar.active {
+    left: 0 !important;
+  }
+  
+  /* Mobile filters toggle button */
+  .mobile-filters-toggle {
+    display: block !important;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+    z-index: 999;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Overlay for mobile sidebar */
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .mobile-overlay.active {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-filters-toggle {
+    display: none !important;
+  }
 }
