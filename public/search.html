@@ -338,17 +338,30 @@
           ${format}
         </span>`
       ).join('');
+      
+      // Generate initials and gradient
+      const initials = psych.user.firstName.charAt(0) + psych.user.lastName.charAt(0);
+      const gradients = [
+        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+        'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+        'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+        'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+        'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+      ];
+      const gradient = gradients[psych.id % gradients.length];
 
       return `
         <div class="card psychologist-card" data-testid="psychologist-card-${psych.id}" style="background-color: white; padding: 1rem;">
           <div class="psychologist-card-inner">
             <!-- Photo & Main Info -->
             <div class="psychologist-header">
-              <img 
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop" 
-                alt="${psych.user.firstName} ${psych.user.lastName}"
+              <div 
                 class="psychologist-photo"
-              />
+                style="background: ${gradient}; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.5rem;"
+              >
+                ${initials}
+              </div>
               
               <div class="psychologist-info">
                 <h3 class="font-semibold" style="color: #1A1A1A; font-size: 1.125rem; margin-bottom: 0.25rem;">

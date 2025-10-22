@@ -35,9 +35,14 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Psychologist Photos Fix + UI Improvements (October 22, 2025)
-- **Fixed psychologist photos on mobile**: Photos now always visible and not squished
-  - Added min-width and min-height to prevent compression on all screen sizes
+## Latest Update - Psychologist Avatars + Mobile Fixes (October 22, 2025)
+- **Replaced photos with gradient avatars**: Psychologists now have beautiful gradient avatars with initials
+  - Removed external Unsplash images that didn't load on mobile
+  - Each psychologist has unique gradient color (6 gradient variations)
+  - Initials displayed in white on gradient background
+  - Avatars are always visible and load instantly
+- **Fixed psychologist photos on mobile**: Avatars protected from compression
+  - Added min-width and min-height to prevent squishing on all screen sizes
   - Desktop: 80x80px, Tablet: 70x70px, Mobile: 60x60px
   - Added display: block for reliability
 - **Centered login icon**: Lock icon now properly centered with margin-left/right: auto
