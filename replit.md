@@ -6,7 +6,14 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Mobile Hero Buttons Fix
+### Latest Update - Mobile Menu Scroll Fix
+- **Fixed mobile menu scroll and burger visibility**: Menu now works perfectly on mobile
+  - Removed unwanted scroll inside menu (changed height to max-height)
+  - Burger button now always visible (z-index: 1002 above menu's 1000)
+  - Added overflow-y: auto for proper scrolling only when needed
+  - Menu items fit without scrolling on standard mobile devices
+
+### Previous Update - Mobile Hero Buttons Fix
 - **Fixed hero section buttons on mobile**: Buttons now properly adapted for mobile devices
   - Hero CTA buttons (Найти психолога, Стать психологом) now display vertically on mobile
   - Buttons stretch to full width (100%) on mobile devices

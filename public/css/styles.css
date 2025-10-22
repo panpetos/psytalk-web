@@ -990,7 +990,8 @@ select option {
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  z-index: 1001;
+  z-index: 1002;
+  position: relative;
 }
 
 .burger-menu span {
@@ -1059,7 +1060,7 @@ select option {
     top: 70px;
     right: -100%;
     width: 280px;
-    height: calc(100vh - 70px);
+    max-height: calc(100vh - 70px);
     background: white;
     flex-direction: column;
     padding: 2rem;
@@ -1067,6 +1068,8 @@ select option {
     transition: right 0.3s ease;
     z-index: 1000;
     align-items: flex-start !important;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   
   .nav-menu.active {
