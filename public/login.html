@@ -3,151 +3,192 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Вход - PsychPlatform</title>
+  <title>Вход - psytalk.pro</title>
+  <meta name="description" content="Войдите в свой аккаунт на psytalk.pro для доступа к онлайн консультациям с психологами">
   <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-  <div class="container container-sm" style="margin-top: 80px;">
-    <div class="card">
-      <div class="card-header text-center">
-        <h1 class="card-title">PsychPlatform</h1>
-        <p class="text-secondary mb-0">Платформа онлайн-консультаций с психологами</p>
-      </div>
-      
-      <div id="tabs" class="tabs">
-        <ul class="tab-list">
-          <li><button class="tab-button active" data-tab="login">Вход</button></li>
-          <li><button class="tab-button" data-tab="register">Регистрация</button></li>
+<body style="background-color: #FAFAFA;">
+  <!-- Navigation -->
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
+    <div class="container">
+      <div class="nav-container">
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600; word-spacing: 0; letter-spacing: 0;">
+          <span style="color: #1A1A1A;">psy</span><!--
+       --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+        </a>
+        <ul class="nav-menu">
+          <li><a href="/register.html" class="btn btn-ghost btn-sm" data-testid="button-register">Регистрация</a></li>
         </ul>
       </div>
-      
-      <!-- Login Tab -->
-      <div id="login-tab" class="tab-content active">
-        <form id="login-form">
-          <div class="form-group">
-            <label class="form-label" for="login-email">Email</label>
-            <input type="email" id="login-email" class="form-input" required>
+    </div>
+  </nav>
+
+  <div class="section" style="padding: 3rem 0;">
+    <div class="container" style="max-width: 500px;">
+      <div class="card" style="background-color: white; padding: 2.5rem;">
+        <!-- Header -->
+        <div class="text-center mb-6">
+          <div class="mx-auto mb-4 flex items-center justify-center icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem;">
+            <i data-lucide="lock" style="color: white; width: 2rem; height: 2rem;"></i>
           </div>
-          
-          <div class="form-group">
-            <label class="form-label" for="login-password">Пароль</label>
-            <input type="password" id="login-password" class="form-input" required>
-          </div>
-          
-          <div id="login-error" class="alert alert-danger hidden"></div>
-          
-          <button type="submit" class="btn w-full">Войти</button>
-        </form>
-        
-        <div class="mt-3 text-sm text-secondary">
-          <p><strong>Демо-аккаунты:</strong></p>
-          <p>Клиент: maria.ivanova@example.com / client123</p>
-          <p>Психолог: anna.petrova@psychplatform.com / psychologist123</p>
-          <p>Админ: admin@psychplatform.com / admin123</p>
+          <h1 class="font-bold mb-2" style="font-size: 1.75rem; color: #1A1A1A;">
+            Вход в аккаунт
+          </h1>
+          <p style="color: #666;">
+            Добро пожаловать в psytalk.pro
+          </p>
         </div>
-      </div>
-      
-      <!-- Register Tab -->
-      <div id="register-tab" class="tab-content">
-        <form id="register-form">
+
+        <!-- Alert -->
+        <div id="alert" class="alert" style="display: none; margin-bottom: 1.5rem;"></div>
+
+        <!-- Login Form -->
+        <form id="login-form">
+          <!-- Email -->
           <div class="form-group">
-            <label class="form-label" for="register-role">Тип аккаунта</label>
-            <select id="register-role" class="form-select" required>
-              <option value="">Выберите тип</option>
-              <option value="client">Клиент</option>
-              <option value="psychologist">Психолог</option>
-            </select>
-          </div>
-          
-          <div class="grid grid-cols-2">
-            <div class="form-group">
-              <label class="form-label" for="register-firstName">Имя</label>
-              <input type="text" id="register-firstName" class="form-input" required>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="register-lastName">Фамилия</label>
-              <input type="text" id="register-lastName" class="form-input" required>
+            <label class="form-label" for="email">Email</label>
+            <div style="position: relative;">
+              <i data-lucide="mail" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.25rem; height: 1.25rem; color: #999;"></i>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-input" 
+                required 
+                placeholder="your@email.com"
+                style="padding-left: 3rem;"
+                data-testid="input-email"
+              />
             </div>
           </div>
-          
+
+          <!-- Password -->
           <div class="form-group">
-            <label class="form-label" for="register-email">Email</label>
-            <input type="email" id="register-email" class="form-input" required>
+            <label class="form-label" for="password">Пароль</label>
+            <div style="position: relative;">
+              <i data-lucide="lock" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.25rem; height: 1.25rem; color: #999;"></i>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="form-input" 
+                required 
+                placeholder="••••••••"
+                style="padding-left: 3rem;"
+                data-testid="input-password"
+              />
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label class="form-label" for="register-password">Пароль</label>
-            <input type="password" id="register-password" class="form-input" minlength="6" required>
-            <small class="text-sm text-secondary">Минимум 6 символов</small>
-          </div>
-          
-          <div id="register-error" class="alert alert-danger hidden"></div>
-          
-          <button type="submit" class="btn w-full">Зарегистрироваться</button>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-full btn-lg" data-testid="button-submit">
+            Войти
+          </button>
         </form>
+
+        <!-- Divider -->
+        <div style="margin: 2rem 0; text-align: center; position: relative;">
+          <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #E5E5E5;"></div>
+          <span style="position: relative; background: white; padding: 0 1rem; color: #999; font-size: 0.875rem;">или</span>
+        </div>
+
+        <!-- Register Link -->
+        <div class="text-center">
+          <p style="color: #666; margin-bottom: 1rem;">
+            Еще нет аккаунта?
+          </p>
+          <div class="flex gap-3">
+            <a href="/register.html?type=client" class="btn btn-outline flex-1" data-testid="button-register-client">
+              <i data-lucide="user" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
+              Я клиент
+            </a>
+            <a href="/register.html?type=psychologist" class="btn btn-outline flex-1" data-testid="button-register-psychologist">
+              <i data-lucide="brain" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
+              Я психолог
+            </a>
+          </div>
+        </div>
+
+        <!-- Demo Accounts Info -->
+        <div style="margin-top: 2rem; padding: 1.5rem; background: #F3E8FF; border-radius: 0.75rem;">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="info" style="width: 1.25rem; height: 1.25rem; color: #7C3AED;"></i>
+            <h3 class="font-semibold" style="color: #7C3AED;">Демо-аккаунты для тестирования</h3>
+          </div>
+          <div class="flex flex-column gap-2" style="font-size: 0.875rem; color: #666;">
+            <div>
+              <div style="font-weight: 600; color: #1A1A1A; margin-bottom: 0.25rem;">Клиент:</div>
+              <div style="font-family: monospace; color: #7C3AED;">maria.ivanova@example.com</div>
+              <div style="font-family: monospace; color: #7C3AED;">client123</div>
+            </div>
+            <div style="margin-top: 0.5rem;">
+              <div style="font-weight: 600; color: #1A1A1A; margin-bottom: 0.25rem;">Психолог:</div>
+              <div style="font-family: monospace; color: #7C3AED;">anna.petrova@psychplatform.com</div>
+              <div style="font-family: monospace; color: #7C3AED;">psychologist123</div>
+            </div>
+            <div style="margin-top: 0.5rem;">
+              <div style="font-weight: 600; color: #1A1A1A; margin-bottom: 0.25rem;">Администратор:</div>
+              <div style="font-family: monospace; color: #7C3AED;">admin@psychplatform.com</div>
+              <div style="font-family: monospace; color: #7C3AED;">admin123</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+
   <script src="/js/api.js"></script>
   <script src="/js/auth.js"></script>
   <script>
-    // Tab switching
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        
-        // Update button states
-        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-        button.classList.add('active');
-        
-        // Update tab content
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-        document.getElementById(`${tab}-tab`).classList.add('active');
-      });
-    });
-    
     // Login form
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      const errorEl = document.getElementById('login-error');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const alertEl = document.getElementById('alert');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
       
-      errorEl.classList.add('hidden');
+      // Hide previous alerts
+      alertEl.style.display = 'none';
+      
+      // Disable button during submission
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Вход...';
       
       try {
         await Auth.login(email, password);
-        Auth.redirectToDashboard();
+        
+        // Show success message
+        alertEl.className = 'alert';
+        alertEl.style.display = 'block';
+        alertEl.style.background = '#F0FDF4';
+        alertEl.style.color = '#15803D';
+        alertEl.style.border = '1px solid #BBF7D0';
+        alertEl.innerHTML = '<strong>Успешно!</strong> Перенаправление...';
+        
+        // Redirect after a short delay
+        setTimeout(() => {
+          Auth.redirectToDashboard();
+        }, 500);
       } catch (error) {
-        errorEl.textContent = error.message;
-        errorEl.classList.remove('hidden');
-      }
-    });
-    
-    // Register form
-    document.getElementById('register-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const data = {
-        role: document.getElementById('register-role').value,
-        firstName: document.getElementById('register-firstName').value,
-        lastName: document.getElementById('register-lastName').value,
-        email: document.getElementById('register-email').value,
-        password: document.getElementById('register-password').value
-      };
-      
-      const errorEl = document.getElementById('register-error');
-      errorEl.classList.add('hidden');
-      
-      try {
-        await Auth.register(data);
-        Auth.redirectToDashboard();
-      } catch (error) {
-        errorEl.textContent = error.message;
-        errorEl.classList.remove('hidden');
+        // Show error message
+        alertEl.className = 'alert';
+        alertEl.style.display = 'block';
+        alertEl.style.background = '#FEF2F2';
+        alertEl.style.color = '#991B1B';
+        alertEl.style.border = '1px solid #FECACA';
+        alertEl.innerHTML = `<strong>Ошибка!</strong> ${error.message || 'Неверный email или пароль'}`;
+        
+        // Re-enable button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Войти';
       }
     });
     
