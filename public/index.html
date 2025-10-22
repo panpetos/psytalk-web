@@ -31,28 +31,40 @@
   <!-- Hero Section -->
   <section class="section" style="padding: 5rem 0; background: white;">
     <div class="container">
-      <div class="text-center" style="max-width: 900px; margin: 0 auto;">
-        <h1 class="font-bold mb-4" style="font-size: 3rem; line-height: 1.2; color: #1A1A1A;" data-testid="text-hero-title">
-          Подберите психолога,<br>который вас поймет
-        </h1>
-        <p class="text-xl mb-6" style="color: #666; line-height: 1.8; max-width: 700px; margin: 0 auto 2rem;" data-testid="text-hero-description">
-          Онлайн консультации с квалифицированными специалистами. Конфиденциально, удобно и эффективно.
-        </p>
-        
-        <!-- Call to Action -->
-        <div class="flex gap-3 justify-center flex-wrap mb-8">
-          <a href="/search.html" class="btn btn-primary btn-lg" data-testid="button-find-psychologist">
-            Найти психолога
-          </a>
-          <a href="/register.html?type=psychologist" class="btn btn-outline btn-lg" data-testid="button-become-psychologist">
-            Стать психологом
-          </a>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+        <!-- Text Content -->
+        <div>
+          <h1 class="font-bold mb-4" style="font-size: 3rem; line-height: 1.2; color: #1A1A1A;" data-testid="text-hero-title">
+            Подберите психолога,<br>который вас поймет
+          </h1>
+          <p class="text-xl mb-6" style="color: #666; line-height: 1.8;" data-testid="text-hero-description">
+            Онлайн консультации с квалифицированными специалистами. Конфиденциально, удобно и эффективно.
+          </p>
+          
+          <!-- Call to Action -->
+          <div class="flex gap-3 mb-6">
+            <a href="/search.html" class="btn btn-primary btn-lg" data-testid="button-find-psychologist">
+              Найти психолога
+            </a>
+            <a href="/register.html?type=psychologist" class="btn btn-outline btn-lg" data-testid="button-become-psychologist">
+              Стать психологом
+            </a>
+          </div>
+
+          <!-- First session badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-2" style="background-color: #F3E8FF; border-radius: 2rem; color: #7C3AED;">
+            <i data-lucide="check-circle" style="width: 1rem; height: 1rem;"></i>
+            <span style="font-weight: 500;">Первая консультация всего 2500 ₽</span>
+          </div>
         </div>
 
-        <!-- First session badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-2" style="background-color: #F3E8FF; border-radius: 2rem; color: #7C3AED;">
-          <i data-lucide="check-circle" style="width: 1rem; height: 1rem;"></i>
-          <span style="font-weight: 500;">Первая консультация бесплатно</span>
+        <!-- Hero Image -->
+        <div style="position: relative;">
+          <img 
+            src="@assets/image_1761149013393.png" 
+            alt="Онлайн консультация психолога" 
+            style="width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 20px 60px rgba(124, 58, 237, 0.15);"
+          />
         </div>
       </div>
     </div>
@@ -73,7 +85,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Issue 1 -->
         <div class="card text-center" style="padding: 2rem; background-color: white;">
-          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
+          <div class="mx-auto mb-4 flex items-center justify-center icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem;">
             <i data-lucide="heart" style="color: white; width: 2rem; height: 2rem;"></i>
           </div>
           <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Отношения</h3>
@@ -84,7 +96,7 @@
 
         <!-- Issue 2 -->
         <div class="card text-center" style="padding: 2rem; background-color: white;">
-          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
+          <div class="mx-auto mb-4 flex items-center justify-center icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem;">
             <i data-lucide="trending-down" style="color: white; width: 2rem; height: 2rem;"></i>
           </div>
           <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Тревога и стресс</h3>
@@ -95,7 +107,7 @@
 
         <!-- Issue 3 -->
         <div class="card text-center" style="padding: 2rem; background-color: white;">
-          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
+          <div class="mx-auto mb-4 flex items-center justify-center icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem;">
             <i data-lucide="user-search" style="color: white; width: 2rem; height: 2rem;"></i>
           </div>
           <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Самопознание</h3>
@@ -106,7 +118,7 @@
 
         <!-- Issue 4 -->
         <div class="card text-center" style="padding: 2rem; background-color: white;">
-          <div class="mx-auto mb-4 flex items-center justify-center" style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); border-radius: 1rem;">
+          <div class="mx-auto mb-4 flex items-center justify-center icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem;">
             <i data-lucide="briefcase" style="color: white; width: 2rem; height: 2rem;"></i>
           </div>
           <h3 class="font-semibold mb-2" style="color: #1A1A1A; font-size: 1.125rem;">Карьера</h3>
@@ -169,7 +181,7 @@
             <div class="flex items-center justify-center" style="width: 3rem; height: 3rem; background: #7C3AED; border-radius: 50%; color: white; font-weight: 600; font-size: 1.25rem;">
               2
             </div>
-            <h3 class="font-semibold" style="color: #1A1A1A; font-size: 1.25rem;">Запишитесь на сессию</h3>
+            <h3 class="font-semibold" style="color: #1A1A1A; font-size: 1.25rem;">Запишитесь на консультацию</h3>
           </div>
           <p style="color: #666;">
             Выберите удобное время в календаре психолога. Первая консультация может быть короче для знакомства.
@@ -200,7 +212,7 @@
           Готовы начать путь к себе?
         </h2>
         <p class="text-xl mb-6" style="color: rgba(255,255,255,0.9);">
-          Первая консультация всего 100 рублей. Найдите своего психолога уже сегодня.
+          Первая консультация всего 2500 ₽. Найдите своего психолога уже сегодня.
         </p>
         <a href="/search.html" class="btn btn-lg" style="background: white; color: #7C3AED; border: none; padding: 1rem 3rem; font-weight: 600;" data-testid="button-cta-find">
           Найти психолога
@@ -256,8 +268,8 @@
             Сколько стоит консультация?
           </summary>
           <p style="color: #666; margin-top: 1rem;">
-            Стоимость зависит от психолога и составляет от 1000 до 5000 рублей за сессию. 
-            Первая консультация доступна по специальной цене 100 рублей.
+            Стоимость зависит от психолога и составляет от 1000 до 5000 рублей за консультацию. 
+            Первая консультация доступна по специальной цене 2500 ₽.
           </p>
         </details>
       </div>
