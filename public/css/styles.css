@@ -462,7 +462,7 @@ p {
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 0;
 }
 
 .nav-menu {

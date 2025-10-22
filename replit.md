@@ -17,7 +17,7 @@ The platform enables clients to search for psychologists, book appointments, and
   - **White text**: All input fields and placeholders are white for better readability on purple background
   - Auto-apply filters on any change (checkbox/select/input)
   - Reset button to clear all filters at once
-- **Logo spacing fix**: Footer logo "psytalk.pro" now displays without gaps on all pages
+- **Logo spacing fix**: Header and footer logo "psytalk.pro" now displays without gaps on all pages (fixed CSS gap: 0)
 - **Navigation fixes**: All internal links work correctly across pages (search, blog, offers)
 
 ### Previous Update - Adaptive Psychologist Cards & Mobile Navigation
