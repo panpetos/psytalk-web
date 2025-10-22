@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Личный кабинет клиента - PsychPlatform</title>
+  <title>Личный кабинет - psytalk.pro</title>
   <link rel="stylesheet" href="/css/styles.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-muted">
+<body style="background-color: #FAFAFA;">
   <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
     <div class="container">
       <div class="nav-container">
-        <a href="/" class="nav-brand" data-testid="link-home">
-          <i data-lucide="brain-circuit"></i>
-          PsychPlatform
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600;">
+          <span style="color: #1A1A1A;">psy</span><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
         </a>
         <ul class="nav-menu">
-          <li><a href="/search.html" class="nav-link" data-testid="link-search">Психологи</a></li>
-          <li><button class="btn btn-outline btn-sm" id="logout-btn" data-testid="button-logout">Выйти</button></li>
+          <li><a href="#services" class="nav-link" data-testid="link-services">услуги</a></li>
+          <li><a href="/search.html" class="nav-link" data-testid="link-psychologists">психологи</a></li>
+          <li><a href="#blog" class="nav-link" data-testid="link-blog">блог</a></li>
+          <li style="margin-left: 2rem;"><button class="btn btn-outline btn-sm" id="logout-btn" data-testid="button-logout">Выйти</button></li>
         </ul>
       </div>
     </div>
@@ -28,132 +29,148 @@
     <div class="container">
       <!-- Header -->
       <div class="mb-6">
-        <h1 class="text-3xl font-bold text-text-custom mb-2" data-testid="text-page-title">Личный кабинет</h1>
-        <p class="text-muted" id="welcome-text">Добро пожаловать!</p>
+        <h1 class="font-bold mb-2" style="font-size: 2rem; color: #1A1A1A;" data-testid="text-page-title">
+          Здравствуйте, <span id="user-name">PAN</span> 👋
+        </h1>
       </div>
 
-      <!-- Tabs Navigation -->
-      <div class="card mb-6" data-testid="dashboard-nav" style="background-color: white;">
-        <div class="flex gap-4" style="padding: 0 1.5rem; border-bottom: 1px solid hsl(var(--border)); background-color: white;">
-          <button class="tab-button active" data-tab="appointments" data-testid="tab-appointments">
-            <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
-            <span>Мои консультации</span>
-          </button>
-          <button class="tab-button" data-tab="messages" data-testid="tab-messages">
-            <i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i>
-            <span>Сообщения</span>
-          </button>
-          <button class="tab-button" data-tab="profile" data-testid="tab-profile">
-            <i data-lucide="user" style="width: 1rem; height: 1rem;"></i>
-            <span>Профиль</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Content Area -->
-      <div class="grid" style="grid-template-columns: 1fr 320px; gap: 1.5rem; align-items: start;">
+      <!-- Content Grid -->
+      <div class="grid" style="grid-template-columns: 1fr 350px; gap: 2rem; align-items: start;">
         
         <!-- Main Content -->
         <div>
-          <!-- Appointments Tab -->
-          <div class="tab-content active" id="appointments-tab">
-            <!-- Upcoming Appointments -->
-            <div class="mb-6">
-              <h2 class="text-xl font-semibold text-text-custom mb-4">Предстоящие консультации</h2>
-              <div id="upcoming-appointments" class="flex flex-column gap-3" style="background-color: transparent;">
-                <!-- Skeleton -->
-                <div class="card" style="padding: 1.5rem; background-color: white;">
-                  <div class="skeleton skeleton-title"></div>
-                  <div class="skeleton skeleton-text"></div>
-                </div>
-              </div>
+          <!-- Next Session Card - Pink -->
+          <div class="card mb-4" style="background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); padding: 2rem; color: white;">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="alert-circle" style="width: 1.25rem; height: 1.25rem;"></i>
+              <span style="font-weight: 600;">Следующая сессия</span>
             </div>
-
-            <!-- Past Appointments -->
-            <div>
-              <h2 class="text-xl font-semibold text-text-custom mb-4">Прошедшие консультации</h2>
-              <div id="past-appointments" class="flex flex-column gap-3" style="background-color: transparent;">
-                <!-- Skeleton -->
-                <div class="card" style="padding: 1.5rem; background-color: white;">
-                  <div class="skeleton skeleton-title"></div>
-                  <div class="skeleton skeleton-text"></div>
-                </div>
-              </div>
+            <div class="mb-3" style="font-size: 1.5rem; font-weight: 700;">
+              21 июля, пт, 19:00
             </div>
+            <div style="font-size: 0.875rem; margin-bottom: 0.5rem; opacity: 0.95;">
+              Europe/Moscow GMT+3
+            </div>
+            <div style="margin-bottom: 1rem; opacity: 0.95;">
+              Бронь активна 40 минут.<br>
+              Чтобы сессия состоялась, подтвердите карту.
+            </div>
+            <button class="btn w-full" style="background: white; color: #FF9A9E; border: none; font-weight: 600;" data-testid="button-confirm-card">
+              Подтвердить карту
+            </button>
           </div>
 
-          <!-- Messages Tab -->
-          <div class="tab-content" id="messages-tab">
-            <div class="card text-center" style="padding: 3rem;">
-              <i data-lucide="message-square" style="width: 3rem; height: 3rem; margin: 0 auto 1rem; color: hsl(var(--muted-foreground));"></i>
-              <h3 class="text-lg font-semibold text-text-custom mb-2">Сообщения</h3>
-              <p class="text-muted">Здесь будут отображаться ваши сообщения с психологами</p>
+          <!-- My Psychologist -->
+          <div class="card mb-4" style="background-color: white; padding: 1.5rem;">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold" style="font-size: 1.125rem; color: #1A1A1A;">Мой психолог</h3>
+              <button style="color: #7C3AED; background: none; border: none; cursor: pointer; font-size: 0.875rem;">
+                Заменить
+              </button>
             </div>
+
+            <div class="flex gap-3" id="psychologist-info">
+              <div class="skeleton" style="width: 3rem; height: 3rem; border-radius: 50%;"></div>
+              <div class="flex-1">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-text"></div>
+              </div>
+            </div>
+
+            <button class="btn btn-outline w-full mt-4" data-testid="button-view-profile">
+              <i data-lucide="eye" style="width: 1rem; height: 1rem;"></i>
+              Профиль
+            </button>
           </div>
 
-          <!-- Profile Tab -->
-          <div class="tab-content" id="profile-tab">
-            <div class="card">
-              <div class="card-content">
-                <h3 class="text-lg font-semibold text-text-custom mb-4">Мой профиль</h3>
-                <div class="form-group">
-                  <label class="form-label">Имя</label>
-                  <input type="text" id="profile-firstName" class="form-input" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Фамилия</label>
-                  <input type="text" id="profile-lastName" class="form-input" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Email</label>
-                  <input type="email" id="profile-email" class="form-input" />
-                </div>
-                <button class="btn btn-primary" onclick="updateProfile()" data-testid="button-save-profile">
-                  Сохранить изменения
-                </button>
-              </div>
+          <!-- Support Section -->
+          <div class="card" style="background-color: white; padding: 1.5rem;">
+            <h3 class="font-semibold mb-3" style="font-size: 1.125rem; color: #1A1A1A;">
+              Поддержка
+            </h3>
+            
+            <div class="flex gap-3 mb-3">
+              <button class="btn flex-1" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" data-testid="button-telegram">
+                <i data-lucide="send" style="width: 1rem; height: 1rem;"></i>
+                Telegram
+              </button>
+              <button class="btn flex-1" style="background: #25D366; color: white; border: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" data-testid="button-whatsapp">
+                <i data-lucide="message-circle" style="width: 1rem; height: 1rem;"></i>
+                WhatsApp
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2 p-3" style="background: #F5F5F5; border-radius: 0.5rem;">
+              <input 
+                type="text" 
+                value="support@psytalk.pro" 
+                readonly 
+                style="background: none; border: none; flex: 1; color: #666; font-size: 0.875rem;"
+              />
+              <button style="background: none; border: none; cursor: pointer; color: #7C3AED;">
+                <i data-lucide="copy" style="width: 1rem; height: 1rem;"></i>
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Sidebar -->
         <aside>
-          <!-- Quick Stats -->
-          <div class="card" style="background-color: white;">
-            <div class="card-content" style="background-color: white;">
-              <h3 class="font-semibold text-text-custom mb-4">Статистика</h3>
-              <div class="flex flex-column gap-3" style="background-color: white;">
-                <div class="flex justify-between">
-                  <span class="text-muted">Всего сессий:</span>
-                  <span class="font-medium" id="stat-total" data-testid="stat-total-sessions">0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-muted">Активных психологов:</span>
-                  <span class="font-medium" id="stat-psychologists" data-testid="stat-active-psychologists">0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-muted">Потрачено:</span>
-                  <span class="font-medium" id="stat-spent" data-testid="stat-total-spent">0 ₽</span>
-                </div>
-              </div>
-            </div>
+          <!-- Quick Actions -->
+          <div class="card mb-4" style="background-color: white; padding: 1.5rem;">
+            <h3 class="font-semibold mb-3" style="font-size: 1.125rem; color: #1A1A1A;">
+              Промокоды и сертификаты
+            </h3>
+            <p class="text-sm mb-3" style="color: #666;">
+              Промокоды и сертификаты не суммируются и применяются по очереди. Условия переноса и отмены также как, как у сессий по картой.
+              <button style="color: #7C3AED; background: none; border: none; cursor: pointer; text-decoration: underline; font-size: 0.875rem;">
+                Подробные условия применения промокодов и сертификатов
+              </button>
+            </p>
+            
+            <input 
+              type="text" 
+              class="form-input mb-3" 
+              placeholder="Введите промокод"
+              data-testid="input-promo"
+              style="font-size: 0.875rem;"
+            />
+            
+            <button class="btn btn-outline w-full" data-testid="button-apply-promo">
+              Применить промокод
+            </button>
           </div>
 
-          <!-- Quick Actions -->
-          <div class="card mt-4" style="background-color: white;">
-            <div class="card-content" style="background-color: white;">
-              <h3 class="font-semibold text-text-custom mb-4">Быстрые действия</h3>
-              <div class="flex flex-column gap-2" style="background-color: white;">
-                <a href="/search.html" class="btn btn-primary w-full" data-testid="button-find-psychologist">
-                  <i data-lucide="search" style="width: 1rem; height: 1rem;"></i>
-                  Найти психолога
-                </a>
-                <a href="/help.html" class="btn btn-outline w-full" data-testid="button-help">
-                  <i data-lucide="help-circle" style="width: 1rem; height: 1rem;"></i>
-                  Помощь
-                </a>
-              </div>
+          <!-- Payment Methods -->
+          <div class="card mb-4" style="background-color: white; padding: 1.5rem;">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="credit-card" style="width: 1.125rem; height: 1.125rem; color: #7C3AED;"></i>
+              <span style="font-size: 0.875rem; color: #666;">
+                Мы добавили возможность оплачивать ваши сессии картой Mastercard иностранного банка
+              </span>
+              <button style="background: none; border: none; color: #666; cursor: pointer;">
+                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+              </button>
             </div>
+            <button style="color: #7C3AED; background: none; border: none; cursor: pointer; text-decoration: underline; font-size: 0.875rem;">
+              Подробности тут ↗
+            </button>
+          </div>
+
+          <!-- Banner -->
+          <div class="card text-center" style="background: linear-gradient(180deg, #667eea 0%, #764ba2 100%); padding: 2rem; color: white; border-radius: 1rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">
+              👁️
+            </div>
+            <div class="font-bold mb-2" style="font-size: 1.25rem;">
+              ОПОРА
+            </div>
+            <p style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 1.5rem;">
+              Психологическая поддержка в трудные времена
+            </p>
+            <button class="btn w-full" style="background: white; color: #667eea; border: none; font-weight: 600;">
+              Узнать больше
+            </button>
           </div>
         </aside>
       </div>
@@ -164,236 +181,78 @@
   <script src="/js/auth.js"></script>
   <script>
     let currentUser = null;
-    let appointments = [];
     let isDemoMode = false;
-
-    // Tab switching
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-        button.classList.add('active');
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-        document.getElementById(`${tab}-tab`).classList.add('active');
-      });
-    });
 
     // Check if in DEMO mode
     async function checkDemoMode() {
       try {
         const response = await fetch('/api/auth/me');
-        return response.status === 503 || response.status === 404;
-      } catch (error) {
-        return true;
-      }
-    }
-
-    // Initialize page
-    async function init() {
-      isDemoMode = await checkDemoMode();
-      
-      if (isDemoMode) {
-        // DEMO MODE: Show mock data
-        currentUser = {
-          id: 1,
-          firstName: 'Мария',
-          lastName: 'Иванова',
-          email: 'maria@example.com',
-          role: 'client'
-        };
         
-        document.getElementById('welcome-text').textContent = `Добро пожаловать, ${currentUser.firstName} ${currentUser.lastName}!`;
-        document.getElementById('profile-firstName').value = currentUser.firstName;
-        document.getElementById('profile-lastName').value = currentUser.lastName;
-        document.getElementById('profile-email').value = currentUser.email;
-        
-        loadDemoAppointments();
-        lucide.createIcons();
-      } else {
-        // REAL MODE: Use Auth
-        Auth.init().then(async (user) => {
-          if (!user || user.role !== 'client') {
-            window.location.href = '/login.html';
-            return;
-          }
-
-          currentUser = user;
-          document.getElementById('welcome-text').textContent = `Добро пожаловать, ${user.firstName} ${user.lastName}!`;
-          
-          document.getElementById('profile-firstName').value = user.firstName;
-          document.getElementById('profile-lastName').value = user.lastName;
-          document.getElementById('profile-email').value = user.email;
-
-          await loadAppointments();
-          lucide.createIcons();
-        });
-      }
-    }
-
-    init();
-
-    // Load demo appointments
-    function loadDemoAppointments() {
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      tomorrow.setHours(14, 0, 0, 0);
-      
-      const nextWeek = new Date();
-      nextWeek.setDate(nextWeek.getDate() + 7);
-      nextWeek.setHours(16, 30, 0, 0);
-      
-      const lastWeek = new Date();
-      lastWeek.setDate(lastWeek.getDate() - 7);
-      lastWeek.setHours(10, 0, 0, 0);
-
-      appointments = [
-        {
-          id: 1,
-          dateTime: tomorrow.toISOString(),
-          status: 'scheduled',
-          format: 'Видео',
-          psychologist: {
-            id: 1,
-            price: 3500,
-            user: { firstName: 'Анна', lastName: 'Петрова' }
-          }
-        },
-        {
-          id: 2,
-          dateTime: nextWeek.toISOString(),
-          status: 'scheduled',
-          format: 'Аудио',
-          psychologist: {
-            id: 2,
-            price: 4000,
-            user: { firstName: 'Дмитрий', lastName: 'Соколов' }
-          }
-        },
-        {
-          id: 3,
-          dateTime: lastWeek.toISOString(),
-          status: 'completed',
-          format: 'Видео',
-          psychologist: {
-            id: 1,
-            price: 3500,
-            user: { firstName: 'Анна', lastName: 'Петрова' }
-          }
+        if (response.status === 503) {
+          isDemoMode = true;
+          loadDemoData();
+        } else if (response.ok) {
+          currentUser = await response.json();
+          loadUserData();
+        } else {
+          window.location.href = '/login.html';
         }
-      ];
+      } catch (error) {
+        console.error('Error loading user:', error);
+        isDemoMode = true;
+        loadDemoData();
+      }
+    }
 
-      const upcoming = appointments.filter(apt => new Date(apt.dateTime) > new Date() && apt.status === 'scheduled');
-      const past = appointments.filter(apt => new Date(apt.dateTime) < new Date() || apt.status === 'completed');
+    // Load demo data
+    function loadDemoData() {
+      document.getElementById('user-name').textContent = 'Мария Иванова';
+      
+      // Show psychologist
+      const psychInfo = {
+        name: 'Наиля Рамазанова',
+        specialization: 'Семейный психотерапевт'
+      };
+      
+      document.getElementById('psychologist-info').innerHTML = `
+        <div class="flex items-center justify-center" style="width: 3rem; height: 3rem; border-radius: 50%; background: #7C3AED; color: white; font-weight: 600; font-size: 1.125rem; flex-shrink: 0;">
+          НР
+        </div>
+        <div class="flex-1">
+          <div class="font-semibold" style="color: #1A1A1A;">${psychInfo.name}</div>
+          <div class="text-sm" style="color: #666;">${psychInfo.specialization}</div>
+        </div>
+      `;
+    }
 
-      renderAppointments('upcoming-appointments', upcoming, true);
-      renderAppointments('past-appointments', past, false);
-
-      document.getElementById('stat-total').textContent = appointments.length;
-      document.getElementById('stat-psychologists').textContent = '2';
-      document.getElementById('stat-spent').textContent = '3 500 ₽';
+    // Load user data
+    async function loadUserData() {
+      document.getElementById('user-name').textContent = currentUser?.firstName || 'Пользователь';
+      
+      // Load psychologist if exists
+      // Add your logic here
     }
 
     // Logout
-    document.getElementById('logout-btn').addEventListener('click', async () => {
+    document.getElementById('logout-btn')?.addEventListener('click', async () => {
       if (isDemoMode) {
         window.location.href = '/';
-      } else {
-        await Auth.logout();
+        return;
+      }
+      
+      try {
+        await fetch('/api/auth/logout', { method: 'POST' });
+        window.location.href = '/';
+      } catch (error) {
+        console.error('Logout error:', error);
         window.location.href = '/';
       }
     });
 
-    // Load appointments
-    async function loadAppointments() {
-      try {
-        appointments = await API.appointments.getClientAppointments(currentUser.id);
-        
-        const upcoming = appointments.filter(apt => new Date(apt.dateTime) > new Date() && apt.status === 'scheduled');
-        const past = appointments.filter(apt => new Date(apt.dateTime) < new Date() || apt.status === 'completed');
-
-        renderAppointments('upcoming-appointments', upcoming, true);
-        renderAppointments('past-appointments', past, false);
-
-        // Update stats
-        document.getElementById('stat-total').textContent = appointments.length;
-        document.getElementById('stat-psychologists').textContent = new Set(appointments.map(a => a.psychologist.id)).size;
-        const totalSpent = appointments.filter(a => a.status === 'completed').reduce((sum, a) => sum + parseFloat(a.psychologist.price || 0), 0);
-        document.getElementById('stat-spent').textContent = `${totalSpent.toLocaleString()} ₽`;
-        
-        lucide.createIcons();
-      } catch (error) {
-        console.error('Error loading appointments:', error);
-        document.getElementById('upcoming-appointments').innerHTML = '<p class="text-muted">Ошибка загрузки</p>';
-        document.getElementById('past-appointments').innerHTML = '<p class="text-muted">Ошибка загрузки</p>';
-      }
-    }
-
-    // Render appointments
-    function renderAppointments(containerId, apts, isUpcoming) {
-      const container = document.getElementById(containerId);
-      
-      if (apts.length === 0) {
-        container.innerHTML = `<div class="card text-center" style="padding: 2rem; background-color: white;">
-          <p class="text-muted">${isUpcoming ? 'Нет предстоящих консультаций' : 'Нет прошедших консультаций'}</p>
-        </div>`;
-        return;
-      }
-
-      container.innerHTML = apts.map(apt => {
-        const date = new Date(apt.dateTime);
-        const initials = `${apt.psychologist.user.firstName[0]}${apt.psychologist.user.lastName[0]}`.toUpperCase();
-        
-        return `
-          <div class="card" data-testid="appointment-card-${apt.id}" style="background-color: white;">
-            <div class="card-content" style="background-color: white;">
-              <div class="flex gap-3" style="background-color: white;">
-                <div class="flex items-center justify-center" style="width: 3rem; height: 3rem; border-radius: 50%; background-color: hsl(var(--primary)); color: white; font-weight: 600; flex-shrink: 0;">
-                  ${initials}
-                </div>
-                <div class="flex-1" style="background-color: white;">
-                  <h4 class="font-semibold text-text-custom mb-1">
-                    Др. ${apt.psychologist.user.firstName} ${apt.psychologist.user.lastName}
-                  </h4>
-                  <p class="text-sm text-muted mb-2">
-                    <i data-lucide="calendar" style="width: 0.875rem; height: 0.875rem; display: inline;"></i>
-                    ${date.toLocaleDateString('ru-RU')} в ${date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})} • ${apt.format}
-                  </p>
-                  <span class="badge badge-${apt.status === 'scheduled' ? 'default' : apt.status === 'completed' ? 'success' : 'outline'}">
-                    ${apt.status === 'scheduled' ? 'Запланирована' : apt.status === 'completed' ? 'Завершена' : apt.status}
-                  </span>
-                </div>
-                <div class="flex flex-column gap-2" style="background-color: white;">
-                  ${isUpcoming ? `
-                    <a href="/consultation.html?id=${apt.id}" class="btn btn-primary btn-sm" data-testid="button-join-${apt.id}">
-                      Присоединиться
-                    </a>
-                    <button class="btn btn-outline btn-sm" onclick="reschedule('${apt.id}')" data-testid="button-reschedule-${apt.id}">
-                      Перенести
-                    </button>
-                  ` : `
-                    <button class="btn btn-outline btn-sm" data-testid="button-leave-review-${apt.id}">
-                      Оставить отзыв
-                    </button>
-                    <a href="/booking.html?id=${apt.psychologist.id}" class="btn btn-outline btn-sm" data-testid="button-book-again-${apt.id}">
-                      Записаться снова
-                    </a>
-                  `}
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function reschedule(id) {
-      alert('Функция переноса будет доступна в следующей версии');
-    }
-
-    function updateProfile() {
-      alert('Функция редактирования профиля будет доступна в следующей версии');
-    }
-
+    // Initialize
+    checkDemoMode();
+    
+    // Initialize Lucide icons
     lucide.createIcons();
   </script>
 </body>
