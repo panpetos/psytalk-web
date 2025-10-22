@@ -6,13 +6,21 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Mobile Menu Fixed
-- **Fixed mobile menu to open properly without horizontal scroll**: Menu now works perfectly on mobile
-  - Menu slides in from right OVER the page content (like original design)
-  - Fixed horizontal scroll issue using `transform: translateX(100%)` instead of `right: -100%`
-  - Burger button always visible (z-index: 1002 above menu's 1000)
-  - Menu items fit without scrolling on standard mobile devices
-  - Smooth animation when opening/closing
+### Latest Update - Navigation & UI Polish (October 22, 2025)
+- **Completely fixed mobile menu system**: Perfect navigation on all devices
+  - Menu slides in from right OVER the page content (transform-based animation)
+  - Proper z-index hierarchy: header (999), menu (1001), burger (1002)
+  - Menu has visible left border and enhanced shadow for depth
+  - Burger button always clickable and visible above everything
+  - Auto-close on link click or outside click with proper event listeners
+  - Removed inline onclick in favor of addEventListener for reliability
+  - **Body scroll lock**: When menu open, page doesn't scroll (overflow: hidden)
+  - **Removed backdrop-filter**: Clear white background instead of blur effect
+- **Standardized button styling**: All buttons now have consistent border-radius: 0.5rem
+- **Fixed icon stretching**: 3D gradient icons (.icon-3d) now maintain square shape
+  - Added flex-shrink: 0, min-width: 4rem, min-height: 4rem
+  - Icons stay perfectly round/square on all screen sizes
+  - Fixed missing .icon-3d class on offers.html third card
 
 ### Previous Update - Mobile Hero Buttons Fix
 - **Fixed hero section buttons on mobile**: Buttons now properly adapted for mobile devices

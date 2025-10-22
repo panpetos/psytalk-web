@@ -152,7 +152,7 @@
             Максимум
           </div>
           <div style="margin-bottom: 1rem;">
-            <div style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #10B981 0%, #34D399 100%); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);">
+            <div class="icon-3d" style="width: 4rem; height: 4rem; border-radius: 1rem; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #10B981 0%, #34D399 100%);">
               <i data-lucide="zap" style="color: white; width: 2rem; height: 2rem;"></i>
             </div>
           </div>
@@ -346,6 +346,13 @@
         e.stopPropagation();
         navMenu.classList.toggle('active');
         burgerMenu.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (navMenu.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
       });
       
       // Close menu when clicking outside
@@ -355,6 +362,7 @@
             !burgerMenu.contains(e.target)) {
           navMenu.classList.remove('active');
           burgerMenu.classList.remove('active');
+          document.body.style.overflow = '';
         }
       });
       
@@ -364,6 +372,7 @@
         link.addEventListener('click', function() {
           navMenu.classList.remove('active');
           burgerMenu.classList.remove('active');
+          document.body.style.overflow = '';
         });
       });
     });
