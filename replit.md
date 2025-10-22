@@ -1,19 +1,21 @@
 # Overview
 
-This is a comprehensive online psychology platform called "PsychPlatform" that connects clients with qualified psychologists for remote consultations. The platform is built as a full-stack web application using React for the frontend and Express.js for the backend, with in-memory storage for development. The system supports three user roles: clients seeking psychological help, psychologists providing services, and administrators managing the platform.
+This is a comprehensive online psychology platform called "PsychPlatform" that connects clients with qualified psychologists for remote consultations. The platform is built as a full-stack web application using **pure HTML/CSS/JavaScript** for the frontend and Express.js for the backend with MySQL database. The system supports three user roles: clients seeking psychological help, psychologists providing services, and administrators managing the platform.
 
 The platform enables clients to search for psychologists, book appointments, and conduct sessions via video, audio, or chat. Psychologists can manage their profiles, schedules, and conduct consultations while receiving payments. Administrators oversee user verification, platform management, and analytics.
 
-## Recent Changes (January 17, 2025)
-- Successfully deployed working MVP with all core features
-- Fixed dialog transparency issues for better user experience
-- Implemented role-based authentication and dashboards
-- Added demo accounts for testing all user types
-- Set up object storage for file uploads
-- Platform is running and fully functional
-- Fixed session middleware and profile editing functionality
-- Created comprehensive deployment guide for PostgreSQL migration
-- All LSP errors resolved, application fully debugged
+## Recent Changes (October 22, 2025)
+- **Completed HTML/CSS/JS migration** from React to pure web technologies
+- **Recreated shadcn/ui design** - all pages now have the same beautiful design quality as the original React version
+- **Migrated to MySQL** from PostgreSQL for reg.ru hosting compatibility
+- **New page designs:**
+  - Landing page: Hero section with gradients, features cards, CTA sections, footer
+  - Search page: Sticky sidebar filters, responsive grid of psychologist cards, live filtering
+  - Client Dashboard: Tabs navigation, appointment cards, sidebar statistics
+  - All pages use Lucide icons, shadcn/ui-inspired components, responsive layouts
+- **CSS Design System**: Complete CSS with HSL color variables, card/button/form components, skeleton loaders
+- Server runs in DEMO mode without MySQL, serves static pages for UI preview
+- Ready for deployment to reg.ru with MySQL database
 
 # User Preferences
 
@@ -23,24 +25,26 @@ Preferred language: Russian (all communication should be in Russian).
 # System Architecture
 
 ## Frontend Architecture
-The client-side application is built with React and TypeScript, utilizing modern UI components from shadcn/ui built on Radix UI primitives. The architecture follows a component-based approach with:
+The client-side application is built with **pure HTML/CSS/JavaScript**, recreating the shadcn/ui design system without dependencies. The architecture follows a multi-page approach with:
 
-- **Routing**: Wouter for lightweight client-side routing
-- **State Management**: React Query (@tanstack/react-query) for server state management and caching
-- **Styling**: Tailwind CSS with CSS variables for theming support
-- **UI Components**: Comprehensive component library with accessible Radix UI primitives
-- **File Upload**: Uppy integration for handling document uploads (psychologist certifications, etc.)
+- **Pages**: Static HTML files for each route (index.html, search.html, client-dashboard.html, etc.)
+- **Styling**: Custom CSS design system inspired by shadcn/ui with HSL color variables, responsive grid, utility classes
+- **Components**: Card, Button, Badge, Form, Modal components built with pure CSS
+- **Icons**: Lucide icons via CDN for consistent iconography
+- **Interactivity**: Vanilla JavaScript for tabs, filters, modals, and dynamic content
+- **API Integration**: Fetch API for backend communication
 
-The frontend is structured with clear separation between pages, components, and utilities, with path aliases configured for clean imports.
+The frontend provides a beautiful, responsive UI that matches the original React design quality.
 
 ## Backend Architecture
-The server uses Express.js with TypeScript in ES module format, providing a RESTful API architecture:
+The server uses Express.js in ES module format, providing a RESTful API architecture:
 
-- **Framework**: Express.js with middleware for JSON parsing, logging, and error handling
-- **Database**: PostgreSQL with Drizzle ORM for type-safe database operations
-- **Authentication**: bcrypt for password hashing with session-based authentication
-- **File Storage**: Google Cloud Storage integration for handling uploaded documents
+- **Framework**: Express.js with middleware for JSON parsing, session management, and error handling
+- **Database**: MySQL for production (reg.ru compatible), with DEMO mode fallback when unavailable
+- **Authentication**: bcrypt for password hashing with express-session for session management
+- **Storage**: In-memory storage or MySQL depending on environment
 - **API Design**: RESTful endpoints organized by feature areas (auth, appointments, reviews, etc.)
+- **DEMO Mode**: Server serves static HTML/CSS/JS pages when MySQL is unavailable
 
 ## Data Storage Solutions
 The application uses a PostgreSQL database with a well-structured schema managed through Drizzle ORM:
