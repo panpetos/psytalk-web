@@ -1214,17 +1214,19 @@ select option {
   }
   
   .psychologist-booking {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: stretch;
     gap: 0.75rem;
   }
   
   .psychologist-price {
     text-align: center;
+    order: 2;
   }
   
   .psychologist-booking .btn {
     max-width: 100%;
+    order: 1;
   }
 }
 
