@@ -5,196 +5,296 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Личный кабинет клиента - PsychPlatform</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body class="bg-muted">
+  <!-- Navigation -->
   <nav class="nav">
-    <div class="container nav-container">
-      <a href="/" class="nav-brand">PsychPlatform</a>
-      <ul class="nav-menu">
-        <li><a href="/edit-profile.html" class="nav-link">Профиль</a></li>
-        <li><button class="btn btn-sm" id="logout-btn">Выйти</button></li>
-      </ul>
+    <div class="container">
+      <div class="nav-container">
+        <a href="/" class="nav-brand" data-testid="link-home">
+          <i data-lucide="brain-circuit"></i>
+          PsychPlatform
+        </a>
+        <ul class="nav-menu">
+          <li><a href="/search.html" class="nav-link" data-testid="link-search">Психологи</a></li>
+          <li><button class="btn btn-outline btn-sm" id="logout-btn" data-testid="button-logout">Выйти</button></li>
+        </ul>
+      </div>
     </div>
   </nav>
-  
-  <div class="container" style="margin-top: 40px;">
-    <h1 class="mb-4">Личный кабинет клиента</h1>
-    
-    <div class="tabs">
-      <ul class="tab-list">
-        <li><button class="tab-button active" data-tab="appointments">Мои записи</button></li>
-        <li><button class="tab-button" data-tab="search">Поиск психологов</button></li>
-        <li><button class="tab-button" data-tab="history">История</button></li>
-      </ul>
-    </div>
-    
-    <!-- Appointments Tab -->
-    <div id="appointments-tab" class="tab-content active">
-      <h2>Предстоящие консультации</h2>
-      <div id="upcoming-appointments">
-        <div class="spinner"></div>
+
+  <div class="section" style="padding: 2rem 0;">
+    <div class="container">
+      <!-- Header -->
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-text-custom mb-2" data-testid="text-page-title">Личный кабинет</h1>
+        <p class="text-muted" id="welcome-text">Добро пожаловать!</p>
       </div>
-      
-      <h2 class="mt-4">Прошедшие консультации</h2>
-      <div id="past-appointments">
-        <div class="spinner"></div>
+
+      <!-- Tabs Navigation -->
+      <div class="card mb-6" data-testid="dashboard-nav">
+        <div class="flex gap-4" style="padding: 0 1.5rem; border-bottom: 1px solid hsl(var(--border));">
+          <button class="tab-button active" data-tab="appointments" data-testid="tab-appointments">
+            <i data-lucide="calendar" style="width: 1rem; height: 1rem;"></i>
+            <span>Мои консультации</span>
+          </button>
+          <button class="tab-button" data-tab="messages" data-testid="tab-messages">
+            <i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i>
+            <span>Сообщения</span>
+          </button>
+          <button class="tab-button" data-tab="profile" data-testid="tab-profile">
+            <i data-lucide="user" style="width: 1rem; height: 1rem;"></i>
+            <span>Профиль</span>
+          </button>
+        </div>
       </div>
-    </div>
-    
-    <!-- Search Tab -->
-    <div id="search-tab" class="tab-content">
-      <h2>Поиск психологов</h2>
-      <p><a href="/" class="text-primary">Перейти на страницу поиска →</a></p>
-    </div>
-    
-    <!-- History Tab -->
-    <div id="history-tab" class="tab-content">
-      <h2>История консультаций</h2>
-      <div id="all-appointments">
-        <div class="spinner"></div>
+
+      <!-- Content Area -->
+      <div class="grid" style="grid-template-columns: 1fr 320px; gap: 1.5rem; align-items: start;">
+        
+        <!-- Main Content -->
+        <div>
+          <!-- Appointments Tab -->
+          <div class="tab-content active" id="appointments-tab">
+            <!-- Upcoming Appointments -->
+            <div class="mb-6">
+              <h2 class="text-xl font-semibold text-text-custom mb-4">Предстоящие консультации</h2>
+              <div id="upcoming-appointments" class="flex flex-column gap-3">
+                <!-- Skeleton -->
+                <div class="card" style="padding: 1.5rem;">
+                  <div class="skeleton skeleton-title"></div>
+                  <div class="skeleton skeleton-text"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Past Appointments -->
+            <div>
+              <h2 class="text-xl font-semibold text-text-custom mb-4">Прошедшие консультации</h2>
+              <div id="past-appointments" class="flex flex-column gap-3">
+                <!-- Skeleton -->
+                <div class="card" style="padding: 1.5rem;">
+                  <div class="skeleton skeleton-title"></div>
+                  <div class="skeleton skeleton-text"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages Tab -->
+          <div class="tab-content" id="messages-tab">
+            <div class="card text-center" style="padding: 3rem;">
+              <i data-lucide="message-square" style="width: 3rem; height: 3rem; margin: 0 auto 1rem; color: hsl(var(--muted-foreground));"></i>
+              <h3 class="text-lg font-semibold text-text-custom mb-2">Сообщения</h3>
+              <p class="text-muted">Здесь будут отображаться ваши сообщения с психологами</p>
+            </div>
+          </div>
+
+          <!-- Profile Tab -->
+          <div class="tab-content" id="profile-tab">
+            <div class="card">
+              <div class="card-content">
+                <h3 class="text-lg font-semibold text-text-custom mb-4">Мой профиль</h3>
+                <div class="form-group">
+                  <label class="form-label">Имя</label>
+                  <input type="text" id="profile-firstName" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Фамилия</label>
+                  <input type="text" id="profile-lastName" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" id="profile-email" class="form-input" />
+                </div>
+                <button class="btn btn-primary" onclick="updateProfile()" data-testid="button-save-profile">
+                  Сохранить изменения
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside>
+          <!-- Quick Stats -->
+          <div class="card">
+            <div class="card-content">
+              <h3 class="font-semibold text-text-custom mb-4">Статистика</h3>
+              <div class="flex flex-column gap-3">
+                <div class="flex justify-between">
+                  <span class="text-muted">Всего сессий:</span>
+                  <span class="font-medium" id="stat-total" data-testid="stat-total-sessions">0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-muted">Активных психологов:</span>
+                  <span class="font-medium" id="stat-psychologists" data-testid="stat-active-psychologists">0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-muted">Потрачено:</span>
+                  <span class="font-medium" id="stat-spent" data-testid="stat-total-spent">0 ₽</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="card mt-4">
+            <div class="card-content">
+              <h3 class="font-semibold text-text-custom mb-4">Быстрые действия</h3>
+              <div class="flex flex-column gap-2">
+                <a href="/search.html" class="btn btn-primary w-full" data-testid="button-find-psychologist">
+                  <i data-lucide="search" style="width: 1rem; height: 1rem;"></i>
+                  Найти психолога
+                </a>
+                <a href="/help.html" class="btn btn-outline w-full" data-testid="button-help">
+                  <i data-lucide="help-circle" style="width: 1rem; height: 1rem;"></i>
+                  Помощь
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   </div>
-  
+
   <script src="/js/api.js"></script>
   <script src="/js/auth.js"></script>
   <script>
     let currentUser = null;
     let appointments = [];
-    
+
     // Tab switching
     document.querySelectorAll('.tab-button').forEach(button => {
       button.addEventListener('click', () => {
         const tab = button.dataset.tab;
-        
         document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
         button.classList.add('active');
-        
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.getElementById(`${tab}-tab`).classList.add('active');
       });
     });
-    
+
+    // Load user data
+    Auth.init().then(async (user) => {
+      if (!user || user.role !== 'client') {
+        window.location.href = '/login.html';
+        return;
+      }
+
+      currentUser = user;
+      document.getElementById('welcome-text').textContent = `Добро пожаловать, ${user.firstName} ${user.lastName}!`;
+      
+      // Load profile
+      document.getElementById('profile-firstName').value = user.firstName;
+      document.getElementById('profile-lastName').value = user.lastName;
+      document.getElementById('profile-email').value = user.email;
+
+      // Load appointments
+      await loadAppointments();
+      lucide.createIcons();
+    });
+
     // Logout
     document.getElementById('logout-btn').addEventListener('click', async () => {
       await Auth.logout();
       window.location.href = '/';
     });
-    
-    // Format date
-    function formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return date.toLocaleString('ru-RU', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    }
-    
-    // Render appointment card
-    function renderAppointment(apt) {
-      const isPast = new Date(apt.dateTime) < new Date();
-      const statusText = {
-        scheduled: 'Запланирована',
-        in_progress: 'В процессе',
-        completed: 'Завершена',
-        cancelled: 'Отменена'
-      }[apt.status] || apt.status;
-      
-      return `
-        <div class="card">
-          <div class="flex justify-between items-center mb-2">
-            <h3 class="mb-0">${apt.psychologist.user.firstName} ${apt.psychologist.user.lastName}</h3>
-            <span class="badge">${statusText}</span>
-          </div>
-          <p class="text-sm text-secondary mb-2">${apt.psychologist.specialization}</p>
-          <p class="mb-2"><strong>Дата:</strong> ${formatDate(apt.dateTime)}</p>
-          <p class="mb-2"><strong>Формат:</strong> ${apt.format === 'video' ? 'Видео' : apt.format === 'audio' ? 'Аудио' : 'Чат'}</p>
-          <p class="mb-2"><strong>Стоимость:</strong> ${apt.price} ₽</p>
-          ${apt.status === 'scheduled' ? `
-            <div class="flex gap-2 mt-3">
-              <button class="btn btn-sm" onclick="startConsultation('${apt.id}')">Начать консультацию</button>
-              <button class="btn btn-sm btn-danger" onclick="cancelAppointment('${apt.id}')">Отменить</button>
-            </div>
-          ` : ''}
-          ${apt.status === 'completed' ? `
-            <button class="btn btn-sm mt-3" onclick="leaveReview('${apt.id}', '${apt.psychologistId}')">Оставить отзыв</button>
-          ` : ''}
-        </div>
-      `;
-    }
-    
+
     // Load appointments
     async function loadAppointments() {
       try {
-        appointments = await API.appointments.getByClient(currentUser.id);
+        appointments = await API.appointments.getClientAppointments(currentUser.id);
         
-        const now = new Date();
-        const upcoming = appointments.filter(apt => 
-          new Date(apt.dateTime) > now && apt.status === 'scheduled'
-        );
-        const past = appointments.filter(apt => 
-          new Date(apt.dateTime) <= now || apt.status !== 'scheduled'
-        );
+        const upcoming = appointments.filter(apt => new Date(apt.dateTime) > new Date() && apt.status === 'scheduled');
+        const past = appointments.filter(apt => new Date(apt.dateTime) < new Date() || apt.status === 'completed');
+
+        renderAppointments('upcoming-appointments', upcoming, true);
+        renderAppointments('past-appointments', past, false);
+
+        // Update stats
+        document.getElementById('stat-total').textContent = appointments.length;
+        document.getElementById('stat-psychologists').textContent = new Set(appointments.map(a => a.psychologist.id)).size;
+        const totalSpent = appointments.filter(a => a.status === 'completed').reduce((sum, a) => sum + parseFloat(a.psychologist.price || 0), 0);
+        document.getElementById('stat-spent').textContent = `${totalSpent.toLocaleString()} ₽`;
         
-        const upcomingEl = document.getElementById('upcoming-appointments');
-        const pastEl = document.getElementById('past-appointments');
-        const allEl = document.getElementById('all-appointments');
-        
-        upcomingEl.innerHTML = upcoming.length > 0 
-          ? upcoming.map(renderAppointment).join('')
-          : '<p class="text-secondary">Нет предстоящих консультаций</p>';
-          
-        pastEl.innerHTML = past.length > 0 
-          ? past.slice(0, 3).map(renderAppointment).join('')
-          : '<p class="text-secondary">Нет прошедших консультаций</p>';
-          
-        allEl.innerHTML = appointments.length > 0 
-          ? appointments.map(renderAppointment).join('')
-          : '<p class="text-secondary">Нет консультаций</p>';
-          
+        lucide.createIcons();
       } catch (error) {
         console.error('Error loading appointments:', error);
+        document.getElementById('upcoming-appointments').innerHTML = '<p class="text-muted">Ошибка загрузки</p>';
+        document.getElementById('past-appointments').innerHTML = '<p class="text-muted">Ошибка загрузки</p>';
       }
     }
-    
-    // Cancel appointment
-    async function cancelAppointment(id) {
-      if (!confirm('Вы уверены, что хотите отменить эту консультацию?')) return;
+
+    // Render appointments
+    function renderAppointments(containerId, apts, isUpcoming) {
+      const container = document.getElementById(containerId);
       
-      try {
-        await API.appointments.update(id, { status: 'cancelled' });
-        await loadAppointments();
-        alert('Консультация отменена');
-      } catch (error) {
-        alert('Ошибка: ' + error.message);
+      if (apts.length === 0) {
+        container.innerHTML = `<div class="card text-center" style="padding: 2rem;">
+          <p class="text-muted">${isUpcoming ? 'Нет предстоящих консультаций' : 'Нет прошедших консультаций'}</p>
+        </div>`;
+        return;
       }
+
+      container.innerHTML = apts.map(apt => {
+        const date = new Date(apt.dateTime);
+        const initials = `${apt.psychologist.user.firstName[0]}${apt.psychologist.user.lastName[0]}`.toUpperCase();
+        
+        return `
+          <div class="card" data-testid="appointment-card-${apt.id}">
+            <div class="card-content">
+              <div class="flex gap-3">
+                <div class="flex items-center justify-center" style="width: 3rem; height: 3rem; border-radius: 50%; background-color: hsl(var(--primary)); color: white; font-weight: 600; flex-shrink: 0;">
+                  ${initials}
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-semibold text-text-custom mb-1">
+                    Др. ${apt.psychologist.user.firstName} ${apt.psychologist.user.lastName}
+                  </h4>
+                  <p class="text-sm text-muted mb-2">
+                    <i data-lucide="calendar" style="width: 0.875rem; height: 0.875rem; display: inline;"></i>
+                    ${date.toLocaleDateString('ru-RU')} в ${date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})} • ${apt.format}
+                  </p>
+                  <span class="badge badge-${apt.status === 'scheduled' ? 'default' : apt.status === 'completed' ? 'success' : 'outline'}">
+                    ${apt.status === 'scheduled' ? 'Запланирована' : apt.status === 'completed' ? 'Завершена' : apt.status}
+                  </span>
+                </div>
+                <div class="flex flex-column gap-2">
+                  ${isUpcoming ? `
+                    <a href="/consultation.html?id=${apt.id}" class="btn btn-primary btn-sm" data-testid="button-join-${apt.id}">
+                      Присоединиться
+                    </a>
+                    <button class="btn btn-outline btn-sm" onclick="reschedule('${apt.id}')" data-testid="button-reschedule-${apt.id}">
+                      Перенести
+                    </button>
+                  ` : `
+                    <button class="btn btn-outline btn-sm" data-testid="button-leave-review-${apt.id}">
+                      Оставить отзыв
+                    </button>
+                    <a href="/booking.html?id=${apt.psychologist.id}" class="btn btn-outline btn-sm" data-testid="button-book-again-${apt.id}">
+                      Записаться снова
+                    </a>
+                  `}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
-    
-    // Start consultation
-    function startConsultation(id) {
-      window.location.href = `/consultation.html?id=${id}`;
+
+    function reschedule(id) {
+      alert('Функция переноса будет доступна в следующей версии');
     }
-    
-    // Leave review
-    function leaveReview(appointmentId, psychologistId) {
-      window.location.href = `/leave-review.html?appointment=${appointmentId}&psychologist=${psychologistId}`;
+
+    function updateProfile() {
+      alert('Функция редактирования профиля будет доступна в следующей версии');
     }
-    
-    // Make functions global
-    window.cancelAppointment = cancelAppointment;
-    window.startConsultation = startConsultation;
-    window.leaveReview = leaveReview;
-    
-    // Initialize
-    Auth.requireAuth('client').then(ok => {
-      if (ok) {
-        currentUser = Auth.getUser();
-        loadAppointments();
-      }
-    });
+
+    lucide.createIcons();
   </script>
 </body>
 </html>
