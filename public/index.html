@@ -20,7 +20,7 @@
         </a>
         
         <!-- Burger Menu Button (Mobile/Tablet only) -->
-        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu" onclick="toggleMobileMenu()">
+        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu">
           <span></span>
           <span></span>
           <span></span>
@@ -418,13 +418,39 @@
     // Initialize Lucide icons
     lucide.createIcons();
     
-    // Toggle mobile menu
-    function toggleMobileMenu() {
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
       const navMenu = document.getElementById('navMenu');
       const burgerMenu = document.getElementById('burgerMenu');
-      navMenu.classList.toggle('active');
-      burgerMenu.classList.toggle('active');
-    }
+      
+      if (!navMenu || !burgerMenu) return;
+      
+      // Toggle menu on burger click
+      burgerMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
+        burgerMenu.classList.toggle('active');
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (navMenu.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            !burgerMenu.contains(e.target)) {
+          navMenu.classList.remove('active');
+          burgerMenu.classList.remove('active');
+        }
+      });
+      
+      // Close menu when clicking on a link
+      const menuLinks = navMenu.querySelectorAll('a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          burgerMenu.classList.remove('active');
+        });
+      });
+    });
   </script>
 </body>
 </html>
