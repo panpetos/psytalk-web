@@ -6,11 +6,17 @@ The platform enables clients to search for psychologists, book appointments, and
 
 ## Recent Changes (October 22, 2025)
 
-### Latest Update - Mobile Navigation & New Pages
+### Latest Update - Adaptive Psychologist Cards & Mobile Navigation
+- **Psychologist cards complete redesign**: Fully adaptive, compact design
+  - **Mobile (<=480px)**: Compact layout, 60px photo, description hidden, vertical price/button
+  - **Tablet (<=768px)**: Medium layout, 70px photo, description hidden
+  - **Desktop (>768px)**: Full layout, 80px photo, description visible, horizontal price/button
+  - Removed excessive information (tags, credentials clutter) for cleaner look
+  - CSS media queries with strong !important rules for reliable rendering
 - **Burger menu implementation**: Responsive mobile/tablet navigation (три фиолетовые полоски #7C3AED)
   - Shows on mobile/tablet (<1024px), hidden on desktop
   - Smooth slide-in animation from right
-  - CSS media queries with !important to ensure proper display
+  - Desktop navigation links fully functional
 - **New pages created**:
   - **/blog.html**: Blog page with 6 psychology articles (burnout, anxiety, relationships, self-esteem, stress, meditation)
   - **/offers.html**: Special offers page with 3 pricing packages (first session 2500₽, 5-session package 22000₽, 10-session package 42000₽)
