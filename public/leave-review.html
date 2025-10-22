@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оставить отзыв - PsychPlatform</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-container">
+      <a href="/" class="nav-brand">PsychPlatform</a>
+      <ul class="nav-menu">
+        <li><a href="/client-dashboard.html" class="nav-link">Назад</a></li>
+        <li><button class="btn btn-sm" id="logout-btn">Выйти</button></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container container-sm" style="margin-top: 40px;">
+    <div class="card">
+      <h1 class="card-title">Оставить отзыв</h1>
+      
+      <div id="psychologist-info" class="mb-3">
+        <div class="spinner"></div>
+      </div>
+      
+      <form id="review-form">
+        <div class="form-group">
+          <label class="form-label">Оценка</label>
+          <div class="flex gap-2">
+            <button type="button" class="btn btn-sm star-btn" data-rating="1">⭐ 1</button>
+            <button type="button" class="btn btn-sm star-btn" data-rating="2">⭐ 2</button>
+            <button type="button" class="btn btn-sm star-btn" data-rating="3">⭐ 3</button>
+            <button type="button" class="btn btn-sm star-btn" data-rating="4">⭐ 4</button>
+            <button type="button" class="btn btn-sm star-btn" data-rating="5">⭐ 5</button>
+          </div>
+          <input type="hidden" id="rating" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Комментарий</label>
+          <textarea id="comment" class="form-textarea" rows="5" placeholder="Расскажите о вашем опыте работы с психологом..."></textarea>
+        </div>
+        
+        <div id="form-error" class="alert alert-danger hidden"></div>
+        <div id="form-success" class="alert alert-success hidden"></div>
+        
+        <button type="submit" class="btn w-full">Отправить отзыв</button>
+      </form>
+    </div>
+  </div>
+  
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const appointmentId = urlParams.get('appointment');
+    const psychologistId = urlParams.get('psychologist');
+    
+    let currentUser = null;
+    let selectedRating = 0;
+    
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await Auth.logout();
+      window.location.href = '/';
+    });
+    
+    // Star rating selection
+    document.querySelectorAll('.star-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedRating = parseInt(btn.dataset.rating);
+        document.getElementById('rating').value = selectedRating;
+        
+        // Update button states
+        document.querySelectorAll('.star-btn').forEach(b => {
+          const rating = parseInt(b.dataset.rating);
+          if (rating <= selectedRating) {
+            b.classList.add('btn-primary');
+            b.classList.remove('btn-secondary');
+          } else {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-secondary');
+          }
+        });
+      });
+    });
+    
+    // Load psychologist info
+    async function loadPsychologist() {
+      if (!psychologistId) {
+        document.getElementById('psychologist-info').innerHTML = 
+          '<div class="alert alert-danger">Психолог не найден</div>';
+        return;
+      }
+      
+      try {
+        const psychologist = await API.psychologists.get(psychologistId);
+        document.getElementById('psychologist-info').innerHTML = `
+          <div class="card" style="background: var(--color-bg-secondary);">
+            <h3>${psychologist.user.firstName} ${psychologist.user.lastName}</h3>
+            <p class="text-sm text-secondary mb-0">${psychologist.specialization}</p>
+          </div>
+        `;
+      } catch (error) {
+        document.getElementById('psychologist-info').innerHTML = 
+          '<div class="alert alert-danger">Ошибка загрузки информации о психологе</div>';
+      }
+    }
+    
+    // Submit review
+    document.getElementById('review-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const errorEl = document.getElementById('form-error');
+      const successEl = document.getElementById('form-success');
+      errorEl.classList.add('hidden');
+      successEl.classList.add('hidden');
+      
+      if (!selectedRating) {
+        errorEl.textContent = 'Пожалуйста, выберите оценку';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+      
+      try {
+        const reviewData = {
+          appointmentId,
+          clientId: currentUser.id,
+          psychologistId,
+          rating: selectedRating,
+          comment: document.getElementById('comment').value || null
+        };
+        
+        await API.reviews.create(reviewData);
+        
+        successEl.textContent = 'Спасибо за отзыв!';
+        successEl.classList.remove('hidden');
+        
+        setTimeout(() => {
+          window.location.href = '/client-dashboard.html';
+        }, 2000);
+        
+      } catch (error) {
+        errorEl.textContent = error.message;
+        errorEl.classList.remove('hidden');
+      }
+    });
+    
+    // Initialize
+    Auth.requireAuth('client').then(ok => {
+      if (ok) {
+        currentUser = Auth.getUser();
+        loadPsychologist();
+      }
+    });
+  </script>
+</body>
+</html>
