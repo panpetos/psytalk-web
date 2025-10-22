@@ -1122,8 +1122,8 @@ select option {
     font-size: 2rem !important;
   }
   
-  /* Hero image - full width on mobile */
-  .section .grid > div:last-child {
+  /* Hero image - full width on mobile - only for hero section */
+  section:first-of-type .grid > div:last-child {
     order: -1;
   }
 }
@@ -1279,6 +1279,13 @@ select option {
 
 .filter-price-input::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Step number circles - prevent squishing */
+.flex.items-center.justify-center[style*="border-radius: 50%"] {
+  flex-shrink: 0 !important;
+  min-width: 3rem !important;
+  min-height: 3rem !important;
 }
 
 /* Auth buttons - responsive layout */

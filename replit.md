@@ -35,7 +35,15 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Auth Pages Mobile Fix
+## Latest Update - How It Works Section Fix (October 22, 2025)
+- **Fixed step order on mobile**: Steps now display in correct 1→2→3 order
+  - Changed CSS selector from `.section .grid > div:last-child` to `section:first-of-type .grid > div:last-child`
+  - This prevents order change in "Как это работает" section while keeping Hero image first on mobile
+- **Fixed step number circles**: Circles are now perfectly round and don't squish
+  - Added flex-shrink: 0, min-width: 3rem, min-height: 3rem to prevent compression
+  - Circles maintain shape on all screen sizes
+
+## Previous Update - Auth Pages Mobile Fix
 - **Added burger menu to login and register pages**: Full navigation on all pages
   - Added complete navigation menu with burger button on login.html and register.html
   - Menu includes: услуги, психологи, блог, спец. предложения + auth button
