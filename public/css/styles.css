@@ -70,6 +70,7 @@ body {
   color: hsl(var(--foreground));
   background-color: hsl(var(--background));
   min-height: 100vh;
+  padding-top: 70px;
 }
 
 /* ============================================
@@ -442,10 +443,12 @@ p {
   background-color: white;
   border-bottom: 1px solid hsl(var(--border));
   padding: var(--spacing-md) 0;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 999;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   width: 100%;
   overflow-x: hidden;
 }

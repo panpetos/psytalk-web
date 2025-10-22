@@ -16,6 +16,10 @@ The platform enables clients to search for psychologists, book appointments, and
   - Removed inline onclick in favor of addEventListener for reliability
   - **Body scroll lock**: When menu open, page doesn't scroll (overflow: hidden)
   - **Removed backdrop-filter**: Clear white background instead of blur effect
+- **Fixed navigation**: Changed from sticky to fixed positioning
+  - Navigation now always stays at the top (position: fixed)
+  - Added 70px padding-top to body to prevent content hiding under nav
+  - Smooth shadow effect for depth (0 2px 8px rgba)
 - **Standardized button styling**: All buttons now have consistent border-radius: 0.5rem
 - **Fixed icon stretching**: 3D gradient icons (.icon-3d) now maintain square shape
   - Added flex-shrink: 0, min-width: 4rem, min-height: 4rem
