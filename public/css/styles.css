@@ -1288,6 +1288,40 @@ select option {
   min-height: 3rem !important;
 }
 
+/* Blog page - responsive grid */
+@media (max-width: 768px) {
+  /* Blog grid - single column on mobile */
+  div[style*="grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Blog hero title - smaller on mobile */
+  section[style*="background: linear-gradient(135deg, #A78BFA"] h1 {
+    font-size: 2rem !important;
+  }
+  
+  /* Blog hero text */
+  section[style*="background: linear-gradient(135deg, #A78BFA"] p {
+    font-size: 1rem !important;
+  }
+  
+  /* Blog article cards - adjust padding */
+  article.card > div[style*="padding: 1.5rem"] {
+    padding: 1rem !important;
+  }
+  
+  /* Blog article titles - slightly smaller */
+  article.card h3 {
+    font-size: 1.125rem !important;
+  }
+  
+  /* Blog article image height */
+  article.card > div[style*="height: 200px"] {
+    height: 160px !important;
+  }
+}
+
 /* Auth buttons - responsive layout */
 @media (max-width: 768px) {
   .auth-buttons {

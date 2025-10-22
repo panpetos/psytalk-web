@@ -35,7 +35,20 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - How It Works Section Fix (October 22, 2025)
+## Latest Update - Blog Page Mobile Adaptation (October 22, 2025)
+- **Mobile-responsive blog grid**: Articles now display in single column on mobile
+  - Changed from multi-column grid to single column (<768px)
+  - Reduced gap between articles from 2rem to 1.5rem
+- **Optimized typography for mobile**:
+  - Hero title: 3rem → 2rem
+  - Hero description: 1.25rem → 1rem
+  - Article titles: 1.25rem → 1.125rem
+- **Adjusted card layout**:
+  - Article image height: 200px → 160px on mobile
+  - Card padding: 1.5rem → 1rem on mobile
+- **Result**: Blog page is now fully responsive and comfortable to read on all devices
+
+## Previous Update - How It Works Section Fix
 - **Fixed step order on mobile**: Steps now display in correct 1→2→3 order
   - Changed CSS selector from `.section .grid > div:last-child` to `section:first-of-type .grid > div:last-child`
   - This prevents order change in "Как это работает" section while keeping Hero image first on mobile
