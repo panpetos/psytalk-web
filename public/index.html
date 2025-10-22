@@ -44,7 +44,14 @@
           
           <!-- Call to Action -->
           <div class="flex gap-3 mb-6">
-            <a href="/search.html" class="btn btn-primary btn-lg" data-testid="button-find-psychologist">
+            <a 
+              href="/search.html" 
+              class="btn btn-lg" 
+              style="background: #7C3AED; color: white; padding: 0.75rem 2rem; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s;"
+              onmouseover="this.style.background='#6D28D9'; this.style.color='white';" 
+              onmouseout="this.style.background='#7C3AED'; this.style.color='white';"
+              data-testid="button-find-psychologist"
+            >
               Найти психолога
             </a>
             <a href="/register.html?type=psychologist" class="btn btn-outline btn-lg" data-testid="button-become-psychologist">

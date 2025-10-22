@@ -220,6 +220,7 @@ p {
 
 .btn-primary:hover {
   background-color: hsl(258 80% 50%);
+  color: hsl(var(--primary-foreground));
 }
 
 .btn-secondary {
@@ -229,6 +230,7 @@ p {
 
 .btn-secondary:hover {
   background-color: hsl(270 90% 92%);
+  color: hsl(var(--secondary-foreground));
 }
 
 .btn-outline {
@@ -257,6 +259,7 @@ p {
 
 .btn-destructive:hover {
   background-color: hsl(0 84% 50%);
+  color: hsl(var(--destructive-foreground));
 }
 
 /* Button Sizes */
