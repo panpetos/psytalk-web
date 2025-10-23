@@ -29,6 +29,7 @@ jobs:
         run: npm run build
 
 <<<<<<< ours
+<<<<<<< ours
       # 5. Добавляем .htaccess в dist для SPA и HTTPS
       - name: Add .htaccess to dist
         run: |
@@ -63,6 +64,8 @@ jobs:
       - name: Upload via FTP to REG.RU
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
 =======
+=======
+>>>>>>> theirs
       - name: Deploy via FTP
         uses: SamKirkland/ftp-deploy-action@v4.3.5
 >>>>>>> theirs
@@ -93,8 +96,12 @@ jobs:
             api/**
             *.php
 <<<<<<< ours
+<<<<<<< ours
             *.json
             *.md
+=======
+            .htaccess
+>>>>>>> theirs
 =======
             .htaccess
 >>>>>>> theirs
