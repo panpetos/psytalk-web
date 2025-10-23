@@ -35,7 +35,28 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Role-Based Profile Editing Pages (October 23, 2025)
+## Latest Update - Psychologist Profile Page Redesign (October 23, 2025)
+- **Completely redesigned psychologist-profile.html** page with modern purple theme
+  - Gradient avatar with psychologist initials (unique color per psychologist)
+  - Two-column layout: main profile card + sticky booking card
+  - Profile sections: About, Education, Work formats with Lucide icons
+  - Reviews section with star ratings and client feedback
+- **Booking functionality**:
+  - Modal window for appointment booking
+  - Date/time picker, format selection (video/audio/chat), notes field
+  - Only visible for logged-in clients
+  - Error handling and success feedback
+- **Navigation improvements**:
+  - Added burger menu for mobile
+  - Profile dropdown menu for authenticated users
+  - "Войти" button for guests
+- **Mobile responsive**:
+  - Grid converts to single column on mobile
+  - Sticky booking card on desktop
+  - All elements adapt to small screens
+- **All interactive elements** have data-testid attributes for testing
+
+## Previous Update - Role-Based Profile Editing Pages (October 23, 2025)
 - **Created separate profile editing forms** for different user roles
   - Client form: Simple layout with First Name, Last Name, Phone, Photo upload
   - Psychologist form: Extended layout with About, Education, Sessions description, Full name, Preview photo, Phone, 4 document uploads (ДОК.Ф1-Ф4)

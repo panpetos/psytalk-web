@@ -4,46 +4,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Профиль психолога - psytalk.pro</title>
+  <meta name="description" content="Профиль психолога на платформе psytalk.pro - онлайн консультации">
   <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-  <nav class="nav">
-    <div class="container nav-container">
-      <a href="/" class="nav-brand" style="word-spacing: 0; letter-spacing: 0;">
-        <span style="color: #1A1A1A;">psy</span><!--
-     --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
-      </a>
-      <ul class="nav-menu">
-        <li><a href="/" class="nav-link">Поиск</a></li>
-        <li id="nav-dashboard" class="hidden"><a href="#" id="dashboard-link" class="nav-link">Кабинет</a></li>
-        <li><button class="btn btn-sm" id="logout-btn">Выйти</button></li>
-      </ul>
+<body style="background-color: #FAFAFA;">
+  <!-- Navigation -->
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
+    <div class="container">
+      <div class="nav-container">
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600; word-spacing: 0; letter-spacing: 0;">
+          <span style="color: #1A1A1A;">psy</span><!--
+       --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+        </a>
+        
+        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/search.html" class="nav-link" data-testid="link-search" style="color: #7C3AED; font-weight: 600;">Найти психолога</a></li>
+          <li><a href="/blog.html" class="nav-link" data-testid="link-blog">Блог</a></li>
+          <li><a href="/offers.html" class="nav-link" data-testid="link-offers">Спец. предложения</a></li>
+          <li id="auth-section">
+            <a href="/login.html" class="btn" style="background: #7C3AED; color: white; padding: 0.5rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 500;" data-testid="button-login">Войти</a>
+          </li>
+          <li id="profile-section" style="margin-left: 2rem; position: relative; display: none;">
+            <button class="profile-trigger" id="profileTrigger" data-testid="button-profile" style="background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); color: white; border: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: transform 0.2s;">
+              <span id="userInitials">...</span>
+            </button>
+            <!-- Profile Dropdown -->
+            <div class="profile-dropdown" id="profileDropdown" style="display: none; position: absolute; top: calc(100% + 0.5rem); right: 0; width: 300px; background: white; border-radius: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; z-index: 1000;">
+              <div style="background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); padding: 1.5rem; color: white;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <div style="width: 4rem; height: 4rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; flex-shrink: 0;">
+                    <span id="userInitialsLarge">...</span>
+                  </div>
+                  <div style="flex: 1; min-width: 0;">
+                    <div style="font-weight: 700; font-size: 1.125rem; margin-bottom: 0.25rem;" id="userFullName">...</div>
+                    <div style="font-size: 0.8125rem; opacity: 0.9; overflow: hidden; text-overflow: ellipsis;" id="userEmail">...</div>
+                  </div>
+                </div>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2); display: flex; gap: 1rem; font-size: 0.8125rem;">
+                  <div>ID: <span id="userId">-</span></div>
+                  <div style="text-transform: uppercase; opacity: 0.9;" id="userRole">-</div>
+                </div>
+              </div>
+              <div style="padding: 0.5rem;">
+                <a href="#" id="dashboard-link" class="dropdown-item" data-testid="link-dropdown-dashboard">
+                  <i data-lucide="layout-dashboard" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Личный кабинет</span>
+                </a>
+                <a href="/edit-profile.html" class="dropdown-item" data-testid="link-dropdown-settings">
+                  <i data-lucide="settings" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Настройки</span>
+                </a>
+                <a href="/offers.html" class="dropdown-item" data-testid="link-dropdown-help">
+                  <i data-lucide="help-circle" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Помощь</span>
+                </a>
+                <div style="height: 1px; background: #F0F0F0; margin: 0.5rem 0;"></div>
+                <button class="dropdown-item" id="logout-btn" data-testid="button-logout" style="color: #EF4444;">
+                  <i data-lucide="log-out" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Выйти</span>
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
   
-  <div class="container" style="margin-top: 40px;">
-    <div id="profile-content">
-      <div class="spinner"></div>
+  <!-- Main Content -->
+  <div class="section" style="padding: 2rem 0;">
+    <div class="container" style="max-width: 1200px;">
+      <div id="profile-content">
+        <div style="text-align: center; padding: 4rem;">
+          <div style="display: inline-block; width: 3rem; height: 3rem; border: 3px solid #7C3AED; border-radius: 50%; border-top-color: transparent; animation: spin 1s linear infinite;"></div>
+        </div>
+      </div>
     </div>
   </div>
   
   <!-- Booking Modal -->
-  <div id="booking-modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Записаться на консультацию</h2>
-        <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+  <div id="booking-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div style="background: white; border-radius: 1rem; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative;">
+      <div style="padding: 1.5rem; border-bottom: 1px solid #F0F0F0; display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="font-size: 1.5rem; font-weight: 600; margin: 0;">Записаться на консультацию</h2>
+        <button onclick="closeBookingModal()" style="background: none; border: none; font-size: 2rem; cursor: pointer; color: #666; line-height: 1;" data-testid="button-close-modal">&times;</button>
       </div>
       
-      <form id="booking-form">
-        <div class="form-group">
-          <label class="form-label">Дата и время</label>
-          <input type="datetime-local" id="booking-datetime" class="form-input" required>
+      <form id="booking-form" style="padding: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Дата и время</label>
+          <input 
+            type="datetime-local" 
+            id="booking-datetime" 
+            class="form-input" 
+            required 
+            style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem;"
+            data-testid="input-datetime"
+          >
         </div>
         
-        <div class="form-group">
-          <label class="form-label">Формат консультации</label>
-          <select id="booking-format" class="form-select" required>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Формат консультации</label>
+          <select 
+            id="booking-format" 
+            class="form-select" 
+            required 
+            style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem; background: white;"
+            data-testid="select-format"
+          >
             <option value="">Выберите формат</option>
             <option value="video">Видео</option>
             <option value="audio">Аудио</option>
@@ -51,14 +126,30 @@
           </select>
         </div>
         
-        <div class="form-group">
-          <label class="form-label">Комментарий (необязательно)</label>
-          <textarea id="booking-notes" class="form-textarea" rows="3"></textarea>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Комментарий (необязательно)</label>
+          <textarea 
+            id="booking-notes" 
+            class="form-textarea" 
+            rows="3"
+            style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem; resize: vertical;"
+            data-testid="textarea-notes"
+          ></textarea>
         </div>
         
-        <div id="booking-error" class="alert alert-danger hidden"></div>
+        <div id="booking-error" class="hidden" style="padding: 1rem; background: #FEE2E2; color: #DC2626; border-radius: 0.5rem; margin-bottom: 1rem;">
+          <i data-lucide="alert-circle" style="width: 1rem; height: 1rem; display: inline; vertical-align: middle; margin-right: 0.5rem;"></i>
+          <span id="booking-error-text"></span>
+        </div>
         
-        <button type="submit" class="btn w-full">Записаться</button>
+        <button 
+          type="submit" 
+          class="btn w-full" 
+          style="width: 100%; background: #7C3AED; color: white; border: none; font-weight: 600; padding: 0.875rem; border-radius: 0.5rem; font-size: 1rem; cursor: pointer;"
+          data-testid="button-submit-booking"
+        >
+          Записаться
+        </button>
       </form>
     </div>
   </div>
@@ -73,20 +164,91 @@
     const urlParams = new URLSearchParams(window.location.search);
     const psychologistId = urlParams.get('id');
     
-    // Initialize auth
-    Auth.init().then(user => {
-      currentUser = user;
-      if (user) {
-        document.getElementById('nav-dashboard').classList.remove('hidden');
-        const link = document.getElementById('dashboard-link');
-        link.href = user.role === 'client' ? '/client-dashboard.html' : 
-                    user.role === 'psychologist' ? '/psychologist-dashboard.html' :
-                    '/admin-dashboard.html';
+    // Burger menu
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navMenu = document.getElementById('navMenu');
+    
+    burgerMenu.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        burgerMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Profile dropdown menu
+    const profileTrigger = document.getElementById('profileTrigger');
+    const profileDropdown = document.getElementById('profileDropdown');
+    
+    profileTrigger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVisible = profileDropdown.style.display === 'block';
+      profileDropdown.style.display = isVisible ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (profileDropdown && !profileDropdown.contains(e.target) && !profileTrigger.contains(e.target)) {
+        profileDropdown.style.display = 'none';
       }
+    });
+
+    profileDropdown?.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    function fillProfileDropdown(user) {
+      const firstName = user.first_name || user.firstName || '';
+      const lastName = user.last_name || user.lastName || '';
+      const initials = (firstName[0] || '') + (lastName[0] || '');
+      
+      document.getElementById('userInitials').textContent = initials;
+      document.getElementById('userInitialsLarge').textContent = initials;
+      document.getElementById('userFullName').textContent = `${firstName} ${lastName}`.trim() || 'Пользователь';
+      document.getElementById('userEmail').textContent = user.email || '';
+      document.getElementById('userId').textContent = user.id || '-';
+      
+      const roleMap = {
+        'admin': 'Администратор',
+        'psychologist': 'Психолог',
+        'client': 'Клиент'
+      };
+      document.getElementById('userRole').textContent = roleMap[user.role] || user.role || '-';
+      
+      const dashboardLink = document.getElementById('dashboard-link');
+      if (dashboardLink) {
+        if (user.role === 'admin') {
+          dashboardLink.href = '/admin-dashboard.html';
+        } else if (user.role === 'psychologist') {
+          dashboardLink.href = '/psychologist-dashboard.html';
+        } else {
+          dashboardLink.href = '/client-dashboard.html';
+        }
+      }
+      
+      lucide.createIcons();
+    }
+    
+    // Initialize auth
+    Auth.checkAuth().then(() => {
+      currentUser = Auth.currentUser;
+      if (currentUser) {
+        document.getElementById('auth-section').style.display = 'none';
+        document.getElementById('profile-section').style.display = 'block';
+        fillProfileDropdown(currentUser);
+      }
+      loadProfile();
+    }).catch(() => {
+      loadProfile();
     });
     
     // Logout
-    document.getElementById('logout-btn').addEventListener('click', async () => {
+    document.getElementById('logout-btn')?.addEventListener('click', async () => {
       await Auth.logout();
       window.location.href = '/';
     });
@@ -94,7 +256,13 @@
     // Load psychologist profile
     async function loadProfile() {
       if (!psychologistId) {
-        document.getElementById('profile-content').innerHTML = '<p class="text-danger">Психолог не найден</p>';
+        document.getElementById('profile-content').innerHTML = `
+          <div style="text-align: center; padding: 3rem;">
+            <i data-lucide="alert-circle" style="width: 3rem; height: 3rem; color: #DC2626; margin: 0 auto 1rem;"></i>
+            <p style="color: #DC2626; font-size: 1.125rem;">Психолог не найден</p>
+          </div>
+        `;
+        lucide.createIcons();
         return;
       }
       
@@ -102,66 +270,171 @@
         psychologist = await API.psychologists.get(psychologistId);
         const reviews = await API.reviews.getByPsychologist(psychologistId);
         
+        const firstName = psychologist.user?.first_name || psychologist.user?.firstName || '';
+        const lastName = psychologist.user?.last_name || psychologist.user?.lastName || '';
+        const fullName = `${firstName} ${lastName}`.trim();
+        const initials = (firstName[0] || '') + (lastName[0] || '');
+        
+        // Gradient colors for avatar
+        const gradients = [
+          'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+          'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+          'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+          'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+          'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
+        ];
+        const gradient = gradients[psychologist.id % gradients.length];
+        
         document.getElementById('profile-content').innerHTML = `
-          <div class="grid grid-cols-3">
-            <div class="card" style="grid-column: span 2;">
-              <h1 class="mb-3">${psychologist.user.firstName} ${psychologist.user.lastName}</h1>
-              <p class="text-lg text-secondary mb-3">${psychologist.specialization}</p>
-              
-              <div class="mb-3">
-                <p class="mb-2"><strong>Опыт работы:</strong> ${psychologist.experience} лет</p>
-                <p class="mb-2"><strong>Образование:</strong> ${psychologist.education}</p>
-                <p class="mb-2"><strong>Рейтинг:</strong> ${psychologist.rating || 0} ⭐ (${psychologist.totalReviews} отзывов)</p>
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+            <!-- Main Profile Card -->
+            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+              <div style="display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <div style="width: 120px; height: 120px; background: ${gradient}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; font-weight: 700; flex-shrink: 0;">
+                  ${initials}
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                  <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #1A1A1A;" data-testid="text-psychologist-name">${fullName}</h1>
+                  <p style="font-size: 1.125rem; color: #7C3AED; margin-bottom: 1rem;">${psychologist.specialization || 'Психолог'}</p>
+                  
+                  <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div>
+                      <div style="color: #666; font-size: 0.875rem; margin-bottom: 0.25rem;">Опыт</div>
+                      <div style="font-weight: 600; color: #1A1A1A;">${psychologist.experience || 0} лет</div>
+                    </div>
+                    <div>
+                      <div style="color: #666; font-size: 0.875rem; margin-bottom: 0.25rem;">Рейтинг</div>
+                      <div style="font-weight: 600; color: #1A1A1A;">
+                        <i data-lucide="star" style="width: 1rem; height: 1rem; display: inline; vertical-align: middle; color: #FCD34D; fill: #FCD34D;"></i>
+                        ${psychologist.rating || 0} (${psychologist.totalReviews || 0})
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               
-              <h3 class="mb-2">О себе</h3>
-              <p class="mb-3">${psychologist.description}</p>
+              <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: #1A1A1A; display: flex; align-items: center; gap: 0.5rem;">
+                  <i data-lucide="user" style="width: 1.125rem; height: 1.125rem; color: #7C3AED;"></i>
+                  О психологе
+                </h3>
+                <p style="color: #666; line-height: 1.6;">${psychologist.description || 'Информация не указана'}</p>
+              </div>
               
-              <h3 class="mb-2">Сертификаты</h3>
-              <ul class="mb-3">
-                ${psychologist.certifications && psychologist.certifications.length > 0
-                  ? psychologist.certifications.map(cert => `<li>${cert}</li>`).join('')
-                  : '<li>Не указаны</li>'}
-              </ul>
+              <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: #1A1A1A; display: flex; align-items: center; gap: 0.5rem;">
+                  <i data-lucide="graduation-cap" style="width: 1.125rem; height: 1.125rem; color: #7C3AED;"></i>
+                  Образование
+                </h3>
+                <p style="color: #666; line-height: 1.6;">${psychologist.education || 'Информация не указана'}</p>
+              </div>
               
-              <h3 class="mb-2">Форматы работы</h3>
-              <div class="flex gap-2 mb-3">
-                ${psychologist.formats && psychologist.formats.length > 0
-                  ? psychologist.formats.map(format => `
-                      <span class="badge">${format === 'video' ? 'Видео' : format === 'audio' ? 'Аудио' : 'Чат'}</span>
-                    `).join('')
-                  : '<span class="badge">Не указаны</span>'}
+              <div>
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: #1A1A1A; display: flex; align-items: center; gap: 0.5rem;">
+                  <i data-lucide="video" style="width: 1.125rem; height: 1.125rem; color: #7C3AED;"></i>
+                  Форматы работы
+                </h3>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                  <span style="background: #F3E8FF; color: #7C3AED; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500;">
+                    <i data-lucide="video" style="width: 0.875rem; height: 0.875rem; display: inline; vertical-align: middle; margin-right: 0.25rem;"></i>
+                    Видео
+                  </span>
+                  <span style="background: #F3E8FF; color: #7C3AED; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500;">
+                    <i data-lucide="mic" style="width: 0.875rem; height: 0.875rem; display: inline; vertical-align: middle; margin-right: 0.25rem;"></i>
+                    Аудио
+                  </span>
+                  <span style="background: #F3E8FF; color: #7C3AED; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500;">
+                    <i data-lucide="message-circle" style="width: 0.875rem; height: 0.875rem; display: inline; vertical-align: middle; margin-right: 0.25rem;"></i>
+                    Чат
+                  </span>
+                </div>
               </div>
             </div>
             
+            <!-- Booking Card -->
             <div>
-              <div class="card">
-                <h3 class="text-2xl text-primary mb-3">${psychologist.price} ₽</h3>
-                <p class="text-sm text-secondary mb-3">за консультацию (50 минут)</p>
+              <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 100px;">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                  <div style="font-size: 2.5rem; font-weight: 700; color: #7C3AED; margin-bottom: 0.5rem;">${psychologist.price || 2000} ₽</div>
+                  <p style="color: #666; font-size: 0.875rem;">за консультацию (50 минут)</p>
+                </div>
+                
                 ${currentUser && currentUser.role === 'client' 
-                  ? '<button class="btn w-full" onclick="openBookingModal()">Записаться</button>'
-                  : '<p class="text-sm text-secondary">Войдите как клиент, чтобы записаться</p>'}
+                  ? `<button 
+                      onclick="openBookingModal()" 
+                      style="width: 100%; background: #7C3AED; color: white; border: none; font-weight: 600; padding: 1rem; border-radius: 0.5rem; font-size: 1rem; cursor: pointer; transition: background 0.2s;"
+                      onmouseover="this.style.background='#6D28D9'"
+                      onmouseout="this.style.background='#7C3AED'"
+                      data-testid="button-book"
+                    >
+                      <i data-lucide="calendar-check" style="width: 1.125rem; height: 1.125rem; display: inline; vertical-align: middle; margin-right: 0.5rem;"></i>
+                      Записаться на консультацию
+                    </button>`
+                  : `<div style="text-align: center; padding: 1rem; background: #F5F5F5; border-radius: 0.5rem; color: #666; font-size: 0.875rem;">
+                      <i data-lucide="info" style="width: 1rem; height: 1rem; display: inline; vertical-align: middle; margin-right: 0.25rem;"></i>
+                      Войдите как клиент, чтобы записаться
+                    </div>`}
+                
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #F0F0F0;">
+                  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: #666; font-size: 0.875rem;">
+                    <i data-lucide="check-circle" style="width: 1rem; height: 1rem; color: #10B981;"></i>
+                    <span>Быстрое подтверждение</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: #666; font-size: 0.875rem;">
+                    <i data-lucide="shield-check" style="width: 1rem; height: 1rem; color: #10B981;"></i>
+                    <span>Конфиденциальность</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 0.75rem; color: #666; font-size: 0.875rem;">
+                    <i data-lucide="headphones" style="width: 1rem; height: 1rem; color: #10B981;"></i>
+                    <span>Поддержка 24/7</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
-          <div class="card mt-4">
-            <h2 class="mb-3">Отзывы клиентов</h2>
+          <!-- Reviews Section -->
+          <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; color: #1A1A1A; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="star" style="width: 1.25rem; height: 1.25rem; color: #7C3AED;"></i>
+              Отзывы клиентов
+            </h2>
+            
             ${reviews.length > 0
               ? reviews.map(review => `
-                  <div class="card" style="background: var(--color-bg-secondary);">
-                    <div class="flex justify-between mb-2">
-                      <h4 class="mb-0">${review.client.firstName} ${review.client.lastName}</h4>
-                      <span class="text-primary">⭐ ${review.rating}/5</span>
+                  <div style="background: #FAFAFA; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                      <div>
+                        <h4 style="font-weight: 600; color: #1A1A1A; margin-bottom: 0.25rem;">${review.client?.firstName || 'Клиент'} ${review.client?.lastName || ''}</h4>
+                        <div style="color: #666; font-size: 0.875rem;">${new Date(review.createdAt).toLocaleDateString('ru-RU')}</div>
+                      </div>
+                      <div style="display: flex; gap: 0.25rem;">
+                        ${Array(5).fill(0).map((_, i) => `
+                          <i data-lucide="star" style="width: 1rem; height: 1rem; ${i < review.rating ? 'color: #FCD34D; fill: #FCD34D;' : 'color: #E5E7EB;'}"></i>
+                        `).join('')}
+                      </div>
                     </div>
-                    <p>${review.comment || 'Без комментария'}</p>
+                    <p style="color: #666; line-height: 1.6;">${review.comment || 'Без комментария'}</p>
                   </div>
                 `).join('')
-              : '<p class="text-secondary">Пока нет отзывов</p>'}
+              : `<div style="text-align: center; padding: 3rem; color: #666;">
+                  <i data-lucide="message-square" style="width: 3rem; height: 3rem; margin: 0 auto 1rem; opacity: 0.3;"></i>
+                  <p>Пока нет отзывов</p>
+                </div>`}
           </div>
         `;
+        
+        lucide.createIcons();
       } catch (error) {
-        document.getElementById('profile-content').innerHTML = `<p class="text-danger">Ошибка: ${error.message}</p>`;
+        console.error('Error loading profile:', error);
+        document.getElementById('profile-content').innerHTML = `
+          <div style="text-align: center; padding: 3rem;">
+            <i data-lucide="alert-circle" style="width: 3rem; height: 3rem; color: #DC2626; margin: 0 auto 1rem;"></i>
+            <p style="color: #DC2626; font-size: 1.125rem;">Ошибка загрузки профиля: ${error.message}</p>
+          </div>
+        `;
+        lucide.createIcons();
       }
     }
     
@@ -171,12 +444,13 @@
         alert('Только клиенты могут записываться на консультации');
         return;
       }
-      document.getElementById('booking-modal').classList.add('active');
+      document.getElementById('booking-modal').style.display = 'flex';
+      lucide.createIcons();
     }
     
     // Close booking modal
     function closeBookingModal() {
-      document.getElementById('booking-modal').classList.remove('active');
+      document.getElementById('booking-modal').style.display = 'none';
     }
     
     // Submit booking
@@ -184,6 +458,7 @@
       e.preventDefault();
       
       const errorEl = document.getElementById('booking-error');
+      const errorText = document.getElementById('booking-error-text');
       errorEl.classList.add('hidden');
       
       try {
@@ -202,17 +477,27 @@
         closeBookingModal();
         window.location.href = '/client-dashboard.html';
       } catch (error) {
-        errorEl.textContent = error.message;
+        errorText.textContent = error.message;
         errorEl.classList.remove('hidden');
+        lucide.createIcons();
       }
     });
     
     // Make functions global
     window.openBookingModal = openBookingModal;
     window.closeBookingModal = closeBookingModal;
-    
-    // Load profile
-    loadProfile();
   </script>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 768px) {
+      #profile-content > div:first-child {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </body>
 </html>
