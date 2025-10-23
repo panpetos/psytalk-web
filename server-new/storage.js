@@ -288,6 +288,20 @@ class MySQLStorage {
     await query('DELETE FROM psychologists WHERE id = ?', [psychologistId]);
   }
 
+  async blockUser(userId) {
+    await query(
+      'UPDATE users SET is_frozen = TRUE WHERE id = ?',
+      [userId]
+    );
+  }
+
+  async unblockUser(userId) {
+    await query(
+      'UPDATE users SET is_frozen = FALSE WHERE id = ?',
+      [userId]
+    );
+  }
+
   // ========== APPOINTMENT METHODS ==========
 
   async getAppointment(id) {

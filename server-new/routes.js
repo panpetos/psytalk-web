@@ -326,6 +326,24 @@ function registerRoutes(app) {
     }
   });
 
+  app.put('/api/admin/users/:id/block', async (req, res) => {
+    try {
+      await storage.blockUser(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(400).json({ error: 'Failed to block user' });
+    }
+  });
+
+  app.put('/api/admin/users/:id/unblock', async (req, res) => {
+    try {
+      await storage.unblockUser(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(400).json({ error: 'Failed to unblock user' });
+    }
+  });
+
   // ========== STATS ROUTES ==========
   
   app.get('/api/admin/stats', async (req, res) => {

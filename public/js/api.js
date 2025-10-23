@@ -173,6 +173,14 @@ const API = {
       return API.delete(`/api/admin/psychologists/${id}/reject`);
     },
     
+    blockUser(id) {
+      return API.put(`/api/admin/users/${id}/block`);
+    },
+    
+    unblockUser(id) {
+      return API.put(`/api/admin/users/${id}/unblock`);
+    },
+    
     getStats() {
       return API.get('/api/admin/stats');
     }
