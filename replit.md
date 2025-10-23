@@ -35,7 +35,26 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Profile Dropdown Menu Implementation (October 23, 2025)
+## Latest Update - Role-Based Profile Editing Pages (October 23, 2025)
+- **Created separate profile editing forms** for different user roles
+  - Client form: Simple layout with First Name, Last Name, Phone, Photo upload
+  - Psychologist form: Extended layout with About, Education, Sessions description, Full name, Preview photo, Phone, 4 document uploads (ДОК.Ф1-Ф4)
+- **Gradient header card** on edit-profile.html
+  - Large avatar with user initials (8rem circle)
+  - Dynamic title: "Кабинет клиента" or "Кабинет психолога" based on role
+  - Displays user ID and email in header
+  - Purple gradient background (C084FC to A78BFA) with decorative circles
+- **Form styling improvements**:
+  - All labels in uppercase with letter-spacing
+  - Grid layout: 2 columns for side-by-side fields
+  - White input backgrounds with light gray borders
+  - Dark gray "СОХРАНИТЬ" button with hover effect
+  - File inputs for photo and document uploads
+- **Automatic role detection**: Form fields displayed based on currentUser.role
+- **Data persistence**: Saves to both users and psychologists tables when applicable
+- **All fields have proper data-testid attributes** for testing
+
+## Previous Update - Profile Dropdown Menu Implementation (October 23, 2025)
 - **Added professional profile dropdown menu** to all dashboard pages (admin, client, psychologist, edit-profile)
   - Gradient avatar with user initials displayed in navigation header
   - Click to reveal dropdown with comprehensive user information
