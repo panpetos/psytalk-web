@@ -39,6 +39,8 @@ Real-time consultation capabilities include:
 - **Removed "услуги" from navigation**: Simplified menu structure on all pages
 - **Renamed "психологи" to "Найти психолога"**: More actionable and clear for users
 - **Highlighted "Найти психолога"**: Purple accent color (#7C3AED) and bold font on all pages
+- **Added breadcrumbs**: Added navigation breadcrumbs to blog.html and offers.html pages
+  - Format: главная › блог / главная › спец. предложения
 - **Applied changes across all pages**: index.html, search.html, blog.html, offers.html, login.html, register.html
 
 ## Previous Update - Psychologist Avatars + Mobile Fixes (October 22, 2025)
