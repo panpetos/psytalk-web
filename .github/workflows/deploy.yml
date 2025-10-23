@@ -25,34 +25,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Add .htaccess to dist
-        run: |
-          cat > dist/.htaccess << 'EOF'
-          <IfModule mod_deflate.c>
-            AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
-          </IfModule>
-
-          # Canonical redirect (без www → www.psytalk.pro)
-          RewriteEngine On
-          RewriteCond %{HTTPS} !=on [OR]
-          RewriteCond %{HTTP_HOST} !^www\.psytalk\.pro$ [NC]
-          RewriteRule ^(.*)$ https://www.psytalk.pro/$1 [L,R=301]
-
-          # SPA fallback
-          RewriteCond %{REQUEST_FILENAME} !-f
-          RewriteCond %{REQUEST_FILENAME} !-d
-          RewriteRule . /index.html [L]
-
-          # Disable cache for html
-          <IfModule mod_headers.c>
-            <FilesMatch "\.html$">
-              Header set Cache-Control "no-cache, no-store, must-revalidate"
-              Header set Pragma "no-cache"
-              Header set Expires "0"
-            </FilesMatch>
-          </IfModule>
-          EOF
-
       - name: Deploy via FTP
         uses: SamKirkland/ftp-deploy-action@v4.3.5
         with:
@@ -60,12 +32,11 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           protocol: ftps
-          security: strict
+          security: loose
 
           local-dir: dist/
           server-dir: ${{ secrets.FTP_DIR }}
 
-          dangerous-clean-slate: true
           log-level: standard
 
           exclude: |
@@ -75,3 +46,4 @@ jobs:
             **/*.map
             api/**
             *.php
+            .htaccess

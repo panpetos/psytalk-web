@@ -1,5 +1,9 @@
 // MySQL Database Connection
+const { loadEnv } = require('./loadEnv');
 const mysql = require('mysql2/promise');
+
+// Ensure environment variables from .env are available before configuring the pool
+loadEnv();
 
 // Database configuration from environment variables
 const dbConfig = {
