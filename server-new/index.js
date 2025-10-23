@@ -1,4 +1,7 @@
 // PsychPlatform Server - JavaScript Version
+const { loadEnv } = require('./loadEnv');
+loadEnv();
+
 const express = require('express');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
