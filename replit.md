@@ -35,7 +35,36 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Navigation Refinement (October 23, 2025)
+## Latest Update - Dashboard Pages Complete Redesign (October 23, 2025)
+- **Completely redesigned all dashboard pages**: Modern purple theme with full mobile responsiveness
+  - admin-dashboard.html: Card-based user management, moderation, blocking features
+  - client-dashboard.html: Streamlined client interface with gradient cards
+  - psychologist-dashboard.html: Tabbed interface for appointments, schedule, reviews
+  - edit-profile.html: Clean profile editing with separate sections
+- **Added burger menu to all dashboards**: Full mobile navigation on all dashboard pages
+  - Consistent burger menu with body scroll lock
+  - Auto-close on link click, click outside to close
+- **Implemented admin moderation and blocking**:
+  - Backend: Added is_frozen field to users table
+  - API endpoints: blockUser, unblockUser in API.admin namespace
+  - Storage methods: blockUser, unblockUser in storage.js
+  - UI: Approve/reject psychologists, block/unblock users
+- **Dashboard adaptivity**:
+  - Sidebar layouts convert to single column on mobile (<768px)
+  - Sidebar moves below main content on small screens
+  - Cards stack vertically on mobile
+  - Optimized spacing and typography for mobile
+- **Updated navigation across all dashboards**:
+  - Removed "услуги" from navigation
+  - "Найти психолога" highlighted with #7C3AED and font-weight: 600
+  - Consistent styling across all pages
+- **Unified design system**:
+  - Purple gradient cards (#7C3AED to #A78BFA)
+  - Consistent border-radius: 0.5rem on all elements
+  - Modern icons from Lucide
+  - Smooth animations and transitions
+
+## Previous Update - Navigation Refinement (October 23, 2025)
 - **Removed "услуги" from navigation**: Simplified menu structure on all pages
 - **Renamed "психологи" to "Найти психолога"**: More actionable and clear for users
 - **Highlighted "Найти психолога"**: Purple accent color (#7C3AED) and bold font on all pages

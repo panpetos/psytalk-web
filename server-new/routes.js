@@ -97,6 +97,11 @@ function registerRoutes(app) {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
       
+      // Check if user is blocked
+      if (user.is_frozen) {
+        return res.status(403).json({ error: 'Ваш аккаунт заблокирован. Обратитесь в поддержку.' });
+      }
+      
       // Set user session
       req.session.userId = user.id;
       
@@ -118,6 +123,12 @@ function registerRoutes(app) {
     const user = await storage.getUser(req.session.userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Check if user is blocked
+    if (user.is_frozen) {
+      req.session.destroy();
+      return res.status(403).json({ error: 'Ваш аккаунт заблокирован. Обратитесь в поддержку.' });
     }
     
     delete user.password;
