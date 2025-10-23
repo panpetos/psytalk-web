@@ -35,7 +35,13 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Psychologist Avatars + Mobile Fixes (October 22, 2025)
+## Latest Update - Navigation Refinement (October 23, 2025)
+- **Removed "услуги" from navigation**: Simplified menu structure on all pages
+- **Renamed "психологи" to "Найти психолога"**: More actionable and clear for users
+- **Highlighted "Найти психолога"**: Purple accent color (#7C3AED) and bold font on all pages
+- **Applied changes across all pages**: index.html, search.html, blog.html, offers.html, login.html, register.html
+
+## Previous Update - Psychologist Avatars + Mobile Fixes (October 22, 2025)
 - **Replaced photos with gradient avatars**: Psychologists now have beautiful gradient avatars with initials
   - Removed external Unsplash images that didn't load on mobile
   - Each psychologist has unique gradient color (6 gradient variations)
