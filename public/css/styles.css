@@ -450,7 +450,6 @@ p {
   z-index: 999;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   width: 100%;
-  overflow-x: hidden;
 }
 
 .nav-container {
