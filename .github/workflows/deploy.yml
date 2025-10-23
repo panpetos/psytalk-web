@@ -28,6 +28,7 @@ jobs:
       - name: Build project
         run: npm run build
 
+<<<<<<< ours
       # 5. Добавляем .htaccess в dist для SPA и HTTPS
       - name: Add .htaccess to dist
         run: |
@@ -61,14 +62,29 @@ jobs:
       # 6. Заливаем на хостинг REG.RU через FTP
       - name: Upload via FTP to REG.RU
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
+=======
+      - name: Deploy via FTP
+        uses: SamKirkland/ftp-deploy-action@v4.3.5
+>>>>>>> theirs
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
+<<<<<<< ours
           local-dir: ./dist/           # куда билдит Vite
           server-dir: /www/psytalk.pro/ # абсолютный путь на сервере
           dangerous-clean-slate: true  # чистит только dist, а не API
           log-level: verbose
+=======
+          protocol: ftps
+          security: loose
+
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_DIR }}
+
+          log-level: standard
+
+>>>>>>> theirs
           exclude: |
             **/.git*
             **/.github/**
@@ -76,5 +92,9 @@ jobs:
             **/*.map
             api/**
             *.php
+<<<<<<< ours
             *.json
             *.md
+=======
+            .htaccess
+>>>>>>> theirs

@@ -293,23 +293,33 @@
 
     // Check if in DEMO mode
     async function checkDemoMode() {
-      try {
-        const response = await fetch('/api/auth/me');
-        
-        if (response.status === 503) {
-          isDemoMode = true;
-          loadDemoData();
-        } else if (response.ok) {
-          currentUser = await response.json();
-          loadUserData();
-        } else {
-          window.location.href = '/login.html';
-        }
-      } catch (error) {
-        console.error('Error loading user:', error);
+      const user = await Auth.init();
+
+      if (user) {
+        currentUser = user;
+        loadUserData();
+        return;
+      }
+
+      const error = Auth.lastError;
+
+      if (error?.status === 503) {
         isDemoMode = true;
         loadDemoData();
+        return;
       }
+
+      if (error?.status === 401) {
+        window.location.href = '/login.html';
+        return;
+      }
+
+      if (error) {
+        console.error('Error loading user:', error);
+      }
+
+      isDemoMode = true;
+      loadDemoData();
     }
 
     // Load demo data
@@ -379,12 +389,12 @@
         window.location.href = '/';
         return;
       }
-      
+
       try {
-        await fetch('/api/auth/logout', { method: 'POST' });
-        window.location.href = '/';
+        await Auth.logout();
       } catch (error) {
         console.error('Logout error:', error);
+      } finally {
         window.location.href = '/';
       }
     });

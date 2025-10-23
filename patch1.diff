@@ -1,0 +1,1191 @@
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index 9339368861de72103c830159f10514c1d5603cea..3989f4a9ec16ea08c904b07a811ee95b9f47e3ba 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -3,75 +3,47 @@ name: 🚀 Deploy front to REG.RU (psytalk.pro)
+ on:
+   push:
+     branches: [main]
+   workflow_dispatch:
+ 
+ jobs:
+   build-and-deploy:
+     runs-on: ubuntu-latest
+ 
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v4
+ 
+       - name: Setup Node
+         uses: actions/setup-node@v4
+         with:
+           node-version: 20
+           cache: 'npm'
+ 
+       - name: Install deps
+         run: npm ci || npm i
+ 
+       - name: Build
+         run: npm run build
+ 
+-      - name: Add .htaccess to dist
+-        run: |
+-          cat > dist/.htaccess << 'EOF'
+-          <IfModule mod_deflate.c>
+-            AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+-          </IfModule>
+-
+-          # Canonical redirect (без www → www.psytalk.pro)
+-          RewriteEngine On
+-          RewriteCond %{HTTPS} !=on [OR]
+-          RewriteCond %{HTTP_HOST} !^www\.psytalk\.pro$ [NC]
+-          RewriteRule ^(.*)$ https://www.psytalk.pro/$1 [L,R=301]
+-
+-          # SPA fallback
+-          RewriteCond %{REQUEST_FILENAME} !-f
+-          RewriteCond %{REQUEST_FILENAME} !-d
+-          RewriteRule . /index.html [L]
+-
+-          # Disable cache for html
+-          <IfModule mod_headers.c>
+-            <FilesMatch "\.html$">
+-              Header set Cache-Control "no-cache, no-store, must-revalidate"
+-              Header set Pragma "no-cache"
+-              Header set Expires "0"
+-            </FilesMatch>
+-          </IfModule>
+-          EOF
+-
+       - name: Deploy via FTP
+         uses: SamKirkland/ftp-deploy-action@v4.3.5
+         with:
+           server: ${{ secrets.FTP_SERVER }}
+           username: ${{ secrets.FTP_USER }}
+           password: ${{ secrets.FTP_PASS }}
+           protocol: ftps
+-          security: strict
++          security: loose
+ 
+           local-dir: dist/
+           server-dir: ${{ secrets.FTP_DIR }}
+ 
+-          dangerous-clean-slate: true
+           log-level: standard
+ 
+           exclude: |
+             **/.git*
+             **/.github/**
+             **/node_modules/**
+             **/*.map
+             api/**
+             *.php
++            .htaccess
+diff --git a/client/src/lib/auth.ts b/client/src/lib/auth.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..31a9b3d4a6c9e1c0205e5272953ad3f5323c21b8
+--- /dev/null
++++ b/client/src/lib/auth.ts
+@@ -0,0 +1,181 @@
++type HttpMethod = 'GET' | 'POST';
++
++interface FetchError extends Error {
++  status?: number;
++  response?: unknown;
++}
++
++export type RegisterData = {
++  email: string;
++  password: string;
++  name?: string;
++  firstName?: string;
++  lastName?: string;
++  role?: 'user' | 'client' | 'psychologist' | 'admin' | string;
++};
++
++const PHP_AUTH_ENDPOINT = '/api/auth.php';
++const NODE_AUTH_ENDPOINT = '/api/auth';
++
++function buildInit(method: HttpMethod, payload?: unknown): RequestInit {
++  const headers: Record<string, string> = {
++    Accept: 'application/json'
++  };
++
++  const init: RequestInit = {
++    method,
++    credentials: 'include',
++    headers
++  };
++
++  if (method !== 'GET' && payload !== undefined) {
++    headers['Content-Type'] = 'application/json';
++    init.body = JSON.stringify(payload);
++  }
++
++  return init;
++}
++
++async function fetchJson(url: string, init: RequestInit): Promise<any> {
++  const response = await fetch(url, init);
++  const contentType = response.headers.get('content-type') ?? '';
++
++  let parsed: any = null;
++  if (response.status !== 204) {
++    const text = await response.text();
++    if (text) {
++      if (contentType.includes('application/json')) {
++        parsed = JSON.parse(text);
++      } else {
++        try {
++          parsed = JSON.parse(text);
++        } catch (error) {
++          parsed = text;
++        }
++      }
++    }
++  }
++
++  if (!response.ok) {
++    const message = (parsed && (parsed.error || parsed.message)) || response.statusText || 'Request failed';
++    const error: FetchError = new Error(message);
++    error.status = response.status;
++    error.response = parsed;
++    throw error;
++  }
++
++  return parsed;
++}
++
++function shouldFallback(error: unknown): boolean {
++  if (!error) {
++    return false;
++  }
++
++  if (error instanceof TypeError) {
++    return true;
++  }
++
++  const err = error as FetchError;
++  if (err.status === 0 || err.status === 404 || err.status === 405) {
++    return true;
++  }
++
++  if (typeof err.message === 'string' && err.message.includes('Failed to fetch')) {
++    return true;
++  }
++
++  return false;
++}
++
++function phpRegisterPayload(data: RegisterData): Record<string, unknown> {
++  const payload: Record<string, unknown> = {
++    email: data.email,
++    password: data.password
++  };
++
++  const name = data.name || `${data.firstName || ''} ${data.lastName || ''}`.trim();
++  if (name) {
++    payload.name = name;
++  }
++
++  const role = data.role === 'client' ? 'user' : data.role;
++  if (role) {
++    payload.role = role;
++  }
++
++  return payload;
++}
++
++function nodeRegisterPayload(data: RegisterData): Record<string, unknown> {
++  const payload: Record<string, unknown> = { ...data };
++
++  if (!payload.firstName && data.name) {
++    const parts = data.name.trim().split(/\s+/).filter(Boolean);
++    if (parts.length) {
++      payload.firstName = parts.shift();
++      payload.lastName = parts.join(' ');
++    }
++  }
++
++  if (payload.role === 'user') {
++    payload.role = 'client';
++  }
++
++  return payload;
++}
++
++async function phpAuth(action: string, method: HttpMethod, payload?: unknown) {
++  const url = `${PHP_AUTH_ENDPOINT}?action=${action}`;
++  return fetchJson(url, buildInit(method, payload));
++}
++
++async function nodeAuth(path: string, method: HttpMethod, payload?: unknown) {
++  const url = `${NODE_AUTH_ENDPOINT}${path}`;
++  return fetchJson(url, buildInit(method, payload));
++}
++
++export async function login(email: string, password: string) {
++  try {
++    return await phpAuth('login', 'POST', { email, password });
++  } catch (error) {
++    if (!shouldFallback(error)) {
++      throw error;
++    }
++    return nodeAuth('/login', 'POST', { email, password });
++  }
++}
++
++export async function me() {
++  try {
++    return await phpAuth('me', 'GET');
++  } catch (error) {
++    if (!shouldFallback(error)) {
++      throw error;
++    }
++    return nodeAuth('/me', 'GET');
++  }
++}
++
++export async function logout() {
++  try {
++    return await phpAuth('logout', 'POST');
++  } catch (error) {
++    if (!shouldFallback(error)) {
++      throw error;
++    }
++    return nodeAuth('/logout', 'POST');
++  }
++}
++
++export async function register(data: RegisterData) {
++  try {
++    return await phpAuth('register', 'POST', phpRegisterPayload(data));
++  } catch (error) {
++    if (!shouldFallback(error)) {
++      throw error;
++    }
++    return nodeAuth('/register', 'POST', nodeRegisterPayload(data));
++  }
++}
++
+diff --git a/package.json b/package.json
+index 9127597f515ad1727e3eff0fe20309975ae18413..f7686080c757f5a87c0a5be7127e32ec26f8a4e6 100644
+--- a/package.json
++++ b/package.json
+@@ -1,21 +1,22 @@
+ {
+   "name": "psychplatform-mysql",
+   "version": "2.0.0",
+   "description": "PsychPlatform - MySQL + Vanilla JS version",
+   "type": "commonjs",
+   "scripts": {
+     "start": "node server-new/index.js",
+     "seed": "node server-new/seed.js",
+-    "dev": "node server-new/index.js"
++    "dev": "node server-new/index.js",
++    "build": "node scripts/build.js"
+   },
+   "dependencies": {
+     "bcrypt": "^5.1.1",
+     "express": "^4.21.2",
+     "express-mysql-session": "^3.0.3",
+     "express-session": "^1.18.2",
+     "mysql2": "^3.15.3"
+   },
+   "engines": {
+     "node": ">=18.0.0"
+   }
+ }
+diff --git a/public/client-dashboard.html b/public/client-dashboard.html
+index b804960fca07d57178e6fa8fe3ef92270b586864..0088c5d32e20b2b301c600811211d3502d8ad4aa 100644
+--- a/public/client-dashboard.html
++++ b/public/client-dashboard.html
+@@ -271,67 +271,77 @@
+       }
+     });
+ 
+     // Prevent dropdown close when clicking inside
+     profileDropdown?.addEventListener('click', (e) => {
+       e.stopPropagation();
+     });
+ 
+     // Fill user info in profile dropdown
+     function fillProfileDropdown(user) {
+       const firstName = user.first_name || user.firstName || '';
+       const lastName = user.last_name || user.lastName || '';
+       const initials = (firstName[0] || '') + (lastName[0] || '');
+       
+       document.getElementById('userInitials').textContent = initials;
+       document.getElementById('userInitialsLarge').textContent = initials;
+       document.getElementById('userFullName').textContent = `${firstName} ${lastName}`.trim() || 'Пользователь';
+       document.getElementById('userEmail').textContent = user.email || '';
+       document.getElementById('userId').textContent = user.id || '-';
+       
+       lucide.createIcons();
+     }
+ 
+     // Check if in DEMO mode
+     async function checkDemoMode() {
+-      try {
+-        const response = await fetch('/api/auth/me');
+-        
+-        if (response.status === 503) {
+-          isDemoMode = true;
+-          loadDemoData();
+-        } else if (response.ok) {
+-          currentUser = await response.json();
+-          loadUserData();
+-        } else {
+-          window.location.href = '/login.html';
+-        }
+-      } catch (error) {
+-        console.error('Error loading user:', error);
++      const user = await Auth.init();
++
++      if (user) {
++        currentUser = user;
++        loadUserData();
++        return;
++      }
++
++      const error = Auth.lastError;
++
++      if (error?.status === 503) {
+         isDemoMode = true;
+         loadDemoData();
++        return;
+       }
++
++      if (error?.status === 401) {
++        window.location.href = '/login.html';
++        return;
++      }
++
++      if (error) {
++        console.error('Error loading user:', error);
++      }
++
++      isDemoMode = true;
++      loadDemoData();
+     }
+ 
+     // Load demo data
+     function loadDemoData() {
+       // Fill profile dropdown with demo data
+       const demoUser = {
+         first_name: 'Мария',
+         last_name: 'Иванова',
+         email: 'demo@psytalk.pro',
+         id: 'demo',
+         role: 'client'
+       };
+       fillProfileDropdown(demoUser);
+       
+       document.getElementById('user-name').textContent = 'Мария';
+       
+       // Show psychologist
+       const psychInfo = {
+         name: 'Наиля Рамазанова',
+         specialization: 'Семейный психотерапевт',
+         initials: 'НР'
+       };
+       
+       document.getElementById('psychologist-info').innerHTML = `
+         <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #FAFAFA; border-radius: 0.5rem;">
+@@ -357,56 +367,56 @@
+         <p style="opacity: 0.9; font-size: 0.875rem;">
+           С ${psychInfo.name} • Видео-консультация • 60 мин
+         </p>
+       `;
+ 
+       lucide.createIcons();
+     }
+ 
+     // Load user data
+     async function loadUserData() {
+       fillProfileDropdown(currentUser);
+       document.getElementById('user-name').textContent = currentUser?.first_name || currentUser?.firstName || 'Пользователь';
+       
+       // Load psychologist if exists
+       // Add your logic here
+       
+       lucide.createIcons();
+     }
+ 
+     // Logout
+     document.getElementById('logout-btn')?.addEventListener('click', async () => {
+       if (isDemoMode) {
+         window.location.href = '/';
+         return;
+       }
+-      
++
+       try {
+-        await fetch('/api/auth/logout', { method: 'POST' });
+-        window.location.href = '/';
++        await Auth.logout();
+       } catch (error) {
+         console.error('Logout error:', error);
++      } finally {
+         window.location.href = '/';
+       }
+     });
+ 
+     // Initialize
+     checkDemoMode();
+     lucide.createIcons();
+   </script>
+ 
+   <style>
+     /* Dashboard Grid Layout */
+     .dashboard-grid {
+       display: grid;
+       grid-template-columns: 1fr 350px;
+       gap: 2rem;
+       align-items: start;
+     }
+ 
+     .dashboard-main {
+       min-width: 0;
+     }
+ 
+     .dashboard-sidebar {
+       min-width: 0;
+     }
+diff --git a/public/js/api.js b/public/js/api.js
+index 9b0d92cf7da24587455550254b1d9bdf477c96c4..50584027b6fd8fd9e23d1d775d551b78b43c9665 100644
+--- a/public/js/api.js
++++ b/public/js/api.js
+@@ -1,92 +1,172 @@
+ // API Client Module
+ 
+ const API = {
+   baseURL: '',
+-  
++
+   // Generic fetch wrapper
+-  async request(method, url, data = null) {
++  async request(method, url, data = null, { headers = {}, credentials } = {}) {
++    const hasBody = data !== null && data !== undefined && method !== 'GET' && method !== 'HEAD';
++    const isFormData = typeof FormData !== 'undefined' && data instanceof FormData;
++
++    const requestHeaders = {
++      Accept: 'application/json',
++      ...headers
++    };
++
++    if (hasBody && !isFormData) {
++      requestHeaders['Content-Type'] = requestHeaders['Content-Type'] || 'application/json';
++    }
++
+     const options = {
+       method,
+-      headers: {
+-        'Content-Type': 'application/json',
+-      },
+-      credentials: 'same-origin',
++      headers: requestHeaders,
++      credentials: credentials || 'include'
+     };
+-    
+-    if (data) {
+-      options.body = JSON.stringify(data);
++
++    if (hasBody) {
++      options.body = isFormData ? data : JSON.stringify(data);
+     }
+-    
++
+     try {
+       const response = await fetch(url, options);
+-      const responseData = await response.json();
+-      
++      let responseData = null;
++
++      if (response.status !== 204) {
++        const contentType = response.headers.get('content-type') || '';
++        const isJson = contentType.includes('application/json');
++
++        if (isJson) {
++          responseData = await response.json();
++        } else {
++          const text = await response.text();
++          try {
++            responseData = text ? JSON.parse(text) : null;
++          } catch (parseError) {
++            responseData = text;
++          }
++        }
++      }
++
+       if (!response.ok) {
+-        throw new Error(responseData.error || `HTTP error! status: ${response.status}`);
++        const message =
++          (responseData && (responseData.error || responseData.message)) ||
++          `HTTP error! status: ${response.status}`;
++        const error = new Error(message);
++        error.status = response.status;
++        error.response = responseData;
++        throw error;
+       }
+-      
++
+       return responseData;
+     } catch (error) {
++      if (!error.status) {
++        error.status = 0;
++      }
+       console.error('API Error:', error);
+       throw error;
+     }
+   },
+-  
++
++  shouldFallback(error) {
++    if (!error) return false;
++    if (error.status === 404 || error.status === 405) {
++      return true;
++    }
++    if (error.status === 0 && error.name === 'TypeError') {
++      return true;
++    }
++    if (typeof error.message === 'string' && error.message.includes('Failed to fetch')) {
++      return true;
++    }
++    return false;
++  },
++
+   // Convenience methods
+   get(url) {
+     return this.request('GET', url);
+   },
+   
+   post(url, data) {
+     return this.request('POST', url, data);
+   },
+   
+   put(url, data) {
+     return this.request('PUT', url, data);
+   },
+   
+   delete(url) {
+     return this.request('DELETE', url);
+   },
+   
+   // Auth endpoints
+   auth: {
+     register(data) {
+-      return API.post('/api/auth/register', data);
++      const payload = { ...data };
++      const fullName = `${data.firstName || ''} ${data.lastName || ''}`.trim();
++
++      if (!payload.name && fullName) {
++        payload.name = fullName;
++      }
++
++      if (payload.role === 'client') {
++        payload.role = 'user';
++      }
++
++      return API.request('POST', '/api/auth.php?action=register', payload).catch((error) => {
++        if (!API.shouldFallback(error)) {
++          throw error;
++        }
++        return API.request('POST', '/api/auth/register', data);
++      });
+     },
+-    
++
+     login(email, password) {
+-      return API.post('/api/auth/login', { email, password });
++      return API.request('POST', '/api/auth.php?action=login', { email, password }).catch((error) => {
++        if (!API.shouldFallback(error)) {
++          throw error;
++        }
++        return API.request('POST', '/api/auth/login', { email, password });
++      });
+     },
+-    
++
+     logout() {
+-      return API.post('/api/auth/logout');
++      return API.request('POST', '/api/auth.php?action=logout').catch((error) => {
++        if (!API.shouldFallback(error)) {
++          throw error;
++        }
++        return API.request('POST', '/api/auth/logout');
++      });
+     },
+-    
++
+     me() {
+-      return API.get('/api/auth/me');
++      return API.request('GET', '/api/auth.php?action=me').catch((error) => {
++        if (!API.shouldFallback(error)) {
++          throw error;
++        }
++        return API.request('GET', '/api/auth/me');
++      });
+     }
+   },
+   
+   // User endpoints
+   users: {
+     get(id) {
+       return API.get(`/api/users/${id}`);
+     },
+     
+     update(id, data) {
+       return API.put(`/api/users/${id}`, data);
+     }
+   },
+   
+   // Psychologist endpoints
+   psychologists: {
+     search(filters = {}) {
+       const params = new URLSearchParams(filters);
+       return API.get(`/api/psychologists/search?${params}`);
+     },
+     
+     get(id) {
+       return API.get(`/api/psychologists/${id}`);
+     },
+     
+diff --git a/public/js/auth.js b/public/js/auth.js
+index 491b5bc4f9d07b36b6b774ec9cee79a2e060aa6f..be5618567cf0a08854ea5cc2339f91cb26d8186b 100644
+--- a/public/js/auth.js
++++ b/public/js/auth.js
+@@ -1,104 +1,177 @@
+ // Authentication Module
+ 
+ const Auth = {
+   currentUser: null,
+-  
++  lastError: null,
++
++  extractUser(payload, fallbackMessage = 'Authentication failed') {
++    if (!payload) {
++      return null;
++    }
++
++    if (payload.success === false || payload.status === 'error') {
++      throw new Error(payload.message || payload.error || fallbackMessage);
++    }
++
++    if (typeof payload.error === 'string' && !payload.id) {
++      throw new Error(payload.error);
++    }
++
++    if (payload.data && payload.data.user) {
++      return this.normalizeUser(payload.data.user);
++    }
++
++    if (payload.user) {
++      return this.normalizeUser(payload.user);
++    }
++
++    return this.normalizeUser(payload);
++  },
++
++  normalizeUser(user) {
++    if (!user || typeof user !== 'object') {
++      return user;
++    }
++
++    const normalized = { ...user };
++
++    if (normalized.role === 'user') {
++      normalized.role = 'client';
++    }
++
++    return normalized;
++  },
++
+   // Initialize auth state
+   async init() {
+     try {
+-      const user = await API.auth.me();
++      const data = await API.auth.me();
++      const user = this.extractUser(data, 'Not authenticated');
++      if (!user) {
++        const error = new Error('Not authenticated');
++        error.status = 401;
++        this.currentUser = null;
++        this.lastError = error;
++        return null;
++      }
++
+       this.currentUser = user;
++      this.lastError = null;
+       return user;
+     } catch (error) {
+       this.currentUser = null;
++      this.lastError = error;
+       return null;
+     }
+   },
+-  
++
+   // Register new user
+   async register(data) {
+     try {
+-      const user = await API.auth.register(data);
++      const response = await API.auth.register(data);
++      const user = this.extractUser(response, 'Registration failed');
+       this.currentUser = user;
++      this.lastError = null;
+       return user;
+     } catch (error) {
++      this.lastError = error;
+       throw new Error(error.message || 'Registration failed');
+     }
+   },
+-  
++
+   // Login
+   async login(email, password) {
+     try {
+-      const user = await API.auth.login(email, password);
++      const response = await API.auth.login(email, password);
++      const user = this.extractUser(response, 'Login failed');
+       this.currentUser = user;
++      this.lastError = null;
+       return user;
+     } catch (error) {
++      this.currentUser = null;
++      this.lastError = error;
+       throw new Error(error.message || 'Login failed');
+     }
+   },
+-  
++
+   // Logout
+   async logout() {
+     try {
+       await API.auth.logout();
+-      this.currentUser = null;
++      this.lastError = null;
+     } catch (error) {
+       console.error('Logout error:', error);
++      this.lastError = error;
++    } finally {
++      this.currentUser = null;
+     }
+   },
+-  
++
++  setUser(user) {
++    this.currentUser = user;
++    this.lastError = null;
++    return user;
++  },
++
+   // Check if user is authenticated
+   isAuthenticated() {
+     return this.currentUser !== null;
+   },
+   
+   // Check if user has specific role
+   hasRole(role) {
+     return this.currentUser && this.currentUser.role === role;
+   },
+   
+   // Redirect based on role
+   redirectToDashboard() {
+     if (!this.currentUser) {
+       window.location.href = '/login.html';
+       return;
+     }
+     
+     switch (this.currentUser.role) {
+       case 'client':
+         window.location.href = '/client-dashboard.html';
+         break;
+       case 'psychologist':
+         window.location.href = '/psychologist-dashboard.html';
+         break;
+       case 'admin':
+         window.location.href = '/admin-dashboard.html';
+         break;
+       default:
+         window.location.href = '/';
+     }
+   },
+   
+   // Require authentication (redirect if not logged in)
+   async requireAuth(requiredRole = null) {
+     if (!this.currentUser) {
+       const user = await this.init();
+       if (!user) {
+         window.location.href = '/login.html';
+         return false;
+       }
+     }
+     
+     if (requiredRole && !this.hasRole(requiredRole)) {
+       this.redirectToDashboard();
+       return false;
+     }
+     
+     return true;
+   },
+-  
++
+   // Get current user
+   getUser() {
+     return this.currentUser;
++  },
++
++  async checkAuth() {
++    if (this.currentUser) {
++      return this.currentUser;
++    }
++    return this.init();
+   }
+ };
+diff --git a/public/register.html b/public/register.html
+index 7b105c0be0507fe15827866e3d03406c21eb8bbb..e9f304341e86c65a983aedb5b77e2e9af7b116ac 100644
+--- a/public/register.html
++++ b/public/register.html
+@@ -172,133 +172,137 @@
+             data-testid="button-register"
+           >
+             Зарегистрироваться
+           </button>
+ 
+           <!-- Login Link -->
+           <div class="text-center mt-4">
+             <span style="color: #666; font-size: 0.875rem;">
+               Уже есть аккаунт? 
+               <a href="/login.html" style="color: #7C3AED; font-weight: 600; text-decoration: none;" data-testid="link-login">
+                 Войти
+               </a>
+             </span>
+           </div>
+         </form>
+       </div>
+ 
+       <!-- Additional Info -->
+       <div class="text-center mt-4" style="color: #999; font-size: 0.875rem;">
+         Регистрируясь, вы получаете доступ к нашей платформе психологической поддержки
+       </div>
+     </div>
+   </div>
+ 
+   <script src="/js/api.js"></script>
++  <script src="/js/auth.js"></script>
+   <script>
+     // Role selection
+     document.querySelectorAll('.role-option').forEach(option => {
+       option.addEventListener('click', function() {
+         const role = this.dataset.role;
+         
+         // Update radio
+         document.querySelector(`input[value="${role}"]`).checked = true;
+         
+         // Update styles
+         document.querySelectorAll('.role-option').forEach(opt => {
+           opt.classList.remove('active');
+           opt.style.borderColor = '#E5E5E5';
+           opt.style.background = 'white';
+           const icon = opt.querySelector('i');
+           const text = opt.querySelector('div');
+           if (icon) icon.style.color = '#999';
+           if (text) text.style.color = '#666';
+         });
+         
+         this.classList.add('active');
+         this.style.borderColor = '#7C3AED';
+         this.style.background = '#F3E8FF';
+         const icon = this.querySelector('i');
+         const text = this.querySelector('div');
+         if (icon) icon.style.color = '#7C3AED';
+         if (text) text.style.color = '#7C3AED';
+       });
+     });
+ 
+     // Form submission
+     document.getElementById('register-form').addEventListener('submit', async (e) => {
+       e.preventDefault();
+-      
++
+       const submitBtn = document.getElementById('submit-btn');
+       const alert = document.getElementById('alert');
+       
+       // Get form data
+       const formData = new FormData(e.target);
+       const data = {
+         email: formData.get('email'),
+         password: formData.get('password'),
+         firstName: formData.get('firstName'),
+         lastName: formData.get('lastName'),
+         role: formData.get('role')
+       };
+       
+       // Disable button
+       submitBtn.disabled = true;
+       submitBtn.textContent = 'Регистрация...';
+       alert.style.display = 'none';
+       
+       try {
+-        const response = await fetch('/api/auth/register', {
+-          method: 'POST',
+-          headers: { 'Content-Type': 'application/json' },
+-          body: JSON.stringify(data)
++        const user = await Auth.register({
++          email: data.email,
++          password: data.password,
++          role: data.role,
++          firstName: data.firstName,
++          lastName: data.lastName,
++          name: `${data.firstName} ${data.lastName}`.trim()
+         });
+-        
+-        if (response.ok) {
+-          alert.className = 'alert alert-success';
+-          alert.textContent = 'Регистрация успешна! Перенаправление...';
+-          alert.style.display = 'block';
+-          
+-          setTimeout(() => {
+-            if (data.role === 'psychologist') {
+-              window.location.href = '/psychologist-dashboard.html';
+-            } else {
+-              window.location.href = '/client-dashboard.html';
+-            }
+-          }, 1500);
+-        } else {
+-          const error = await response.json();
+-          alert.className = 'alert alert-error';
+-          alert.textContent = error.message || 'Ошибка регистрации';
+-          alert.style.display = 'block';
+-          submitBtn.disabled = false;
+-          submitBtn.textContent = 'Зарегистрироваться';
+-        }
++
++        const role = (user && user.role) || data.role;
++
++        alert.className = 'alert alert-success';
++        alert.textContent = 'Регистрация успешна! Перенаправление...';
++        alert.style.display = 'block';
++
++        setTimeout(() => {
++          if (role === 'psychologist') {
++            window.location.href = '/psychologist-dashboard.html';
++          } else if (role === 'admin') {
++            window.location.href = '/admin-dashboard.html';
++          } else {
++            window.location.href = '/client-dashboard.html';
++          }
++        }, 1500);
+       } catch (error) {
+         console.error('Registration error:', error);
+         alert.className = 'alert alert-error';
+-        alert.textContent = 'Сервер недоступен (DEMO режим). Попробуйте позже.';
++        const message = error?.message || 'Ошибка регистрации';
++        if (message.includes('Failed to fetch') || message.includes('NetworkError')) {
++          alert.textContent = 'Сервер недоступен. Попробуйте позже.';
++        } else {
++          alert.textContent = message;
++        }
+         alert.style.display = 'block';
+         submitBtn.disabled = false;
+         submitBtn.textContent = 'Зарегистрироваться';
+       }
+     });
+ 
+     // Check for role in URL
+     const urlParams = new URLSearchParams(window.location.search);
+     const roleParam = urlParams.get('type');
+     if (roleParam === 'psychologist') {
+       document.querySelector('input[value="psychologist"]').click();
+     }
+ 
+     // Initialize Lucide icons
+     lucide.createIcons();
+     
+     // Mobile menu functionality
+     const navMenu = document.getElementById('navMenu');
+     const burgerMenu = document.getElementById('burgerMenu');
+     
+     if (navMenu && burgerMenu) {
+       // Toggle menu on burger click
+       burgerMenu.addEventListener('click', function(e) {
+         e.stopPropagation();
+         navMenu.classList.toggle('active');
+diff --git a/scripts/build.js b/scripts/build.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..4200be05593b254cf495b8602e0beb45d609df52
+--- /dev/null
++++ b/scripts/build.js
+@@ -0,0 +1,36 @@
++const fs = require('fs');
++const path = require('path');
++
++const publicDir = path.resolve(__dirname, '..', 'public');
++const distDir = path.resolve(__dirname, '..', 'dist');
++
++async function ensureDirExists(dir) {
++  await fs.promises.mkdir(dir, { recursive: true });
++}
++
++async function cleanDir(dir) {
++  await fs.promises.rm(dir, { recursive: true, force: true });
++}
++
++async function copyDir(from, to) {
++  await fs.promises.cp(from, to, { recursive: true });
++}
++
++async function main() {
++  const publicExists = fs.existsSync(publicDir);
++
++  if (!publicExists) {
++    throw new Error(`Public directory not found at ${publicDir}`);
++  }
++
++  await cleanDir(distDir);
++  await ensureDirExists(distDir);
++  await copyDir(publicDir, distDir);
++
++  console.log(`Static files copied from ${publicDir} to ${distDir}`);
++}
++
++main().catch((error) => {
++  console.error(error);
++  process.exitCode = 1;
++});
+diff --git a/server-new/db.js b/server-new/db.js
+index de4848cd7ad26c7165549b6b3d8a4afcc9f93c5e..39d8f4f4489d1be77154fa7c35f45f75928bc7ce 100644
+--- a/server-new/db.js
++++ b/server-new/db.js
+@@ -1,28 +1,32 @@
+ // MySQL Database Connection
++const { loadEnv } = require('./loadEnv');
+ const mysql = require('mysql2/promise');
+ 
++// Ensure environment variables from .env are available before configuring the pool
++loadEnv();
++
+ // Database configuration from environment variables
+ const dbConfig = {
+   host: process.env.DB_HOST || 'localhost',
+   user: process.env.DB_USER || 'u3105470_psyh_user',
+   password: process.env.DB_PASSWORD || 'xR3iA0zO0qwV9cF4',
+   database: process.env.DB_NAME || 'u3105470_psyh',
+   waitForConnections: true,
+   connectionLimit: 10,
+   queueLimit: 0,
+   charset: 'utf8mb4'
+ };
+ 
+ // Create connection pool
+ const pool = mysql.createPool(dbConfig);
+ 
+ // Test connection
+ async function testConnection() {
+   try {
+     const connection = await pool.getConnection();
+     console.log('✓ Successfully connected to MySQL database');
+     connection.release();
+     return true;
+   } catch (error) {
+     console.error('✗ Failed to connect to MySQL database:', error.message);
+     return false;
+diff --git a/server-new/index.js b/server-new/index.js
+index aa7ca5ed738e4aaaecc47167043bb08f7cd3708b..0982bb1732775aa176cc87c99456baf6d0e0e91e 100644
+--- a/server-new/index.js
++++ b/server-new/index.js
+@@ -1,26 +1,29 @@
+ // PsychPlatform Server - JavaScript Version
++const { loadEnv } = require('./loadEnv');
++loadEnv();
++
+ const express = require('express');
+ const session = require('express-session');
+ const MySQLStore = require('express-mysql-session')(session);
+ const path = require('path');
+ 
+ const app = express();
+ 
+ // Middleware
+ app.use(express.json());
+ app.use(express.urlencoded({ extended: false }));
+ 
+ // Try to import database modules, fallback to demo mode
+ let pool, testConnection, initDatabase, registerRoutes;
+ let DEMO_MODE = false;
+ 
+ try {
+   const db = require('./db');
+   pool = db.pool;
+   testConnection = db.testConnection;
+   initDatabase = db.initDatabase;
+   const routes = require('./routes');
+   registerRoutes = routes.registerRoutes;
+ } catch (error) {
+   console.warn('⚠ Database modules not available, running in DEMO mode');
+   DEMO_MODE = true;
+diff --git a/server-new/loadEnv.js b/server-new/loadEnv.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..dced019ee27ce725f7022ce62c55de9b43ffef85
+--- /dev/null
++++ b/server-new/loadEnv.js
+@@ -0,0 +1,59 @@
++// Lightweight .env loader to avoid external dependencies
++// Reads the project root .env file once and populates process.env for missing keys
++const fs = require('fs');
++const path = require('path');
++
++let loaded = false;
++
++function loadEnv() {
++  if (loaded) {
++    return;
++  }
++  loaded = true;
++
++  const envPath = path.resolve(__dirname, '../.env');
++  if (!fs.existsSync(envPath)) {
++    return;
++  }
++
++  try {
++    const content = fs.readFileSync(envPath, 'utf8');
++    const lines = content.split(/\r?\n/);
++
++    for (const rawLine of lines) {
++      const line = rawLine.trim();
++      if (!line || line.startsWith('#')) {
++        continue;
++      }
++
++      const delimiterIndex = line.indexOf('=');
++      if (delimiterIndex === -1) {
++        continue;
++      }
++
++      const key = line.slice(0, delimiterIndex).trim();
++      if (!key) {
++        continue;
++      }
++
++      let value = line.slice(delimiterIndex + 1).trim();
++
++      if (
++        (value.startsWith("\"") && value.endsWith("\"")) ||
++        (value.startsWith("'") && value.endsWith("'"))
++      ) {
++        value = value.slice(1, -1);
++      }
++
++      value = value.replace(/\\n/g, '\n').replace(/\\r/g, '\r');
++
++      if (process.env[key] === undefined) {
++        process.env[key] = value;
++      }
++    }
++  } catch (error) {
++    console.warn('⚠️  Could not load .env file:', error.message);
++  }
++}
++
++module.exports = { loadEnv };
