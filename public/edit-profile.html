@@ -5,79 +5,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Редактирование профиля - psytalk.pro</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-  <nav class="nav">
-    <div class="container nav-container">
-      <a href="/" class="nav-brand" style="word-spacing: 0; letter-spacing: 0;">
-        <span style="color: #1A1A1A;">psy</span><!--
-     --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
-      </a>
-      <ul class="nav-menu">
-        <li><a href="#" id="back-link" class="nav-link">Назад</a></li>
-        <li><button class="btn btn-sm" id="logout-btn">Выйти</button></li>
-      </ul>
+<body style="background-color: #FAFAFA;">
+  <!-- Navigation -->
+  <nav class="nav" style="background-color: white; border-bottom: 1px solid #F0F0F0;">
+    <div class="container">
+      <div class="nav-container">
+        <a href="/" class="nav-brand" data-testid="link-home" style="font-size: 1.25rem; font-weight: 600; word-spacing: 0; letter-spacing: 0;">
+          <span style="color: #1A1A1A;">psy</span><!--
+       --><span style="color: #7C3AED; font-style: italic;">talk.pro</span>
+        </a>
+        
+        <button class="burger-menu" id="burgerMenu" data-testid="button-burger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#" id="back-link" class="nav-link" data-testid="link-back">
+            <i data-lucide="arrow-left" style="width: 1rem; height: 1rem; display: inline; vertical-align: middle; margin-right: 0.25rem;"></i>
+            Назад
+          </a></li>
+          <li style="margin-left: 2rem;"><button class="btn btn-ghost btn-sm" id="logout-btn" data-testid="button-logout">Выйти</button></li>
+        </ul>
+      </div>
     </div>
   </nav>
   
-  <div class="container container-sm" style="margin-top: 40px;">
-    <div class="card">
-      <h1 class="card-title">Редактирование профиля</h1>
-      
-      <form id="profile-form">
-        <div class="grid grid-cols-2">
-          <div class="form-group">
-            <label class="form-label">Имя</label>
-            <input type="text" id="firstName" class="form-input" required>
+  <!-- Main Content -->
+  <div class="section" style="padding: 2rem 0;">
+    <div class="container" style="max-width: 800px;">
+      <!-- Header -->
+      <div class="mb-6">
+        <h1 class="font-bold mb-2" style="font-size: 2rem; color: #1A1A1A;" data-testid="text-page-title">
+          Редактирование профиля
+        </h1>
+        <p style="color: #666;">Обновите вашу личную информацию</p>
+      </div>
+
+      <div class="card" style="padding: 2rem; border-radius: 1rem;">
+        <form id="profile-form">
+          <!-- Personal Information -->
+          <div style="margin-bottom: 2rem;">
+            <h3 class="font-semibold mb-4" style="font-size: 1.125rem; color: #1A1A1A; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="user" style="width: 1.125rem; height: 1.125rem; color: #7C3AED;"></i>
+              Личная информация
+            </h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+              <div class="form-group">
+                <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Имя *</label>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  class="form-input" 
+                  required 
+                  style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem;"
+                  data-testid="input-first-name"
+                >
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Фамилия *</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  class="form-input" 
+                  required 
+                  style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem;"
+                  data-testid="input-last-name"
+                >
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 1.5rem;">
+              <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                class="form-input" 
+                disabled 
+                style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem; background: #F5F5F5; color: #999;"
+                data-testid="input-email"
+              >
+              <p style="font-size: 0.8125rem; color: #666; margin-top: 0.5rem;">
+                <i data-lucide="info" style="width: 0.875rem; height: 0.875rem; display: inline; vertical-align: middle; margin-right: 0.25rem;"></i>
+                Email нельзя изменить
+              </p>
+            </div>
           </div>
           
-          <div class="form-group">
-            <label class="form-label">Фамилия</label>
-            <input type="text" id="lastName" class="form-input" required>
+          <!-- Psychologist-specific fields -->
+          <div id="psychologist-fields" class="hidden">
+            <div style="height: 1px; background: #E0E0E0; margin: 2rem 0;"></div>
+            
+            <h3 class="font-semibold mb-4" style="font-size: 1.125rem; color: #1A1A1A; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="briefcase" style="width: 1.125rem; height: 1.125rem; color: #7C3AED;"></i>
+              Профессиональная информация
+            </h3>
+            
+            <div class="form-group mb-4">
+              <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Специализация *</label>
+              <input 
+                type="text" 
+                id="specialization" 
+                class="form-input"
+                placeholder="Например: Когнитивно-поведенческая терапия"
+                style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem;"
+                data-testid="input-specialization"
+              >
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Опыт работы (лет) *</label>
+                <input 
+                  type="number" 
+                  id="experience" 
+                  class="form-input" 
+                  min="0"
+                  placeholder="0"
+                  style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem;"
+                  data-testid="input-experience"
+                >
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Стоимость консультации (₽) *</label>
+                <input 
+                  type="number" 
+                  id="price" 
+                  class="form-input" 
+                  min="0" 
+                  step="100"
+                  placeholder="2000"
+                  style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem;"
+                  data-testid="input-price"
+                >
+              </div>
+            </div>
+            
+            <div class="form-group mb-4">
+              <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">Образование *</label>
+              <textarea 
+                id="education" 
+                class="form-textarea" 
+                rows="3"
+                placeholder="Укажите ваше образование, сертификаты и квалификации"
+                style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem; resize: vertical;"
+                data-testid="input-education"
+              ></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" style="display: block; margin-bottom: 0.5rem; color: #1A1A1A; font-weight: 500;">О себе *</label>
+              <textarea 
+                id="description" 
+                class="form-textarea" 
+                rows="5"
+                placeholder="Расскажите о себе, вашем подходе к работе и опыте..."
+                style="width: 100%; padding: 0.75rem; border: 1px solid #E0E0E0; border-radius: 0.5rem; font-size: 0.9375rem; resize: vertical;"
+                data-testid="input-description"
+              ></textarea>
+            </div>
           </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" id="email" class="form-input" disabled>
-        </div>
-        
-        <!-- Psychologist-specific fields -->
-        <div id="psychologist-fields" class="hidden">
-          <hr class="my-4" style="border-color: var(--color-border);">
-          <h3 class="mb-3">Профессиональная информация</h3>
           
-          <div class="form-group">
-            <label class="form-label">Специализация</label>
-            <input type="text" id="specialization" class="form-input">
+          <!-- Messages -->
+          <div id="form-error" class="hidden" style="padding: 1rem; background: #FEE2E2; color: #DC2626; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+            <i data-lucide="alert-circle" style="width: 1rem; height: 1rem; display: inline; vertical-align: middle; margin-right: 0.5rem;"></i>
+            <span id="error-message"></span>
           </div>
           
-          <div class="form-group">
-            <label class="form-label">Опыт работы (лет)</label>
-            <input type="number" id="experience" class="form-input" min="0">
+          <div id="form-success" class="hidden" style="padding: 1rem; background: #D1FAE5; color: #059669; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+            <i data-lucide="check-circle" style="width: 1rem; height: 1rem; display: inline; vertical-align: middle; margin-right: 0.5rem;"></i>
+            Профиль успешно обновлен!
           </div>
           
-          <div class="form-group">
-            <label class="form-label">Образование</label>
-            <textarea id="education" class="form-textarea" rows="3"></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">О себе</label>
-            <textarea id="description" class="form-textarea" rows="5"></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">Стоимость консультации (₽)</label>
-            <input type="number" id="price" class="form-input" min="0" step="100">
-          </div>
-        </div>
-        
-        <div id="form-error" class="alert alert-danger hidden"></div>
-        <div id="form-success" class="alert alert-success hidden"></div>
-        
-        <button type="submit" class="btn w-full">Сохранить</button>
-      </form>
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            class="btn w-full" 
+            style="background: #7C3AED; color: white; border: none; font-weight: 600; padding: 0.875rem; border-radius: 0.5rem; font-size: 1rem;"
+            data-testid="button-save"
+          >
+            <i data-lucide="save" style="width: 1rem; height: 1rem; display: inline; vertical-align: middle; margin-right: 0.5rem;"></i>
+            Сохранить изменения
+          </button>
+        </form>
+      </div>
     </div>
   </div>
   
@@ -86,6 +203,25 @@
   <script>
     let currentUser = null;
     let psychologist = null;
+
+    // Burger menu
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navMenu = document.getElementById('navMenu');
+    
+    burgerMenu.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      burgerMenu.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        burgerMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
     
     // Logout
     document.getElementById('logout-btn').addEventListener('click', async () => {
@@ -109,9 +245,9 @@
         }
         
         // Fill user fields
-        document.getElementById('firstName').value = currentUser.firstName;
-        document.getElementById('lastName').value = currentUser.lastName;
-        document.getElementById('email').value = currentUser.email;
+        document.getElementById('firstName').value = currentUser.first_name || currentUser.firstName || '';
+        document.getElementById('lastName').value = currentUser.last_name || currentUser.lastName || '';
+        document.getElementById('email').value = currentUser.email || '';
         
         // Load psychologist data if applicable
         if (currentUser.role === 'psychologist') {
@@ -126,9 +262,32 @@
             document.getElementById('price').value = psychologist.price || 0;
           }
         }
+        
+        lucide.createIcons();
       } catch (error) {
         console.error('Error loading profile:', error);
+        showError('Ошибка загрузки профиля');
       }
+    }
+    
+    // Show error
+    function showError(message) {
+      const errorEl = document.getElementById('form-error');
+      const errorMsg = document.getElementById('error-message');
+      errorMsg.textContent = message;
+      errorEl.classList.remove('hidden');
+      lucide.createIcons();
+      
+      setTimeout(() => {
+        errorEl.classList.add('hidden');
+      }, 5000);
+    }
+    
+    // Show success
+    function showSuccess() {
+      const successEl = document.getElementById('form-success');
+      successEl.classList.remove('hidden');
+      lucide.createIcons();
     }
     
     // Submit form
@@ -156,14 +315,13 @@
             experience: parseInt(document.getElementById('experience').value),
             education: document.getElementById('education').value,
             description: document.getElementById('description').value,
-            price: document.getElementById('price').value
+            price: parseInt(document.getElementById('price').value)
           };
           
           await API.psychologists.update(psychologist.id, psychData);
         }
         
-        successEl.textContent = 'Профиль успешно обновлен!';
-        successEl.classList.remove('hidden');
+        showSuccess();
         
         // Refresh auth state
         await Auth.init();
@@ -173,17 +331,50 @@
         }, 1500);
         
       } catch (error) {
-        errorEl.textContent = error.message;
-        errorEl.classList.remove('hidden');
+        console.error('Error updating profile:', error);
+        showError(error.message || 'Ошибка при сохранении профиля');
       }
     });
     
     // Initialize
-    Auth.requireAuth().then(ok => {
-      if (ok) {
-        loadProfile();
+    Auth.checkAuth().then(() => {
+      if (!Auth.currentUser) {
+        window.location.href = '/login.html';
+        return;
       }
+      
+      loadProfile();
     });
   </script>
+
+  <style>
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .section {
+        padding: 1rem 0 !important;
+      }
+
+      h1 {
+        font-size: 1.5rem !important;
+      }
+
+      .card {
+        padding: 1.25rem !important;
+      }
+
+      h3 {
+        font-size: 1rem !important;
+      }
+
+      .form-label {
+        font-size: 0.875rem !important;
+      }
+
+      .form-input, .form-textarea {
+        font-size: 0.875rem !important;
+        padding: 0.625rem !important;
+      }
+    }
+  </style>
 </body>
 </html>
