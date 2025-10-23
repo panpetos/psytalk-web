@@ -25,7 +25,50 @@
         
         <ul class="nav-menu" id="navMenu">
           <li><a href="/admin-dashboard.html" class="nav-link" style="color: #7C3AED; font-weight: 600;" data-testid="link-dashboard">Панель управления</a></li>
-          <li style="margin-left: 2rem;"><button class="btn btn-ghost btn-sm" id="logout-btn" data-testid="button-logout">Выйти</button></li>
+          <li style="margin-left: 2rem; position: relative;">
+            <button class="profile-trigger" id="profileTrigger" data-testid="button-profile" style="background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); color: white; border: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: transform 0.2s;">
+              <span id="userInitials">...</span>
+            </button>
+            <!-- Profile Dropdown -->
+            <div class="profile-dropdown" id="profileDropdown" style="display: none; position: absolute; top: calc(100% + 0.5rem); right: 0; width: 300px; background: white; border-radius: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; z-index: 1000;">
+              <!-- User Info Header -->
+              <div style="background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%); padding: 1.5rem; color: white;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <div style="width: 4rem; height: 4rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; flex-shrink: 0;">
+                    <span id="userInitialsLarge">...</span>
+                  </div>
+                  <div style="flex: 1; min-width: 0;">
+                    <div style="font-weight: 700; font-size: 1.125rem; margin-bottom: 0.25rem;" id="userFullName">Загрузка...</div>
+                    <div style="font-size: 0.8125rem; opacity: 0.9;" id="userEmail">...</div>
+                  </div>
+                </div>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2); display: flex; gap: 1rem; font-size: 0.8125rem;">
+                  <div>ID: <span id="userId">-</span></div>
+                  <div style="text-transform: uppercase; opacity: 0.9;" id="userRole">-</div>
+                </div>
+              </div>
+              <!-- Menu Items -->
+              <div style="padding: 0.5rem;">
+                <a href="/admin-dashboard.html" class="dropdown-item" data-testid="link-dropdown-dashboard">
+                  <i data-lucide="layout-dashboard" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Личный кабинет</span>
+                </a>
+                <a href="/edit-profile.html" class="dropdown-item" data-testid="link-dropdown-settings">
+                  <i data-lucide="settings" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Настройки</span>
+                </a>
+                <a href="/offers.html" class="dropdown-item" data-testid="link-dropdown-help">
+                  <i data-lucide="help-circle" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Помощь</span>
+                </a>
+                <div style="height: 1px; background: #F0F0F0; margin: 0.5rem 0;"></div>
+                <button class="dropdown-item" id="logout-btn" data-testid="button-logout" style="color: #EF4444;">
+                  <i data-lucide="log-out" style="width: 1.125rem; height: 1.125rem;"></i>
+                  <span>Выйти</span>
+                </button>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -153,6 +196,50 @@
         document.body.style.overflow = '';
       });
     });
+
+    // Profile dropdown menu
+    const profileTrigger = document.getElementById('profileTrigger');
+    const profileDropdown = document.getElementById('profileDropdown');
+    
+    profileTrigger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVisible = profileDropdown.style.display === 'block';
+      profileDropdown.style.display = isVisible ? 'none' : 'block';
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (profileDropdown && !profileDropdown.contains(e.target) && !profileTrigger.contains(e.target)) {
+        profileDropdown.style.display = 'none';
+      }
+    });
+
+    // Prevent dropdown close when clicking inside
+    profileDropdown?.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Fill user info in profile dropdown
+    function fillProfileDropdown(user) {
+      const firstName = user.first_name || user.firstName || '';
+      const lastName = user.last_name || user.lastName || '';
+      const initials = (firstName[0] || '') + (lastName[0] || '');
+      
+      document.getElementById('userInitials').textContent = initials;
+      document.getElementById('userInitialsLarge').textContent = initials;
+      document.getElementById('userFullName').textContent = `${firstName} ${lastName}`.trim() || 'Пользователь';
+      document.getElementById('userEmail').textContent = user.email || '';
+      document.getElementById('userId').textContent = user.id || '-';
+      
+      const roleMap = {
+        'admin': 'Администратор',
+        'psychologist': 'Психолог',
+        'client': 'Клиент'
+      };
+      document.getElementById('userRole').textContent = roleMap[user.role] || user.role || '-';
+      
+      lucide.createIcons();
+    }
 
     // Tab switching
     document.querySelectorAll('.tab-button').forEach(button => {
@@ -484,6 +571,7 @@
         return;
       }
       
+      fillProfileDropdown(Auth.currentUser);
       loadStats();
       loadPending();
       lucide.createIcons();

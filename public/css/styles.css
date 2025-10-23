@@ -1021,6 +1021,52 @@ select option {
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
+/* Profile Dropdown Styles */
+.profile-trigger:hover {
+  transform: scale(1.05);
+}
+
+.profile-dropdown {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #1A1A1A;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: background-color 0.15s, color 0.15s;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.dropdown-item:hover {
+  background-color: #F5F5F5;
+}
+
+.dropdown-item i {
+  flex-shrink: 0;
+}
+
 /* Desktop Navigation - default */
 @media (min-width: 1024px) {
   .burger-menu {
