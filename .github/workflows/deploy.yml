@@ -1,49 +1,54 @@
-name: 🚀 Deploy front to REG.RU (psytalk.pro)
+name: 🚀 Deploy Vite front to REG.RU
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [ main ]    # деплой только при пуше в основную ветку
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # 1. Получаем код из репозитория
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      # 2. Устанавливаем Node.js 20
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - name: Install deps
+      # 3. Устанавливаем зависимости
+      - name: Install dependencies
         run: npm ci || npm i
 
-      - name: Build
+      # 4. Собираем проект Vite
+      - name: Build project
         run: npm run build
 
+      # 5. Добавляем .htaccess в dist для SPA и HTTPS
       - name: Add .htaccess to dist
         run: |
           cat > dist/.htaccess << 'EOF'
+          # Включаем сжатие
           <IfModule mod_deflate.c>
             AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
           </IfModule>
 
-          # Canonical redirect (без www → www.psytalk.pro)
+          # Принудительное перенаправление на HTTPS и без www
           RewriteEngine On
-          RewriteCond %{HTTPS} !=on [OR]
-          RewriteCond %{HTTP_HOST} !^www\.psytalk\.pro$ [NC]
-          RewriteRule ^(.*)$ https://www.psytalk.pro/$1 [L,R=301]
+          RewriteCond %{HTTPS} off [OR]
+          RewriteCond %{HTTP_HOST} ^www\.psytalk\.pro [NC]
+          RewriteRule ^(.*)$ https://psytalk.pro/$1 [L,R=301]
 
-          # SPA fallback
+          # SPA fallback — чтобы React/Vue маршруты работали
           RewriteCond %{REQUEST_FILENAME} !-f
           RewriteCond %{REQUEST_FILENAME} !-d
           RewriteRule . /index.html [L]
 
-          # Disable cache for html
+          # Отключаем кэш для HTML
           <IfModule mod_headers.c>
             <FilesMatch "\.html$">
               Header set Cache-Control "no-cache, no-store, must-revalidate"
@@ -53,21 +58,17 @@ jobs:
           </IfModule>
           EOF
 
-      - name: Deploy via FTP
-        uses: SamKirkland/ftp-deploy-action@v4.3.5
+      # 6. Заливаем на хостинг REG.RU через FTP
+      - name: Upload via FTP to REG.RU
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          protocol: ftps
-          security: loose
-
-          local-dir: dist/
-          server-dir: ${{ secrets.FTP_DIR }}
-
-          dangerous-clean-slate: true
-          log-level: standard
-
+          local-dir: ./dist/           # куда билдит Vite
+          server-dir: /www/psytalk.pro/ # абсолютный путь на сервере
+          dangerous-clean-slate: true  # чистит только dist, а не API
+          log-level: verbose
           exclude: |
             **/.git*
             **/.github/**
@@ -75,3 +76,5 @@ jobs:
             **/*.map
             api/**
             *.php
+            *.json
+            *.md
