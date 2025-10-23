@@ -35,7 +35,28 @@ Real-time consultation capabilities include:
 
 # Recent Changes (October 22, 2025)
 
-## Latest Update - Dashboard Pages Complete Redesign (October 23, 2025)
+## Latest Update - Profile Dropdown Menu Implementation (October 23, 2025)
+- **Added professional profile dropdown menu** to all dashboard pages (admin, client, psychologist, edit-profile)
+  - Gradient avatar with user initials displayed in navigation header
+  - Click to reveal dropdown with comprehensive user information
+  - User info section: large avatar, full name, email, ID, role badge
+  - Navigation options: Dashboard, Настройки (Settings), Помощь (Help), Выйти (Logout)
+  - Smooth fade-in animation with translateY effect
+  - Click outside to close, prevents body scroll interference
+- **CSS Styling for dropdown components**:
+  - `.dropdown-item`: Hover effects, rounded corners (0.5rem), flex layout with icons
+  - `.profile-dropdown`: Animated appearance with fadeIn keyframes
+  - `.profile-trigger`: Scale hover effect for better interactivity
+  - Consistent purple theme integration
+- **JavaScript functionality**:
+  - `fillProfileDropdown(user)`: Populates avatar initials, name, email, ID, role
+  - Auto-detects user data from Auth.currentUser or loaded profile
+  - Dynamic dashboard link based on user role (admin/psychologist/client)
+  - Toggle visibility on trigger click, close on outside click
+  - Integrated with existing burger menu on mobile
+- **All interactive elements** include `data-testid` attributes for testing
+
+## Previous Update - Dashboard Pages Complete Redesign (October 23, 2025)
 - **Completely redesigned all dashboard pages**: Modern purple theme with full mobile responsiveness
   - admin-dashboard.html: Card-based user management, moderation, blocking features
   - client-dashboard.html: Streamlined client interface with gradient cards
