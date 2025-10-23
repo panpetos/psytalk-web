@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server-new/index.js",
     "seed": "node server-new/seed.js",
-    "dev": "node server-new/index.js"
+    "dev": "node server-new/index.js",
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
