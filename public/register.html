@@ -194,6 +194,7 @@
   </div>
 
   <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
   <script>
     // Role selection
     document.querySelectorAll('.role-option').forEach(option => {
@@ -227,7 +228,7 @@
     // Form submission
     document.getElementById('register-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const submitBtn = document.getElementById('submit-btn');
       const alert = document.getElementById('alert');
       
@@ -247,36 +248,39 @@
       alert.style.display = 'none';
       
       try {
-        const response = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+        const user = await Auth.register({
+          email: data.email,
+          password: data.password,
+          role: data.role,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          name: `${data.firstName} ${data.lastName}`.trim()
         });
-        
-        if (response.ok) {
-          alert.className = 'alert alert-success';
-          alert.textContent = 'Регистрация успешна! Перенаправление...';
-          alert.style.display = 'block';
-          
-          setTimeout(() => {
-            if (data.role === 'psychologist') {
-              window.location.href = '/psychologist-dashboard.html';
-            } else {
-              window.location.href = '/client-dashboard.html';
-            }
-          }, 1500);
-        } else {
-          const error = await response.json();
-          alert.className = 'alert alert-error';
-          alert.textContent = error.message || 'Ошибка регистрации';
-          alert.style.display = 'block';
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Зарегистрироваться';
-        }
+
+        const role = (user && user.role) || data.role;
+
+        alert.className = 'alert alert-success';
+        alert.textContent = 'Регистрация успешна! Перенаправление...';
+        alert.style.display = 'block';
+
+        setTimeout(() => {
+          if (role === 'psychologist') {
+            window.location.href = '/psychologist-dashboard.html';
+          } else if (role === 'admin') {
+            window.location.href = '/admin-dashboard.html';
+          } else {
+            window.location.href = '/client-dashboard.html';
+          }
+        }, 1500);
       } catch (error) {
         console.error('Registration error:', error);
         alert.className = 'alert alert-error';
-        alert.textContent = 'Сервер недоступен (DEMO режим). Попробуйте позже.';
+        const message = error?.message || 'Ошибка регистрации';
+        if (message.includes('Failed to fetch') || message.includes('NetworkError')) {
+          alert.textContent = 'Сервер недоступен. Попробуйте позже.';
+        } else {
+          alert.textContent = message;
+        }
         alert.style.display = 'block';
         submitBtn.disabled = false;
         submitBtn.textContent = 'Зарегистрироваться';
